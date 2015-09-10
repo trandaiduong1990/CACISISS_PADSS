@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.accounting">
+
+<class 	name="StatementFeeDetails" table="STATEMENT_FEEDETAILS"> 
+
+	<id name="fdetailId" type ="string"  unsaved-value="0">
+	    <column name ="FDETAIL_ID" sql-type ="varchar2(8)" not-null = "true"/>
+	    <generator class="assigned"/>
+	</id>
+
+	<property name="feeId" type="string">
+		<column name="FEE_ID" sql-type="varchar2(8)" not-null="true" />
+	</property>
+
+	<property name="statId" type="string">
+		<column name="STATEMENT_ID" sql-type="varchar2(7)" not-null="true" />
+	</property>
+
+	<property name="statGen" type="string">
+		<column name="STATEMENT_GEN" sql-type="varchar2(1)" not-null="true" />
+	</property>
+		 
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.riskmanagement">
+
+	<class name="CardholderLimitAdjustmentDto"
+		table="TEMPORARY_LIMITS">
+		<id name="temporaryLimitId" type="long">
+		     <column name="TEMPORARYLIMITID" sql-type ="NUMBER (10)"  not-null = "true" />
+			<generator class="native" />
+		</id>
+
+		<property name="creditLimit" type ="double">
+			<column name="CREDIT_LIMIT" sql-type ="NUMBER (12,2)"  not-null = "true" />
+		</property>
+
+		<property name="cashLimit" type ="double">
+			<column name="CASH_LIMIT" sql-type ="NUMBER (12,2)"  not-null = "true" />
+		</property>
+
+		<property name="cardNumber" type ="long">
+			<column name="CARDNUMBER" sql-type ="NUMBER (19)"  not-null = "true" />
+		</property>
+
+		<property name="fromDate" type ="date">
+			<column name="FROMDATE" sql-type ="DATE"  not-null = "true" />
+		</property>
+
+		<property name="toDate" type ="date">
+			<column name="TODATE" sql-type ="DATE"  not-null = "true" />
+		</property>
+
+		<property name="amountPerTranx" type ="integer">
+			<column name="AMOUNTPERTRANX" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitCount" type ="integer">
+			<column name="DAILYLIMITCOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitAmount" type ="integer">
+			<column name="DAILYLIMITAMOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitCount" type ="integer">
+			<column name="MONTHLYLIMITCOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitAmount" type ="integer">
+			<column name="MONTHLYLIMITAMOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="currCode" type ="string">
+			<column name="CURR_CODE" sql-type ="VARCHAR2 (3)"  not-null = "false" />
+		</property>
+
+		<property name="issuerId" type ="string">
+			<column name="ISSUER_ID" sql-type ="VARCHAR2 (32)"  not-null = "true" />
+		</property>
+		
+		<property name="status" type ="char">
+			<column name="STATUS" sql-type ="CHAR (1)"  not-null = "false" />
+		</property>
+	</class>
+
+</hibernate-mapping>

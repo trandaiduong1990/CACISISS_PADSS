@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package ="org.transinfo.cacis.dto.applicationforms">
+	
+	<class name="CardsRenewalDto" table="CARDS_RENEWAL">
+		<id name="cardRenewalSerial" type="string">
+			<column name="SNO" sql-type="varchar2(8)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_CARDRENEWAL</param>
+            </generator>
+		</id>
+		
+		<property	name="cardNumber"  type ="long">
+			<column name = "CARDNUMBER"  sql-type ="Number"  not-null = "true"/>
+		</property>
+			
+	   <property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(32)"  not-null = "true"/>
+		</property>
+		
+		<property	name="customerId"  type ="string">
+			<column name = "CUSTOMER_ID"  sql-type ="varchar2(12)"  not-null = "true"/>
+		</property>
+		
+	    <property	name="cardExpireDate"  type ="string">
+			<column name = "EXPIRY_DATE"  sql-type ="varchar2(4)" not-null = "true" />
+		</property>
+      
+	  <property	name="userId"  type ="string">
+			<column name = "LAST_UPDATED_BY"  sql-type ="varchar2(25)" not-null = "true" />
+		</property>
+		
+       <property	name="updatedDate"  type ="date">
+			<column name = "LAST_UPDATED_DATE"  sql-type ="Date" not-null = "true" />
+		</property>
+		          
+		<property	name="status"  type ="int">
+			<column name = "STATUS"  sql-type ="number"  not-null = "false"/>
+		</property>
+                	
+	</class> 
+		
+  </hibernate-mapping>

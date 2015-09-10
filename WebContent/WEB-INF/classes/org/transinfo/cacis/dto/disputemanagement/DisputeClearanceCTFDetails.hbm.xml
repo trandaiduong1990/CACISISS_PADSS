@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.disputemanagement">
+
+	<class name="DisputeClearanceCTFDetails" table="DIS_INCOMING_CTF_DETAILS">
+		<id name="settlementId" type="string">
+			<column name="SETTLEMENT_ID" sql-type="varchar2(10)" not-null="true" />
+			<generator class="foreign">
+				<param name="property">incomingMaster</param>
+			</generator>
+		</id>
+		
+		<one-to-one name="incomingMaster" class="org.transinfo.cacis.dto.disputemanagement.DisputeCleaningMasterDto" lazy="false" constrained="true" />
+
+		<property name="tcr0" type="string">
+			<column name="TCR0" sql-type="varchar2(200)" not-null="false" />
+		</property>
+
+		<property name="tcr1" type="string">
+			<column name="TCR1" sql-type="varchar2(200)" not-null="false" />
+		</property>
+
+		<property name="tcr5" type="string">
+			<column name="TCR5" sql-type="varchar2(200)" not-null="false" />
+		</property>
+
+		<property name="tcr7" type="string">
+			<column name="TCR7" sql-type="varchar2(200)" not-null="false" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

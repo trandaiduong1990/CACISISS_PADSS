@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.csr">
+	
+	<class name="CustomerInfoDto" table="CUSTOMER"  >
+		<id name="customerId" type ="string" >
+		     <column name ="CUSTOMER_ID" sql-type ="varchar2(12)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+   	
+		<property	name="customerName"  type ="string">
+			<column name = "CUSTOMER_NAME"  sql-type ="varchar2(30)" not-null = "true" />
+		</property>
+
+      <property	name="embossingName"  type ="string">
+			<column name = "EMBOSSINGNAME"  sql-type ="varchar2(60)" not-null = "true" />
+		</property>
+     
+     <property	name="dob"  type ="date">
+			<column name = "DOB"  sql-type ="Date" not-null = "true" />
+		</property>
+     
+     <property	name="gender"  type ="string">
+			<column name = "GENDER"  sql-type ="char(1)" not-null = "false" />
+		</property>
+      <property	name="maritalStatus"  type ="string">
+			<column name = "MARITAL_STATUS"  sql-type ="char(1)" not-null = "false" />
+		</property>
+       
+      <property	name="idNumber"  type ="string">
+			<column name = "ID_NUMBER"  sql-type ="varchar2(14)" not-null = "true" />
+		</property>
+     
+       <property	name="expDate"  type ="date">
+			<column name = "ID_EXPIRE"  sql-type ="Date" not-null = "true" />
+		</property>
+      
+	
+	 <property	name="nationality"  type ="string">
+			<column name = "NATIONALITY"  sql-type ="varchar2(20)" not-null = "true" />
+		</property>
+     
+	 
+	<property	name="email"  type ="string">
+			<column name = "EMAIL"  sql-type ="varchar2(60)" not-null = "true" />
+		</property>
+     
+	  <property	name="billingTo"  type ="string">
+			<column name = "BILLING_TO"  sql-type ="char(1)" not-null = "false" />
+		</property>
+   
+	  
+		<property	name="income"  type ="float">
+			<column name = "INCOME"  sql-type ="number(10,2)" not-null = "true" />
+		</property>
+   
+        <property	name="referenceCompany"  type ="string">
+			<column name = "REF_COMPANY"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+         
+		<property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "false" />
+		</property>
+	
+		<property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+         
+		<property   name="branchId" type ="string"  >
+		  <column name = "BRANCH_ID" sql-type ="varchar2(6)" not-null = "false" />
+		</property>
+         
+		<property   name="issuerId" type ="string"  >
+		  <column name = "ISSUER_ID" sql-type ="varchar2(12)" not-null = "false" />
+		</property>
+	 
+	   <!--  this for customer to customeraddress  one-to-many -->	
+	   
+	  <set name ="applicationAddress"  cascade ="all" lazy ="false" fetch ="join">
+		  <key column ="customer_id"/>
+		  <one-to-many class="org.transinfo.cacis.dto.cardproduction.CustomerAddressDto"/>
+	  </set> 
+	          <!-- for showing CustomerType  -->
+	 <property name="customerTypeId" formula="(select cst.CUST_TYPE_DESC from CUST_TYPE cst where cst.CUST_TYPE_ID = CUST_TYPE_ID)" />
+    	
+	</class> 
+		
+   </hibernate-mapping>

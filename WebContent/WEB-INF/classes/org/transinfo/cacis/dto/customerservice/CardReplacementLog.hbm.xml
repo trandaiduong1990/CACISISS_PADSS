@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.customerservice">
+	
+	<class name="CardReplacementLogDto" table="REPLACEMENT_LOG" >
+		
+		<id name="replacementLogSerialNo" type="string">
+			<column name="SNO" sql-type="varchar2(8)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_REPLACEMENTLOG</param>
+            </generator>
+		</id>
+    	
+    	<property	name="oldCardNo"  type ="string">
+			<column name = "OLD_CARD_NO"  sql-type ="varchar2(24)"  not-null = "true"/>
+		</property>
+		
+    	<property	name="newCardNo"  type ="string">
+			<column name = "NEW_CARD_NO"  sql-type ="varchar2(24)"  not-null = "false"/>
+		</property>
+	
+		<property   name="issueDate" type ="date"  >
+		  <column name = "ISSUE_DATE" sql-type ="Date" not-null = "false" />
+		</property>
+	
+		<property   name="expireDate" type ="date"  >
+		  <column name = "EXPIRY_DATE" sql-type ="Date" not-null = "false" />
+		</property>
+		
+    	<property	name="nameOnCard"  type ="string">
+			<column name = "NAME_ON_CARD"  sql-type ="varchar2(19)"  not-null = "false"/>
+		</property>
+		
+    	<property	name="flag"  type ="character">
+			<column name = "FLAG"  sql-type ="char(1)"  not-null = "false"/>
+		</property>
+
+		<property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "false" />
+		</property>
+		
+    	<property	name="lastUpdatedBy"  type ="string">
+			<column name = "LAST_UPDATED_BY"  sql-type ="varchar2(32)"  not-null = "false"/>
+		</property>
+      
+	</class>
+   </hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.riskmanagement">
+
+  <class name="RiskMasterDto" table="RISK_MASTER">
+	  <id name="riskId" type="string">
+	     <column name ="RISK_ID" sql-type ="varchar2(6)" not-null = "true"/>
+	     <generator class="assigned"/>
+	  </id>
+
+	  <property name="description" type ="string">
+	     	<column name="DESCRIPTION" sql-type ="varchar2(20)"  not-null = "false"/>
+	  </property>	
+	  
+	  <property name="updatedDate" type="date">
+	  	<column name="LAST_UPDATED_DATE" sql-type ="DATE"  not-null = "false"/>
+	  </property>
+	  
+	  <property name="userId" type="string">
+	  	<column name="LAST_UPDATED_BY" sql-type ="varchar2(25)"  not-null = "false"/>
+	  </property>
+	  
+	  	  		 
+   </class>
+
+</hibernate-mapping>

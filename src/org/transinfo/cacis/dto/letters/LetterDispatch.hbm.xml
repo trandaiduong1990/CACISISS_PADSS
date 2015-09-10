@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.letters">
+	<class name="DispatchLetterSearchDto" table="LETTER_DISPATCH">
+		<id name="dispatchId" type="string">
+			<column name="DISPATCH_ID" sql-type="VARCHAR2 (6)"
+				not-null="true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="applicationId" type="string">
+			<column name="APPLICATION_ID" sql-type="VARCHAR2 (12)"
+				not-null="false" />
+		</property>
+
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="VARCHAR2 (12)"
+				not-null="true" />
+		</property>
+
+		<property name="letterId" type="string">
+			<column name="LETTER_ID" sql-type="VARCHAR2 (6)"
+				not-null="true" />
+		</property>
+
+		<property name="status" type="integer">
+			<column name="STATUS" sql-type="NUMBER" not-null="true" />
+		</property>
+
+		<property name="cardNumber" type="long">
+			<column name="CARDNUMBER" sql-type="NUMBER (19)"
+				not-null="false" />
+		</property>
+		
+		<property name="lastUpdateDate" type ="date">
+			<column name="LAST_UPDATED_DATE" sql-type ="DATE"  not-null = "true" />
+		</property>
+		
+		<property name="lastUpdatedBy" type ="string">
+			<column name="LAST_UPDATED_BY" sql-type ="VARCHAR2 (25)"  not-null = "true" />
+		</property>	  
+		
+	</class>
+
+</hibernate-mapping>

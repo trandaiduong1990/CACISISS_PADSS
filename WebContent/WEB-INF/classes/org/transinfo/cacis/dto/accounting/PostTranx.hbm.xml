@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.accounting">
+
+<class 	name="PostTranx" table="POST_TRANX"> 
+
+	<id name="postId" type ="string"  unsaved-value="0">
+	    <column name ="POST_ID" sql-type ="varchar2(10)" not-null = "true"/>
+	    <generator class="assigned"/>
+	</id>
+
+	<property name="cardNo" type="long">
+		<column name="CARDNO" sql-type="number" not-null="true" />
+	</property>
+
+	<property name="accountId" type="string">
+		<column name="ACCOUNT_ID" sql-type="varchar2(20)" not-null="false" />
+	</property>
+
+	<property name="tranxLogId" type="long">
+		<column name="TRANXLOGID" sql-type="number" not-null="true" />
+	</property>
+
+	<property name="billed" type="string">
+		<column name="UNBILLED" sql-type="varchar2(1)" not-null="false" />
+	</property>
+
+	<property name="postDate" type="timestamp">
+		<column name="POSTED_DATE" sql-type="date" not-null="false" />
+	</property>
+		 
+	</class>
+</hibernate-mapping>

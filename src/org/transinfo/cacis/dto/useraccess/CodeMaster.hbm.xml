@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.useraccess">
+
+	<class name="CodeMasterDto" table="CODE_MASTER">
+	
+	  <composite-id name="id" 
+	      	 class="CodeMasterDto$Id">
+	          <key-property name="groupId" type="string" column="GROUP_ID"/>
+	          <key-property name="codeId" type="string" column="CODE_ID"/>    	
+          </composite-id>
+	  
+          <property name="codeDesc"  type ="string">
+		<column name = "CODE_DESCRIPTION"  sql-type ="varchar2(500)" not-null = "true" />
+	  </property>	
+	  
+	</class>
+	
+</hibernate-mapping>

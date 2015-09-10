@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.transaction">
+  <class name="CustomerFeeDto" table="CUSTOMER_FEE">
+  		<id name="customerFeeId" type="string">
+			<column name="ID" sql-type="varchar2(10)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_CUSTOMER_FEE</param>
+            </generator>
+		</id>
+		
+		<property name="cardNo" type="long">
+			<column name="CARDNO" sql-type="number" not-null="true" />
+		</property>
+		
+		<property name="accountId" type="string">
+			<column name="ACCOUNT_ID" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		
+		<property name="refId" type="string">
+			<column name="REF_ID" sql-type="varchar2(3)" not-null="true" />
+		</property>
+		
+		<property name="feeAmt" type="float">
+			<column name="FEE_AMT" sql-type="number" not-null="true" />
+		</property>
+		
+		<property name="amountSign" type="string">
+			<column name="AMOUNT_SIGN" sql-type="varchar2(1)" not-null="true" />
+		</property>
+		
+		<property name="FeeDate" type="timestamp">
+			<column name="FEE_DATE" sql-type="date" not-null="true" />
+		</property>
+		
+		<property name="feeSrc" type="string">
+			<column name="FEE_SRC" sql-type="varchar2(25)" not-null="false" />
+		</property>
+		
+		<property name="billed" type="string">
+			<column name="UNBILLED" sql-type="varchar2(2)" not-null="true" />
+		</property>
+		
+		<property name="createdDate" type="timestamp">
+			<column name="CREATED_DATE" sql-type="date" not-null="true" />
+		</property>
+		
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" sql-type="varchar2(25)" not-null="true" />
+		</property>
+		
+		<property name="tranxLogId" type="long">
+			<column name="TRANXLOGID" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="feeWaived" type="string">
+			<column name="FEE_WAIVED" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="annualFeeDate" type="timestamp">
+			<column name="AF_DATE" sql-type="date" not-null="false" />
+		</property>
+		
+		<property name="remarks" type="string">
+			<column name="REMARKS" sql-type="varchar2(200)" not-null="false" />
+		</property>
+		
+  </class>
+</hibernate-mapping>

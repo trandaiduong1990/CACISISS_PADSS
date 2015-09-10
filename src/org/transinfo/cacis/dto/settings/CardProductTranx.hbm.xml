@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.settings">
+
+	<class name="CardProductTranxDto" table="CARD_PRODUCT_TRANX">
+		<composite-id name="id" 
+	      	 class="CardProductTranxDto$Id">
+	          <key-property name="productId" type="string" column="PRODUCT_ID"/>
+	          <key-property name="channel" type="string" column="CHANNEL"/>    	
+         </composite-id>
+          
+		<property name="userId" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(30)"
+				not-null="true" />
+		</property>
+
+		<property name="updatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="false" />
+		</property>
+
+		<many-to-one name="tranxId" class="TranxTypeDto" column="TRANX_ID"
+			not-null="true" />
+
+	</class>
+
+</hibernate-mapping>

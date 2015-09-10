@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.transaction">
+  <class name="AccountBillingGLDto" table="ACCOUNT_BILLING_GL">
+  		<id name="accountBillingGLId" type="string">
+			<column name="SNO" sql-type="varchar2(8)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_ACCOUNTBILLINGGL</param>
+            </generator>
+		</id>
+		
+		<property name="accountId" type="string">
+			<column name="ACCOUNT_ID" sql-type="varchar2(12)" not-null="false" />
+		</property>
+		
+		<property name="billingDate" type="date">
+			<column name="BILLING_DATE" sql-type="Date" not-null="false" />
+		</property>
+		
+		<property name="dueDate" type="date">
+			<column name="DUE_DATE" sql-type="Date" not-null="false" />
+		</property>
+		
+		<property name="gracePeriod" type="integer">
+			<column name="GRACE_PERIOD" sql-type="number(2)" not-null="false" />
+		</property>
+	
+	    <property name="previousPurchaseBalance"  type ="double">
+			<column name = "PREVIOUS_PURCHASE_BALANCE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="previousCashBalance"  type ="double">
+			<column name = "PREVIOUS_CASH_BALANCE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="cashAdvances"  type ="double">
+			<column name = "CASH_ADVANCES"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="lateFee"  type ="double">
+			<column name = "LATE_FEE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="overLimitFee"  type ="double">
+			<column name = "OVER_LIMIT_FEE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="financeCharges"  type ="double">
+			<column name = "FINANCE_CHARGES"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="newPurchaseBalance"  type ="double">
+			<column name = "NEW_PURCHASE_BALANCE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="newCashBalance"  type ="double">
+			<column name = "NEW_CASH_BALANCE"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+	
+	    <property name="minimumPayment"  type ="double">
+			<column name = "MINIMUM_PAYMENT"  sql-type ="number(12,2)" not-null = "true" />
+		</property>
+		
+  </class>
+</hibernate-mapping>

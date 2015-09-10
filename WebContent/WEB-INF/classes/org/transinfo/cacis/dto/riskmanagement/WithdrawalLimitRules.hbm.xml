@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.riskmanagement">
+
+	<class name="WithdrawalLimitRulesDto"
+		table="WITHDRAWALLIMITRULES">
+		<id name="ruleId" type="long">
+		     <column name="RULEID" sql-type ="NUMBER (10)"  not-null = "true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="cardProductId" type ="string">
+			<column name="CARD_PRODUCT_ID" sql-type ="VARCHAR2 (6)"  not-null = "true" />
+		</property>
+
+		<property name="custTypeId" type ="string">
+			<column name="CUST_TYPE_ID" sql-type ="VARCHAR2 (2)"  not-null = "true" />
+		</property>
+
+		<property name="mcc" type ="string">
+			<column name="MCC" sql-type ="VARCHAR2 (4)"  not-null = "false" />
+		</property>
+
+		<property name="amountPerTranx" type ="long">
+			<column name="AMOUNTPERTRANX" sql-type ="NUMBER (10)"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitCount" type ="integer">
+			<column name="DAILYLIMITCOUNT" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitAmount" type ="long">
+			<column name="DAILYLIMITAMOUNT" sql-type ="NUMBER (10)"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitCount" type ="integer">
+			<column name="MONTHLYLIMITCOUNT" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitAmount" type ="long">
+			<column name="MONTHLYLIMITAMOUNT" sql-type ="NUMBER (10)"  not-null = "true" />
+		</property>
+
+		<property name="currCode" type ="string">
+			<column name="CURR_CODE" sql-type ="VARCHAR2 (3)"  not-null = "false" />
+		</property>
+
+		<property name="tranxCode" type ="string">
+			<column name="TRANX_CODE" sql-type ="VARCHAR2 (10)"  not-null = "false" />
+		</property>
+
+		<property name="lastUpdatedDate" type ="date">
+			<column name="LAST_UPDATED_DATE" sql-type ="DATE"  not-null = "true" />
+		</property>
+
+		<property name="lastUpdatedBy" type ="string">
+			<column name="LAST_UPDATED_BY" sql-type ="VARCHAR2 (32)"  not-null = "true" />
+		</property>
+
+		<property name="issuerId" type ="string">
+			<column name="ISSUER_ID" sql-type ="VARCHAR2 (32)"  not-null = "true" />
+		</property>
+	</class>
+
+</hibernate-mapping>

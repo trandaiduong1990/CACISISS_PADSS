@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.accounting">
+
+<class 	name="CustomerStatement" table="CUSTOMER_STATEMENT"> 
+
+	<id name="statId" type ="string"  unsaved-value="0">
+	    <column name ="STAT_ID" sql-type ="varchar2(6)" not-null = "true"/>
+	    <generator class="assigned"/>
+	</id>
+
+	<property name="cardNo" type="long">
+		<column name="CARD_NUMBER" sql-type="number" not-null="true" />
+	</property>
+
+	<property name="accId" type="string">
+		<column name="ACCOUNT_ID" sql-type="varchar2(20)" not-null="false" />
+	</property>
+
+	<property name="cycleNo" type="string">
+		<column name="CYCLE_NO" sql-type="varchar2(20)" not-null="false" />
+	</property>
+
+	<property name="genDate" type="timestamp">
+		<column name="GENERATED_DATE" sql-type="date" not-null="false" />
+	</property>
+
+	<property name="prevStatId" type="string">
+		<column name="PREV_STAT_ID" sql-type="varchar2(7)" not-null="false" />
+	</property>
+
+	<property name="prevStatAmt" type="double">
+		<column name="PREV_STAT_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="prevStatOutStandAmt" type="double">
+		<column name="PREV_STAT_OUTSTAND_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="prevPayAmt" type="double">
+		<column name="PREV_PAY_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statAmt" type="double">
+		<column name="STAT_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statMinAmt" type="double">
+		<column name="STAT_MIN_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statDueDate" type="timestamp">
+		<column name="STAT_DUE_DATE" sql-type="date" not-null="false" />
+	</property>
+
+	<property name="statFeeAmt" type="double">
+		<column name="STAT_FEE_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statIntAmt" type="double">
+		<column name="STAT_INTEREST_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statCreatedDate" type="timestamp">
+		<column name="STAT_CREATED_DATE" sql-type="date" not-null="false" />
+	</property>
+
+	<property name="outStandStatAmt" type="double">
+		<column name="OUTSTAND_STAT_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="outStandPurchaseAmt" type="double">
+		<column name="OUTSTAND_STAT_PURCHASE_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="outStandCashAmt" type="double">
+		<column name="OUTSTAND_STAT_CASH_AMT" sql-type="number" not-null="false" />
+	</property>
+
+	<property name="statGen" type="string">
+		<column name="STAT_GEN" sql-type="varchar2(1)" not-null="false" />
+	</property>
+		 
+	</class>
+</hibernate-mapping>

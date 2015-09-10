@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.customerservice">
+	
+	<class name="PinResendDto" table="PINRESEND_FORMS" >
+		
+		<id name="applicationId" type ="string" >
+		     <column name ="APPLICATION_ID" sql-type ="varchar2(12)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+		
+		<property name="cardNumber" type ="long" >
+    	  <column name ="CARDNUMBER" sql-type ="number(19)" not-null ="true"/>
+    	</property>	
+    	
+    	<property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(12)"  not-null = "true"/>
+		</property>
+    	 
+    	 <property	name="applicationType"  type ="integer">
+			<column name = "APPLICATIONTYPE"  sql-type ="Number(1)"  not-null = "true"/>
+		</property>
+		
+		 <property   name="feeApplicable" type ="string"  >
+		  <column name = "FEE_APPLICABLE" sql-type ="varchar2(1)" not-null = "false" />
+	</property>	
+		
+		<property	name="applicationStatus"  type ="integer">
+			<column name = "APPLICATIONSTATUS"  sql-type ="Number(1)"  not-null = "true"/>
+		</property>   	
+    	
+     <property name="remarks" type ="string" >
+    	  <column name ="REMARKS" sql-type ="varchar2(200)" not-null ="false"/>
+   	</property>	
+   
+   	<property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+	</property>
+	
+		<property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+   
+   	<property   name="customerId" type ="string"  >
+		  <column name = "CUSTOMER_ID" sql-type ="varchar2(20)" not-null = "true" />
+	</property>
+	      
+	    
+            <!--  this is to insert the address data -->
+    <component name="customerAddDto" class="org.transinfo.cacis.dto.cardproduction.CustomerAddressDto">
+      	  	   	  	
+	  <property name="address1" type ="string" >
+    	  <column name ="ADDRESS1" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>	
+     	
+    	<property name="address2" type ="string" >
+    	  <column name ="ADDRESS2" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+    		
+    	<property name="city" type ="string" >
+    	  <column name ="CITY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+    	<property name="state" type ="string" >
+    	  <column name ="STATE" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+    	<property name="country" type ="string" >
+    	  <column name ="COUNTRY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+         <property name="postalCode" type ="long" >
+    	  <column name ="POSTAL_CODE" sql-type ="Number(8)" not-null ="false"/>
+    	</property>
+    	    	
+        <property name="phone" type ="string" >
+    	  <column name ="TEL" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	
+
+    	<property name="fax" type ="string" >
+    	  <column name ="FAX" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	 
+      	
+      </component>
+      
+	</class>
+   </hibernate-mapping>

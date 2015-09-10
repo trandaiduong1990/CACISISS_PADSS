@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.csr">
+	
+	<class name="TranxRevertDto" table="TRANSACTIONS_REVERTED" >
+		<id name="tranxLogId" type ="string" >
+		     <column name ="TRANXLOGID" sql-type ="varchar2(32)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+     
+     	<property	name="doneBy"  type ="string">
+			<column name = "DONE_BY"  sql-type ="varchar2(32)"  not-null = "true"/>
+		</property>
+		
+        <property	name="doneWhen"  type ="timestamp">
+			<column name = "DONE_WHEN"  sql-type ="Date"  not-null = "true"/>
+		</property> 
+			
+		<property	name="remarks"  type ="string">
+			<column name = "REMARKS"  sql-type ="varchar2(15)"  not-null = "false"/>
+		</property>
+			
+		<property	name="cardNo"  type ="string">
+			<column name = "CARDNUMBER"  sql-type ="varchar2(20)"  not-null = "false"/>
+		</property>
+	
+	</class>
+   </hibernate-mapping>

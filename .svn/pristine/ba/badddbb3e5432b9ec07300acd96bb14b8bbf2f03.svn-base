@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="org.transinfo.cacis.dto.customerservice">
+
+	<class name="CardChangeDto" table="CARDCHANGE_FORMS">
+		<id name="cardNo" type="long">
+			<column name="CARD_NO" />
+			<generator class="foreign">
+				<param name="property">card</param>
+			</generator>
+		</id>
+		
+		<one-to-one name="card" class="org.transinfo.cacis.dto.cardproduction.CardsDto"  />
+		
+		<property name="nric" type ="string"  >
+		  <column name = "NRIC" sql-type ="varchar2(20)" not-null = "false" />
+		</property>
+		
+		<property name="customerName" type ="string"  >
+		  <column name = "CUSTOMER_NAME" sql-type ="varchar2(30)" not-null = "false" />
+		</property>
+		
+		<property name="existCardProduct" type ="string"  >
+		  <column name = "REQUIRED_CARD_PRODUCT" sql-type ="varchar2(6)" not-null = "false" />
+		</property>
+		
+		<property name="changeCardProduct" type ="string"  >
+		  <column name = "CHANGE_CARD_PRODUCT" sql-type ="varchar2(6)" not-null = "false" />
+		</property>
+		
+		<property name="existCardStatus" type ="char"  >
+		  <column name = "REQUIRED_CARD_STATUS" sql-type ="varchar2(1)" not-null = "false" />
+		</property>
+		
+		<property name="status" type ="integer">
+			<column name = "STATUS"  sql-type ="Number(1)"  not-null = "true"/>
+		</property>
+		
+		<property name="updatedDate" type ="date">
+			<column name = "LAST_UPDATED_DATE"  sql-type ="Date" not-null = "true" />
+		</property>
+		
+		<property name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(20)" not-null = "false" />
+		</property>
+		
+		<many-to-one name="customer" class="org.transinfo.cacis.dto.csr.CustomerInfoDto" column="CUSTOMER_ID" cascade="all" not-null="true" />
+		
+	</class>
+
+</hibernate-mapping>

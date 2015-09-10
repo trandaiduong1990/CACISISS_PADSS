@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.cardproduction">
+
+	<class name="CreditScoringDto" table="CREDIT_SCORING">
+	
+		<id name="scoreId" type="string" unsaved-value="0">
+			<column name="SCORE_ID" sql-type="varchar2(20)" not-null="true" />
+			<generator class="assigned"/>
+		</id>
+
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		
+		<property name="scoreName" type="string">
+			<column name="SCORE_NAME" sql-type="varchar2(20)" not-null="true" />
+		</property>
+
+		<property name="fieldColumn" type="string">
+			<column name="FIELD_COLUMN" sql-type="varchar2(30)" not-null="true" />
+		</property>
+
+		<property name="nFields" type="integer">
+			<column name="NFIELDS" sql-type="number" not-null="true" />
+		</property>
+		
+		<property name="rangeAvl" type="string">
+			<column name="RANGE_AVL" sql-type="varchar2(1)" not-null="true" />
+		</property>
+		
+		<property name="minScore" type="integer">
+			<column name="MIN_SCORE" sql-type="number" not-null="true" />
+		</property>
+		
+		<property name="maxScore" type="integer">
+			<column name="MAX_SCORE" sql-type="number" not-null="true" />
+		</property>
+		
+		<property name="c1" type="string">
+			<column name="C1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c1s1" type="integer">
+			<column name="C1S1" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c2" type="string">
+			<column name="C2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c2s2" type="integer">
+			<column name="C2S2" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c3" type="string">
+			<column name="C3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="c3s3" type="integer">
+			<column name="C3S3" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c4" type="string">
+			<column name="C4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c4s4" type="integer">
+			<column name="C4S4" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c5" type="string">
+			<column name="C5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c5s5" type="integer">
+			<column name="C5S5" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c6" type="string">
+			<column name="C6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c6s6" type="integer">
+			<column name="C6S6" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c7" type="string">
+			<column name="C7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c7s7" type="integer">
+			<column name="C7S7" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="c8" type="string">
+			<column name="C8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c8s8" type="integer">
+			<column name="C8S8" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c9" type="string">
+			<column name="C9" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c9s9" type="integer">
+			<column name="C9S9" sql-type="number" not-null="false" />
+		</property>
+		
+		<property name="c10" type="string">
+			<column name="C10" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="c10s10" type="integer">
+			<column name="C10S10" sql-type="Number" not-null="false" />
+		</property>
+		
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="true" />
+		</property>
+		
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="date" not-null="false" />
+		</property>
+		
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(30)" not-null="false" />
+		</property>
+		
+		<property name="creditName" type="string">
+			<column name="CREDIT_NAME" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<set name ="creditLimit" cascade ="all" lazy ="false" fetch ="join" >
+		  <key column ="SCORE_ID"/>
+		  <one-to-many class="org.transinfo.cacis.dto.settings.CreditLimitProfileDto"/>
+		</set>
+	</class>
+</hibernate-mapping>

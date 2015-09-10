@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package ="org.transinfo.cacis.dto.authorization">
+  <class name="BlockMerchantDto" table="BLACKLIST_MERCHANT">	   
+      
+       <id name="searchMerchantId" type ="long" >
+		     <column name ="MERCHANTID" sql-type ="Number(15)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+		<property	name="merchantName"  type ="string">
+			<column name = "MERCHANT_NAME"  sql-type ="varchar2(35)" not-null = "true" />
+		</property>
+		<property	name="reason"  type ="string">
+			<column name = "REASON"  sql-type ="varchar2(50)" not-null = "true" />
+		</property>
+      	  	   	  	
+	    <property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(32)"  not-null = "true"/>
+		</property>
+
+        <property	name="blockStatus"  type ="string">
+			<column name = "BLOCKSTATUS"  sql-type ="varchar2(1)" not-null = "true" />
+		</property>
+	 	     
+	 <property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+		</property>
+	
+		<property   name="lastUpdatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+         
+   </class>
+
+</hibernate-mapping>

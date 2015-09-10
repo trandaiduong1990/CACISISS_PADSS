@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.disputemanagement">
+
+	<class name="DisputeRequestDocumentsDto" table="DISPUTE_REQUEST_DOCUMENTS">
+	
+	<composite-id name="id" class="DisputeRequestDocumentsDto$Id">
+    		<key-property name="claimNumber" type="string" column="CLAIM_NO"/>
+    		<key-property name="documentId" type="string" column="DOCUMENT_ID" />
+   </composite-id>
+				
+		<property name="docsUploaded" type ="character">
+			<column name="DOCUMENT_UPLOADED" sql-type ="Char(1)"   not-null = "true"  />
+		</property>
+		
+		 <property name="remarksId" type="string">
+		     <column name="REMARKS_ID" sql-type ="varchar2(12)"  not-null = "false" />
+		</property>
+		
+		 <property   name="docsUploadedDate" type ="date" >
+		   <column name= "DOCUMENT_UPLOADED_DATE" sql-type ="date" not-null = "false"/>
+		 </property>
+	    <property   name="updatedDate" type ="date" >
+		   <column name= "LAST_UPDATED_DATE" sql-type ="date" not-null = "true"/>
+		 </property>
+		  <property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(25)" not-null = "true" />
+		</property>
+	</class>
+
+</hibernate-mapping>

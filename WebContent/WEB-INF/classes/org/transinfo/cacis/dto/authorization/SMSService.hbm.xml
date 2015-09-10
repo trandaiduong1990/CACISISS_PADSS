@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.authorization">
+	<class name="SMSServiceDto" table="SMS_SERVICE">
+
+		<id name="cardNumber" type="long">
+			<column name="CARDNUMBER" sql-type="NUMBER"
+				not-null="true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="accountEnquiry" type="char">
+			<column name="ACCOUNT_ENQUIRY" sql-type="CHAR (1)"
+				not-null="true" />
+		</property>
+
+		<property name="paymentAlert" type="char">
+			<column name="PAYMENT_ALERT" sql-type="CHAR (1)"
+				not-null="true" />
+		</property>
+
+		<property name="generalMsg" type="char">
+			<column name="GENERAL_MSG" sql-type="CHAR (1)"
+				not-null="true" />
+		</property>
+
+		<property name="status" type="char">
+			<column name="STATUS" sql-type="CHAR (1)"
+				not-null="true" />
+		</property>
+		
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="DATE"
+				not-null="true" />
+		</property>
+
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="VARCHAR2 (25)"
+				not-null="true" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

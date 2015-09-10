@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+     <hibernate-mapping package="org.transinfo.cacis.dto.administration">
+     
+  <class name="LicenseMasterDto" table="LICENSE_MASTER">	   
+   
+       <id name="serialNo" type ="string">
+    		     <column name ="SERIAL_NO" sql-type ="varchar2(100)" not-null = "true"/>
+    			 <generator class="assigned"/>
+       </id>
+
+          <property  name="licenseKey"  type ="string">
+	  	<column name = "LICENSE_KEY"  sql-type ="varchar2(100)"  not-null = "true"/>
+	  </property>
+
+	  <property  name="ipAddress"  type ="string">
+	  	<column name = "IP_ADDRESS"  sql-type ="varchar2(100)"  not-null = "true"/>
+	  </property>
+	  
+	  <property  name="updatedDate"  type ="date">
+	  	<column name = "LAST_UPDATED_DATE"  sql-type ="Date"  not-null = "true"/>
+	  </property>		  
+	  
+	  <property  name="userId"  type ="string">
+	  	<column name = "LAST_UPDATED_BY"  sql-type ="varchar2(32)"  not-null = "true"/>
+	  </property>	
+	          	
+   </class>
+
+</hibernate-mapping>

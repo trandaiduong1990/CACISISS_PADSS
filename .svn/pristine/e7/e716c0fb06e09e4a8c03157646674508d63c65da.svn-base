@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.cardproduction">
+
+	<class name="CustomerLimitsDto" table="CUSTOMER_LIMITS">
+
+		<id name="cardNo" type="long">
+			<column name="CARDNUMBER" sql-type="number(19)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="amtPerTranx" type="double">
+			<column name="AMOUNTPERTRANX" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="cashPerTranx" type="double">
+			<column name="CASHPERTRANX" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyLimitCount" type="long">
+			<column name="DAILYLIMITCOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyLimitAmt" type="double">
+			<column name="DAILYLIMITAMOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="monthlyLimitCount" type="long">
+			<column name="MONTHLYLIMITCOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="monthlyLimitAmt" type="double">
+			<column name="MONTHLYLIMITAMOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="currencyCode" type="string">
+			<column name="CURR_CODE" sql-type="varchar2(3)" not-null="false" />
+		</property>
+
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(32)" not-null="false" />
+		</property>
+
+		<property name="dailyCashCount" type="long">
+			<column name="DAILYCASHCOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyCashAmt" type="double">
+			<column name="DAILYCASHAMOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="cashLimit" type="double">
+			<column name="CASH_LIMIT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="purchaseLimit" type="double">
+			<column name="PURCHASE_LIMIT" sql-type="number" not-null="false" />
+		</property>
+
+		<!--
+			<property name="eComEnable" type ="string"> <column name =
+			"ECOM_ENABLE" sql-type ="varchar2(1)" not-null = "false"/>
+			</property>
+		-->
+
+		<property name="eComAmt" type="double">
+			<column name="ECOMM_AMOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="date" not-null="false" />
+		</property>
+
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(32)" not-null="false" />
+		</property>
+		
+		<property name="amtPerTranxInt" type="double">
+			<column name="AMOUNTPERTRANX_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="cashPerTranxInt" type="double">
+			<column name="CASHPERTRANX_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyLimitCountInt" type="long">
+			<column name="DAILYLIMITCOUNT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyLimitAmtInt" type="double">
+			<column name="DAILYLIMITAMOUNT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyCashCountInt" type="long">
+			<column name="DAILYCASHCOUNT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="dailyCashAmtInt" type="double">
+			<column name="DAILYCASHAMOUNT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="cashLimitInt" type="double">
+			<column name="CASH_LIMIT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="purchaseLimitInt" type="double">
+			<column name="PURCHASE_LIMIT_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="eComAmtInt" type="double">
+			<column name="ECOMM_AMOUNT_INT" sql-type="number" not-null="false" />
+		</property>
+		
+
+		<property name="eComAmtPerDay" type="double">
+			<column name="ECOMM_AMOUNT_PER_DAY" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="eComAmtPerDayInt" type="double">
+			<column name="ECOMM_AMOUNT_PER_DAY_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="eComTranxPerDay" type="long">
+			<column name="ECOMM_TRANX_PER_DAY" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="eComTranxPerDayInt" type="long">
+			<column name="ECOMM_TRANX_PER_DAY_INT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

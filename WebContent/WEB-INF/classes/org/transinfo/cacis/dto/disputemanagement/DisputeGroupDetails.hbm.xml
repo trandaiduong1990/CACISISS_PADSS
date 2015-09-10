@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.disputemanagement">
+
+	<class name="DisputeGroupDetailsDto" table="DISPUTE_GROUP_DETAILS">
+		<id name="reasonCode" type="string">
+		    <column name="REASON_CODE" sql-type ="varchar2(2)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="chargeBackReason" type="string">
+			<column name="CHARGEBACK_REASON" sql-type="varchar2(100)" not-null="true" />
+		</property>
+
+		<property name="timeLimit" type="string">
+			<column name="TIME_LIMIT" sql-type="varchar2(3)" not-null="true" />
+		</property>
+
+		<property name="minCBAmt" type="integer">
+			<column name="MIN_CB_AMT" sql-type="number" not-null="false" />
+		</property>
+
+		<property name="minCBTEAmt" type="integer">
+			<column name="MIN_CBTE_AMT" sql-type="number" not-null="false" />
+		</property>
+		
+		<many-to-one name="disputeGroup" class="DisputeGroupsDto" column="GROUP_ID" cascade="none" not-null="true" lazy="false" />
+
+	</class>
+
+</hibernate-mapping>

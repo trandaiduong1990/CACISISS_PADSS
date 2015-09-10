@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.log">
+
+  <class name="UserActivitiesDto" table="USER_ACTIVITIES">
+	  <id name="userActivityId" type="int">
+	     <column name ="USERACTIVITYID" sql-type ="number(10)" not-null = "true"/>
+	     <generator class="native" />
+	  </id>
+
+	  <property name="dateTime" type ="timestamp">
+	     	<column name="DATETIME" sql-type ="DATE"  not-null = "true"/>
+	  </property>	
+	  <property name="userId" type="string">
+	 	<column name="USER_ID" sql-type ="varchar2(16)"  not-null = "true"/>
+	  </property>	 
+	  <property name="stationIp" type="string">
+	  	<column name="STATIONIP" sql-type ="varchar2(16)"  not-null = "true"/>
+	  </property>
+	  <property name="issuerId" type="string">
+	  	<column name="ISSUER_ID" sql-type ="varchar2(32)"  not-null = "false"/>
+	  </property>
+	  <property name="activity" type="string">
+	  	<column name="ACTIVITY" sql-type ="varchar2(256)"  not-null = "false"/>
+	  </property>
+	  
+   </class>
+
+</hibernate-mapping>

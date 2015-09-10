@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.customerservice">
+	
+	<class name="FeeWaiver" table="FEE_WAIVER" >
+		
+		<id name="sno" type ="string" >
+		     <column name ="SNO" sql-type ="varchar2(20)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+		
+		<property name="cardNo" type ="string" >
+    	  <column name ="CARDNO" sql-type ="varchar2(20)" not-null ="true"/>
+    	</property>
+		
+		<property name="feeType" type ="string" >
+    	  <column name ="FEE_TYPE" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+		
+		<property name="feeRef" type ="string" >
+    	  <column name ="FEE_REF" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+		
+		<property name="amount" type ="string" >
+    	  <column name ="AMOUNT" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+		
+		<property name="createdBY" type ="string" >
+    	  <column name ="CREATED_BY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+		
+		<property name="createdDate" type ="timestamp" >
+    	  <column name ="CREATED_DATE" sql-type ="date" not-null ="false"/>
+    	</property>
+      
+	</class>
+   </hibernate-mapping>

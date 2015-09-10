@@ -1,0 +1,324 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.cardproduction">
+
+	<class name="ApplValidationDto" table="APPLICATION_VAL">
+	
+		<id name="applValId" type="string" unsaved-value="0">
+			<column name="APPLVAL_ID" sql-type="varchar2(20)" not-null="true" />
+			<generator class="assigned"/>
+		</id>
+
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		
+		<property name="applValName" type="string">
+			<column name="APPLVAL_NAME" sql-type="varchar2(20)" not-null="true" />
+		</property>
+
+		<property name="criteria1" type="string">
+			<column name="CRITERIA1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator1" type="string">
+			<column name="OPERATOR1" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value11" type="string">
+			<column name="VALUE1_1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value21" type="string">
+			<column name="VALUE2_1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail1" type="string">
+			<column name="REF_FAIL1" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition1" type="string">
+			<column name="CONDITION1" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria1" type="string">
+			<column name="COND_CRITERIA1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator1" type="string">
+			<column name="COND_OPERATOR1" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value1" type="string">
+			<column name="VALUE_1" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria2" type="string">
+			<column name="CRITERIA2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator2" type="string">
+			<column name="OPERATOR2" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value12" type="string">
+			<column name="VALUE1_2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value22" type="string">
+			<column name="VALUE2_2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail2" type="string">
+			<column name="REF_FAIL2" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition2" type="string">
+			<column name="CONDITION2" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria2" type="string">
+			<column name="COND_CRITERIA2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator2" type="string">
+			<column name="COND_OPERATOR2" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value2" type="string">
+			<column name="VALUE_2" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria3" type="string">
+			<column name="CRITERIA3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator3" type="string">
+			<column name="OPERATOR3" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value13" type="string">
+			<column name="VALUE1_3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value23" type="string">
+			<column name="VALUE2_3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail3" type="string">
+			<column name="REF_FAIL3" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition3" type="string">
+			<column name="CONDITION3" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria3" type="string">
+			<column name="COND_CRITERIA3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator3" type="string">
+			<column name="COND_OPERATOR3" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value3" type="string">
+			<column name="VALUE_3" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria4" type="string">
+			<column name="CRITERIA4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator4" type="string">
+			<column name="OPERATOR4" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value14" type="string">
+			<column name="VALUE1_4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value24" type="string">
+			<column name="VALUE2_4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail4" type="string">
+			<column name="REF_FAIL4" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition4" type="string">
+			<column name="CONDITION4" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria4" type="string">
+			<column name="COND_CRITERIA4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator4" type="string">
+			<column name="COND_OPERATOR4" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value4" type="string">
+			<column name="VALUE_4" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria5" type="string">
+			<column name="CRITERIA5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator5" type="string">
+			<column name="OPERATOR5" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value15" type="string">
+			<column name="VALUE1_5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value25" type="string">
+			<column name="VALUE2_5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail5" type="string">
+			<column name="REF_FAIL5" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition5" type="string">
+			<column name="CONDITION5" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria5" type="string">
+			<column name="COND_CRITERIA5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator5" type="string">
+			<column name="COND_OPERATOR5" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value5" type="string">
+			<column name="VALUE_5" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria6" type="string">
+			<column name="CRITERIA6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator6" type="string">
+			<column name="OPERATOR6" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value16" type="string">
+			<column name="VALUE1_6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value26" type="string">
+			<column name="VALUE2_6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail6" type="string">
+			<column name="REF_FAIL6" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition6" type="string">
+			<column name="CONDITION6" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria6" type="string">
+			<column name="COND_CRITERIA6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator6" type="string">
+			<column name="COND_OPERATOR6" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value6" type="string">
+			<column name="VALUE_6" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria7" type="string">
+			<column name="CRITERIA7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator7" type="string">
+			<column name="OPERATOR7" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value17" type="string">
+			<column name="VALUE1_7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value27" type="string">
+			<column name="VALUE2_7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail7" type="string">
+			<column name="REF_FAIL7" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition7" type="string">
+			<column name="CONDITION7" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria7" type="string">
+			<column name="COND_CRITERIA7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator7" type="string">
+			<column name="COND_OPERATOR7" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value7" type="string">
+			<column name="VALUE_7" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="criteria8" type="string">
+			<column name="CRITERIA8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+
+		<property name="operator8" type="string">
+			<column name="OPERATOR8" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value18" type="string">
+			<column name="VALUE1_8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="value28" type="string">
+			<column name="VALUE2_8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="refFail8" type="string">
+			<column name="REF_FAIL8" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condition8" type="string">
+			<column name="CONDITION8" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="condCriteria8" type="string">
+			<column name="COND_CRITERIA8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="condOperator8" type="string">
+			<column name="COND_OPERATOR8" sql-type="varchar2(5)" not-null="false" />
+		</property>
+		
+		<property name="value8" type="string">
+			<column name="VALUE_8" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="date" not-null="false" />
+		</property>
+		
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(30)" not-null="false" />
+		</property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<REPORT>
+	<COMMON_PARAM>
+		<BANK_NAME>Sample Bank</BANK_NAME>
+	</COMMON_PARAM>
+	<REPORTTYPE>
+		<REPORT_CODE>TND</REPORT_CODE>
+		<REPORT_NAME>TransactionDetailList</REPORT_NAME>
+		<INPUT_XML_FILE>
+			C:\Development\CACIS\StrutsCacis\JavaSource\org\transinfo\cacis\report\xmls\TranxDetail4.xml
+		</INPUT_XML_FILE>
+		<OUTPUT_FILE_NAME>TransactionDetailList</OUTPUT_FILE_NAME>
+		<REPORT_JSP>jsp/report/ReportView.jsp</REPORT_JSP>
+	</REPORTTYPE>
+</REPORT>
+

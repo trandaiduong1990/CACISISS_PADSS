@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.batchprocess">
+	
+	<class name="CardATMLinkDto" table="CARD_ATM_LINK" >		
+		<id name="cardNumber" type="long">
+			<column name="CARDNUMBER" sql-type="Number" not-null="true" />
+			<generator class="foreign">
+				<param name="property">card</param>
+			</generator>
+		</id>
+		
+		<one-to-one name="card" class="org.transinfo.cacis.dto.cardproduction.CardsDto" lazy="false" constrained="true" />
+
+		<property	name="savingAccount"  type ="string">
+			<column name = "SAVING_ACCOUNT"  sql-type ="varchar2(20)"  not-null = "false"/>
+		</property>
+			
+		<property	name="currentAccount"  type ="string">
+			<column name = "CURRENT_ACCOUNT"  sql-type ="varchar2(20)"  not-null = "false"/>
+		</property>	
+
+        <property	name="defaultAccount"  type ="character">
+			<column name = "DEFAULT_ACCOUNT"  sql-type ="char(1)" not-null = "false" />
+		</property>
+
+        <property	name="collectoralAmt"  type ="float">
+			<column name = "COLLECTORAL_AMT"  sql-type ="number" not-null = "false" />
+		</property>
+
+        <property	name="collectoralAccount"  type ="string">
+			<column name = "COLLECTORAL_ACCOUNT"  sql-type ="varchar2(19)" not-null = "false" />
+		</property>
+
+        <property	name="autoPayAccount"  type ="string">
+			<column name = "AUTOPAY_ACCOUNT"  sql-type ="varchar2(19)" not-null = "false" />
+		</property>
+
+        <property	name="autoPayAccounton"  type ="character">
+			<column name = "AUTOPAY_ACCOUNT_ON"  sql-type ="char(1)" not-null = "false" />
+		</property>
+
+        <property	name="autoPayDisable"  type ="character">
+			<column name = "AUTOPAY_ENABLE_NEXT"  sql-type ="char(1)" not-null = "false" />
+		</property>
+	
+	</class>
+   </hibernate-mapping>

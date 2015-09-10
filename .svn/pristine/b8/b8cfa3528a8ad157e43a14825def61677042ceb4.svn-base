@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.transaction">
+  <class name="FeeDebitGLDto" table="FEE_DEBIT_GL">
+  		<id name="feeDebitGLId" type="string">
+			<column name="SNO" sql-type="varchar2(8)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_FEEDEBITGL</param>
+            </generator>
+		</id>
+		
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(32)" not-null="false" />
+		</property>
+		
+		<property name="dateTime" type="date">
+			<column name="DATETIME" sql-type="Date" not-null="false" />
+		</property>
+		
+		<property name="cardNo" type="string">
+			<column name="CARD_NO" sql-type="varchar2(24)" not-null="false" />
+		</property>
+		
+		<property name="trnxType" type="string">
+			<column name="TRANX_TYPE" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="glType" type="string">
+			<column name="GL_TYPE" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="amount" type="string">
+			<column name="AMOUNT" sql-type="varchar2(12)" not-null="false" />
+		</property>
+		
+		<property name="balance" type="string">
+			<column name="BALANCE" sql-type="varchar2(12)" not-null="false" />
+		</property>
+		
+		<property name="refNo" type="string">
+			<column name="REFNO" sql-type="varchar2(40)" not-null="false" />
+		</property>
+		
+		<property name="billed" type="string">
+			<column name="BILLED" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="feeWaived" type="string">
+			<column name="FEE_WAIVED" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+		<property name="trnxTypeDes"
+			formula="(select tt.DESCRIPTION from TRANX_TYPE tt where tt.TRANX_TYPE = TRANX_TYPE)" />
+					
+		<property name="annualFeeDate" type="timestamp">
+			<column name="AF_DATE" sql-type="date" not-null="false" />
+		</property>
+		
+		<property name="remarks" type="string">
+			<column name="REMARKS" sql-type="varchar2(200)" not-null="false" />
+		</property>
+		
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" sql-type="varchar2(50)" not-null="false" />
+		</property>
+				
+  </class>
+</hibernate-mapping>

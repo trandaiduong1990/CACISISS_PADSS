@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package ="org.transinfo.cacis.dto.common">
+
+  <class name="AddressDto" table ="APPLICATION_ADDRESS" >
+    	<id name="addressId" type="long">
+			<column name="ADDR_ID" sql-type="Number(6)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_APPADDRESS</param>
+            </generator>
+		</id>
+       	    	
+    	<property name="address1" type ="string" >
+    	  <column name ="ADDRESS1" sql-type ="varchar2(100)" not-null ="false"/>
+    	</property>	
+    	
+    	
+    	<property name="address2" type ="string" >
+    	  <column name ="ADDRESS2" sql-type ="varchar2(100)" not-null ="false"/>
+    	</property>
+    		
+    	<property name="city" type ="string" >
+    	  <column name ="CITY" sql-type ="varchar2(20)" not-null ="true"/>
+    	</property>
+
+    	<property name="state" type ="string" >
+    	  <column name ="STATE" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+    	<property name="country" type ="string" >
+    	  <column name ="COUNTRY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+         <property name="postalCode" type ="long" >
+    	  <column name ="POSTAL_CODE" sql-type ="Number(8)" not-null ="false"/>
+    	</property>
+    	
+    	<property name="addressType" type ="string" >
+    	  <column name ="ADDR_TYPE" sql-type ="varchar2(2)" not-null ="false"/>
+    	</property>
+       
+        <property name="phone" type ="string" >
+    	  <column name ="TEL" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	
+
+    	<property name="fax" type ="string" >
+    	  <column name ="FAX" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	 
+
+    	<property name="township" type ="string" >
+    	  <column name ="TOWNSHIP" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	
+    	<property name="homeTp" type ="string" >
+    	  <column name ="HOME_TEL" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	  
+    	
+    	<!-- this for  ApplicationAddress to ApplicationForms(ApplicationFormDto) many-to-one-->
+      <!-- <many-to-one name="appFormDto" column="application_id" not-null="true"/>-->
+        <!-- this for  ApplicationAddress to CardGrade_Forms(CardGradeFormsDto) many-to-one-->
+      <!-- <many-to-one name="cardGradeFormDto" class ="org.transinfo.cacis.dto.applicationforms.CardGradeFormDto" column="application_id" not-null="true"/>--> 
+   
+    </class>   
+
+</hibernate-mapping>

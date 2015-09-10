@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.csr">
+
+	<class name="AddProductDto" table="ADDPRODUCT_FORMS">
+		<id name="sno" type="int">
+			<column name="SNO" sql-type="NUMBER" not-null="true" />
+			 <generator class="sequence">
+                <param name="sequence">SEQ_ADDPRODUCT_FORM</param>
+            </generator>
+		</id>
+		<property name="customerId" type="string">
+			<column name="CUSTOMER_ID" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="nric" type="string">
+			<column name="NRIC" sql-type="varchar2(50)" not-null="false" />
+		</property>
+
+		<property name="customerName" type="string">
+			<column name="CUSTOMER_NAME" sql-type="varchar2(30)" not-null="false" />
+		</property>
+
+		<property name="newCardProduct" type="string">
+			<column name="NEW_CARD_PRODUCT" sql-type="Number(6)" not-null="false" />
+		</property>
+
+		<property name="accountId" type="string">
+			<column name="ACCOUNT_ID" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="status" type="long">
+			<column name="STATUS" sql-type="NUMBER" not-null="false" />
+		</property>
+
+		<property name="acctType" type="string">
+			<column name="ACCT_TYPE" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="false" />
+		</property>
+
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="false" />
+		</property>
+		
+        <property	name="collectoralAmt"  type ="float">
+			<column name = "COLLECTORAL_AMT"  sql-type ="number" not-null = "false" />
+		</property>
+
+        <property	name="collectoralAccount"  type ="string">
+			<column name = "COLLECTORAL_ACCOUNT"  sql-type ="varchar2(19)" not-null = "false" />
+		</property>
+
+        <property	name="autoPayAccount"  type ="string">
+			<column name = "AUTOPAY_ACCOUNT"  sql-type ="varchar2(19)" not-null = "false" />
+		</property>
+		
+		 <property	name="checkedautoPayAccountOn"  type ="character">
+			<column name = "AUTOPAY_ACCOUNT_ON"  sql-type ="char(1)" not-null = "false" />
+		</property>
+
+		<property name="cycleNo" type="string">
+			<column name="CYCLE_NO" sql-type="varchar2(2)" not-null="false" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

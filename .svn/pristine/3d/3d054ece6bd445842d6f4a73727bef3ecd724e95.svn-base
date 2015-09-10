@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.cardproduction">
+
+	<class name="CardsDetails">
+		<id name="cardNumber" type="string" />
+
+		<property name="expDate" type="string" />
+		<property name="statDes" type="string" />
+		<property name="ecom" type="string" />
+		<property name="status" type="string" />
+		<property name="chtDes" type="string" />
+		<property name="cashUsed" type="string" />
+		<property name="purchaseUsed" type="string" />
+		<property name="purchaseAvaDome" type="string" />
+		<property name="purchaseAvaInt" type="string" />
+		<property name="cashAvaDemo" type="string" />
+		<property name="cashAvaInt" type="string" />
+
+	</class>
+
+	<sql-query name="getCards" callable="true">
+		<return alias="cardDet" class="org.transinfo.cacis.dto.cardproduction.CardsDetails">
+			<return-property name="cardNumber" column="CARDNUMBER" />
+			<return-property name="expDate" column="EXPDATE" />
+			<return-property name="statDes" column="STADES" />
+			<return-property name="ecom" column="ECOMM_ENABLE" />
+			<return-property name="status" column="STATUS" />
+			<return-property name="chtDes" column="CHTDES" />
+			<return-property name="cashUsed" column="CASH_USED" />
+			<return-property name="purchaseUsed" column="PURCHASE_USED" />
+			<return-property name="purchaseAvaDome" column="PURCHASE_AVAI_DOME" />
+			<return-property name="purchaseAvaInt" column="PURCHASE_AVAI_INT" />
+			<return-property name="cashAvaDemo" column="CASH_AVAI_DOME" />
+			<return-property name="cashAvaInt" column="CASH_AVAI_INT" />
+		</return>
+		{ call GET_CARDS(? , :accId) }
+	</sql-query>
+
+</hibernate-mapping>

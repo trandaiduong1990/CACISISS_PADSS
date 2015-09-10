@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.csr">
+	
+	<class name="NonReconTransactionLogDto" table="TRANXLOG_NON_RECON" >
+		<id name="tranxNonReconId" type ="string" >
+		     <column name ="TRANX_NON_RECON_ID" sql-type ="varchar2(20)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+     
+		<property	name="tranxCodeQualifier"  type ="string">
+			<column name = "TRANXCODEQUALIFIER"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+		
+		<property	name="merchantName"  type ="string">
+			<column name = "MERCHANTNAME"  sql-type ="varchar2(25)"  not-null = "false"/>
+		</property>	
+		 
+		<property	name="tranxCode"  type ="string">
+			<column name = "TRANXCODE"  sql-type ="varchar2(2)"  not-null = "false"/>
+		</property> 
+		
+		<property	name="accNo"  type ="string">
+			<column name = "ACCNO"  sql-type ="varchar2(16)"  not-null = "false"/>
+		</property>
+			
+        <property	name="accNoExtension"  type ="string">
+			<column name = "ACCNOEXTENSION"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property>
+		
+		<property	name="acqBusinessId"  type ="string">
+			<column name = "ACQBUSINESSID"  sql-type ="varchar2(8)"  not-null = "true"/>
+		</property>
+		
+		<property	name="arn"  type ="string">
+			<column name = "ARN"  sql-type ="varchar2(23)"  not-null = "false"/>
+		</property>	
+		  
+	   <property	name="authCharacterIsTicsIndicator"  type ="string">
+			<column name = "AUTHCHARACTERISTICSINDICATOR"  sql-type ="varchar2(1)"  not-null = "true"/>
+		</property>
+	    
+	   <property	name="authCode"  type ="string">
+			<column name = "AUTHCODE"  sql-type ="varchar2(6)"  not-null = "false"/>
+		</property>
+	
+	   <property	name="cardHolderIdMethod"  type ="string">
+			<column name ="CARDHOLDERIDMETHOD"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+	
+	   <property	name="centralProcessingDate"  type ="string">
+			<column name = "CENTRALPROCESSINGDATE"  sql-type ="varchar2(4)"  not-null = "false"/>
+		</property>
+		
+		 <property	name="collectionOnlyFlag"  type ="string">
+			<column name ="COLLECTIONONLYFLAG"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+			
+		 <property	name="crb"  type ="string">
+			<column name ="CRB"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+       	
+       	<!-- 
+		 <property	name="destinationAmt"  type ="long">
+			<column name ="DESTINATIONAMT"  sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		 -->
+		
+		<property  name="destinationAmt" formula ="to_number(DESTINATIONAMT)/100" type="double"/>
+		
+		 <property	name="destinationCurrCode"  type ="string">
+			<column name ="DESTINATIONCURRCODE"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property>
+		
+		<property	name="floorLimitIndicator"  type ="string">
+			<column name ="FLOORLIMITINDICATOR"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+		
+		<property	name="internationalFeeIndicator"  type ="string">
+			<column name ="INTERNATIONALFEEINDICATOR"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+		
+		<property	name="mcc"  type ="string">
+			<column name ="MCC"  sql-type ="varchar2(4)"  not-null = "false"/>
+		</property>
+		
+		<property	name="merchantCity"  type ="string">
+			<column name ="MERCHANTCITY"  sql-type ="varchar2(13)"  not-null = "false"/>
+		</property>
+				
+		<property	name="merchantCountryCode"  type ="string">
+			<column name = "MERCHANTCOUNTRYCODE"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property>	
+       	
+       	<property	name="merchantProvinceCode"  type ="string">
+			<column name ="MERCHANTPROVINCECODE"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property>
+		
+		<property	name="merchantZipCode"  type ="string">
+			<column name ="MERCHANTZIPCODE"  sql-type ="varchar2(5)"  not-null = "false"/>
+		</property>
+		    	
+       		
+		<property	name="pCasIndicator"  type ="string">
+			<column name = "PCASINDICATOR"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+		
+		<property	name="posentryMode"  type ="string">
+			<column name = "POSENTRYMODE"  sql-type ="varchar2(2)"  not-null = "true"/>
+		</property>	
+		
+		<property	name="posted"  type ="string">
+			<column name ="POSTED"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+		
+		<property	name="postedDate"  type ="timestamp">
+			<column name ="POSTED_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property> 
+		
+		<property	name="posterMinalCapability"  type ="string">
+			<column name ="POSTERMINALCAPABILITY"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property>
+				     
+        <property	name="purchaseDate"  type ="string">
+			<column name = "PURCHASEDATE"  sql-type ="varchar2(12)"  not-null = "true"/>
+		</property>
+        
+        <property	name="reasonCode"  type ="string">
+			<column name = "REASONCODE"  sql-type ="varchar2(2)"  not-null = "false"/>
+		</property>
+        
+        <property	name="reimbursementAttribute"  type ="string">
+			<column name = "REIMBURSEMENTATTRIBUTE"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+        
+        <property	name="remarks"  type ="string">
+			<column name = "REMARKS"  sql-type ="varchar2(200)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="requestedPaymentService"  type ="string">
+			<column name = "REQUESTEDPAYMENTSERVICE"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="reserved"  type ="string">
+			<column name = "RESERVED"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="settlementFlag"  type ="string">
+			<column name = "SETTLEMENTFLAG"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+	
+		<!-- 
+        <property	name="sourceAmt"  type ="long">
+			<column name = "SOURCEAMT"  sql-type ="number(12,2)"  not-null = "false"/>
+		</property> 
+		 -->
+		<property  name="sourceAmt" formula ="to_number(SOURCEAMT)/100" type="double"/>
+		 	
+        <property	name="sourceCurrCode"  type ="string">
+			<column name = "SOURCECURRCODE"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="tcr1"  type ="string">
+			<column name = "TCR1"  sql-type ="varchar2(200)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="tcr5"  type ="string">
+			<column name = "TCR5"  sql-type ="varchar2(200)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="tcr6"  type ="string">
+			<column name = "TCR6"  sql-type ="varchar2(200)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="tcr7"  type ="string">
+			<column name = "TCR7"  sql-type ="varchar2(200)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="tranxComponentSequenceNo"  type ="string">
+			<column name = "TRANXCOMPONENTSEQUENCENO"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="updatedBy"  type ="string">
+			<column name = "UPDATED_BY"  sql-type ="varchar2(50)"  not-null = "false"/>
+		</property> 
+	
+        <property	name="updatedDate"  type ="timestamp">
+			<column name = "UPDATED_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property> 
+	
+        <property	name="usageCode"  type ="string">
+			<column name = "USAGECODE"  sql-type ="varchar2(1)"  not-null = "false"/>
+		</property> 
+	
+	</class>
+   </hibernate-mapping>

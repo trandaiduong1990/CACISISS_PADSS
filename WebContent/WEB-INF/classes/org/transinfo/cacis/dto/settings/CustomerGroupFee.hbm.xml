@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.settings">
+
+	<class name="CustomerGroupFeeDto" table="CUSTOMER_GROUP_FEE">
+
+		<id name="id" type="string">
+			<column name="CGF_ID" sql-type="varchar2(20)" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_CUSTOMER_GROUP_FEE</param>
+            </generator>
+		</id>
+		
+		<many-to-one name="cardProduct" class="CardProductDto" column="CARD_PRODUCT" not-null="true" />
+		
+		<many-to-one name="customerType" class="CustomerTypeDto" column="CUSTOMER_GROUP" not-null="true" />
+
+		<property name="annualFee" type="float">
+			<column name="ANNUAL_FEE" sql-type="number(12,2)" not-null="true" />
+		</property>
+
+		<property name="joinFee" type="float">
+			<column name="JOIN_FEE" sql-type="number(12,2)" not-null="true" />
+		</property>
+
+		<property name="updatedDate" type="timestamp">
+			<column name="UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+
+		<property name="userId" type="string">
+			<column name="UPDATED_BY" sql-type="varchar2(30)" not-null="true" />
+		</property>
+		
+		<property name="annualFeeSup" type="float">
+			<column name="ANNUAL_FEE_SUP" sql-type="number(12,2)" not-null="true" />
+		</property>
+
+		<property name="joinFeeSup" type="float">
+			<column name="JOIN_FEE_SUP" sql-type="number(12,2)" not-null="true" />
+		</property>
+	</class>
+
+</hibernate-mapping>

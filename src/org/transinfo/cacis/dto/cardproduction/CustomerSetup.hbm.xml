@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.cardproduction">
+	
+	<class name="ApplicationProcessDto" table="CUSTOMER"  >
+		<id name="customerId" type ="string" >
+		     <column name ="CUSTOMER_ID" sql-type ="varchar2(12)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+   	<property	name="applicationId"  type ="string">
+			<column name = "APPLICATION_ID"  sql-type ="varchar2(12)"  not-null = "true"/>
+	</property>	 
+		
+		<property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(32)"  not-null = "true"/>
+		</property>
+
+		<property	name="openDate"  type ="date">
+			<column name = "OPEN_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property>
+		<property	name="closeDate"  type ="date">
+			<column name = "CLOSE_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property>
+		
+		<property	name="customerStatus"  type ="integer">
+			<column name = "STATUS"  sql-type ="Number(1)"  not-null = "true"/>
+		</property>
+		
+		<property	name="branchId"  type ="string">
+			<column name = "BRANCH_ID"  sql-type ="varchar2(6)" not-null = "true" />
+		</property>
+
+		<property	name="customerName"  type ="string">
+			<column name = "CUSTOMER_NAME"  sql-type ="varchar2(30)" not-null = "true" />
+		</property>
+
+        <property	name="surName"  type ="string">
+			<column name = "SURNAME_NAME"  sql-type ="varchar2(30)" />
+		</property>
+
+      <property	name="embossingName"  type ="string">
+			<column name = "EMBOSSINGNAME"  sql-type ="varchar2(60)" not-null = "true" />
+		</property>
+      <property	name="customerTypeId"  type ="string">
+			<column name = "CUST_TYPE_ID"  sql-type ="varchar2(2)" not-null = "true" />
+		</property>
+     <property	name="dob"  type ="date">
+			<column name = "DOB"  sql-type ="Date" not-null = "true" />
+		</property>
+     <property	name="pob"  type ="string">
+			<column name = "POB"  sql-type ="varchar2(100)" not-null = "false" />
+		</property>
+     <property	name="gender"  type ="string">
+			<column name = "GENDER"  sql-type ="char(1)" not-null = "false" />
+		</property>
+      <property	name="maritalStatus"  type ="string">
+			<column name = "MARITAL_STATUS"  sql-type ="char(1)" not-null = "false" />
+		</property>
+       <property	name="dependents"  type ="int">
+			<column name = "DEPENDENTS"  sql-type ="Number(2)" not-null = "false" />
+		</property>
+
+      <property	name="idNumber"  type ="string">
+			<column name = "ID_NUMBER"  sql-type ="varchar2(14)" not-null = "true" />
+		</property>
+      <property	name="idDate"  type ="date">
+			<column name = "ID_DATE"  sql-type ="Date" not-null = "false" />
+		</property>
+
+      <property	name="passport"  type ="string">
+			<column name = "PASSPORT_NO"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+
+       <property	name="expDate"  type ="date">
+			<column name = "ID_EXPIRE"  sql-type ="Date" not-null = "false" />
+		</property>
+      
+	  <property	name="idPlace"  type ="string">
+			<column name = "ID_PLACE"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+     
+	 <property	name="nationality"  type ="string">
+			<column name = "NATIONALITY"  sql-type ="varchar2(20)" not-null = "true" />
+		</property>
+     
+	 <property	name="education"  type ="string">
+			<column name = "EDUCATION"  sql-type ="varchar2(2)" not-null = "false" />
+		</property>
+    
+	<property	name="email"  type ="string">
+			<column name = "EMAIL"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+     
+	 <property	name="billingTo"  type ="string">
+			<column name = "BILLING_TO"  sql-type ="varchar2(2)" not-null = "false" />
+		</property>
+
+    <property	name="jobStatus"  type ="string">
+			<column name = "JOB_STATUS"  sql-type ="varchar2(3)" not-null = "false" />
+		</property>
+
+	    <property	name="jobStatusOthers"  type ="string">
+			<column name = "JOB_STATUS_OTHERS"  sql-type ="varchar2(15)" not-null = "false" />
+		</property>
+   
+	    <property	name="jobType"  type ="string">
+			<column name = "JOB_TYPE"  sql-type ="varchar2(3)" not-null = "false" />
+		</property>
+
+       <property	name="jobTypeOthers"  type ="string">
+			<column name = "JOB_TYPE_OTHERS"  sql-type ="varchar2(15)" not-null = "false" />
+		</property>
+        
+		<property	name="income"  type ="float">
+			<column name = "INCOME"  sql-type ="number(10,2)" not-null = "false" />
+		</property>
+
+        <property	name="referenceName"  type ="string">
+			<column name = "REF_NAME"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+
+        <property	name="referencePhone"  type ="string">
+			<column name = "REF_TEL"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+
+        <property	name="referenceCompany"  type ="string">
+			<column name = "REF_COMPANY"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+
+         <property	name="referenceFax"  type ="string">
+			<column name = "REF_FAX"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+	 
+                 
+		 <property	name="remarks"  type ="string">
+			<column name = "REMARKS"  sql-type ="varchar2(200)" not-null = "false" />
+		</property>
+		<property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "false" />
+		</property>
+	
+		<property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+		
+		 <property	name="parenetCustomerId"  type ="string">
+			<column name = "PARENT_CUSTOMER_ID"  sql-type ="varchar2(12)" not-null = "false" />
+		</property>
+		
+		
+                 
+		 <property	name="csn"  type ="string">
+			<column name = "CSN"  sql-type ="varchar2(20)" not-null = "false" />
+		</property>
+                 
+		 <property	name="customerInitial"  type ="string">
+			<column name = "CUSTOMER_INITIAL"  sql-type ="varchar2(4)" not-null = "false" />
+		</property>
+                 
+		 <property	name="companyName"  type ="string">
+			<column name = "COMPANY_NAME"  sql-type ="varchar2(604)" not-null = "false" />
+		</property>
+	 
+	   <!--  this for customer to customeraddress  one-to-many -->	
+	   
+		  <set name ="applicationAddress"  cascade ="all" lazy ="false" fetch ="join">
+			  <key column ="customer_id"/>
+			  <one-to-many class="CustomerAddressDto"/>
+		  </set> 
+	
+	 <!--  this for  customer to customersupplementary address(table:supplemetary_cardHolder) one-to-many -->	
+	 	  
+   		<set name ="customerSuppAddress"  inverse = "true" cascade ="all">
+		  <key column ="customer_id"/>
+		  <one-to-many class="SupplementaryCardHolderDto"/>
+		</set>	
+		  
+     <!--  this for customer to customerAccount  one-to-many -->	
+	 	  
+  <set name ="customerAccount"  inverse ="true" cascade ="all" lazy ="false" fetch ="join">
+		  <key column ="customer_id"/>
+		  <one-to-many class="CustomerAccountDto"/>
+		  </set>
+		  
+     <!--  this for customer  to Cards  one-to-many -->	
+	 	  
+  <set name ="customerCards" inverse = "true"  cascade ="all" lazy ="false" fetch ="join">
+		  <key column ="customer_id"/>
+		  <one-to-many class="CardsDto" />
+		  </set>
+	
+	 <!--  this for customer to customerCardProducts store -->	
+	 	    
+   <map name="appCardProducts" table="CUSTOMER_CARD_PRODUCTS" lazy ="false" fetch ="join" >
+	     <key column="customer_id"/>
+	     <map-key column="Card_Product_Id" type="string"/>
+	 <composite-element class="ApplicationCardProductsDto">
+	    <property   name="lastUpdatedBy" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+		</property>
+	    <property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+	 </composite-element>
+  </map> 
+  	
+  	 <!--  this for customer to customerDocument Proofs store -->
+  	  
+  <map name="appDocProofs" table="CUSTOMER_DOC_PROOF" lazy ="false" fetch ="join">
+	    <key column="customer_id"/>
+	    <map-key column="document_id" type="string"/>
+	     <composite-element class="ApplicationDocProofDto">
+	    <property   name="lastUpdatedBy" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+		</property>
+	    <property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+	 </composite-element>
+	 </map> 
+		
+	</class> 
+	
+	<class name="SupplementaryCardHolderDto" table ="SUPPLEMENTARY_CARDHOLDER">
+    
+    	<id name="supplementaryId" >
+    	 <column name ="SUPPL_ID" sql-type ="varchar2(12)" not-null = "true"/>
+    		<generator class="assigned"/>
+    	</id>
+    	    
+    	<property	name="applicationId"  type ="string">
+			<column name = "APPLICATION_ID"  sql-type ="varchar2(12)"  not-null = "true"/>
+	    </property>	 
+		
+		 <property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(12)"  not-null = "true"/>
+		</property>
+
+		<property	name="openDate"  type ="date">
+			<column name = "OPEN_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property>
+		<property	name="closeDate"  type ="date">
+			<column name = "CLOSE_DATE"  sql-type ="Date"  not-null = "false"/>
+		</property>
+		
+		<property	name="status"  type ="integer">
+			<column name = "STATUS"  sql-type ="Number(1)"  not-null = "true"/>
+		</property>
+		
+		<property	name="branchId"  type ="string">
+			<column name = "BRANCH_ID"  sql-type ="varchar2(6)" not-null = "true" />
+		</property>
+<!-- 
+		<property	name="customerName"  type ="string">
+			<column name = "CUSTOMER_NAME"  sql-type ="varchar2(30)" not-null = "true" />
+		</property>
+
+        <property	name="surName"  type ="string">
+			<column name = "SURNAME_NAME"  sql-type ="varchar2(30)" />
+		</property>
+
+       <property	name="embossingName"  type ="string">
+			<column name = "EMBOSSINGNAME"  sql-type ="varchar2(60)" not-null = "true" />
+		</property>
+        
+       <property	name="dob"  type ="date">
+			<column name = "DOB"  sql-type ="Date" not-null = "true" />
+		</property>
+    
+        <property	name="pob"  type ="string">
+			<column name = "POB"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+     
+       <property	name="gender"  type ="string">
+			<column name = "GENDER"  sql-type ="char(1)" not-null = "false" />
+		</property>
+     
+       <property	name="maritalStatus"  type ="string">
+			<column name = "MARITAL_STATUS"  sql-type ="char(1)" not-null = "false" />
+		</property>
+      
+       <property	name="idNumber"  type ="string">
+			<column name = "ID_NUMBER"  sql-type ="varchar2(14)" not-null = "true" />
+		</property>
+      
+       <property	name="idDate"  type ="date">
+			<column name = "ID_DATE"  sql-type ="Date" not-null = "false" />
+		</property>
+
+        <property	name="expDate"  type ="date">
+			<column name = "ID_EXPIRE"  sql-type ="Date" not-null = "true" />
+		</property>
+      
+	    <property	name="idPlace"  type ="string">
+			<column name = "ID_PLACE"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+     
+	    <property	name="nationality"  type ="string">
+	 		<column name = "NATIONALITY"  sql-type ="varchar2(20)" not-null = "true" />
+		</property>
+     
+        <property	name="email"  type ="string">
+			<column name = "EMAIL"  sql-type ="varchar2(60)" not-null = "true" />
+		 </property>
+	
+	    <property	name="income"  type ="float">
+			<column name = "INCOME"  sql-type ="number(10,2)" not-null = "true" />
+		</property>
+			 -->
+			 
+		<property	name="supplCustomerName"  type ="string">
+			<column name = "CUSTOMER_NAME"  sql-type ="varchar2(30)" not-null = "true" />
+		</property>
+
+        <property	name="supplSurName"  type ="string">
+			<column name = "SURNAME_NAME"  sql-type ="varchar2(30)" />
+		</property>
+
+       <property	name="supplEmbossingName"  type ="string">
+			<column name = "EMBOSSINGNAME"  sql-type ="varchar2(60)" not-null = "true" />
+		</property>
+        
+       <property	name="supplDob"  type ="date">
+			<column name = "DOB"  sql-type ="Date" not-null = "true" />
+		</property>
+    
+        <property	name="supplPob"  type ="string">
+			<column name = "POB"  sql-type ="varchar2(100)" not-null = "false" />
+		</property>
+     
+       <property	name="supplGender"  type ="string">
+			<column name = "GENDER"  sql-type ="char(1)" not-null = "false" />
+		</property>
+     
+       <property	name="supplMaritalStatus"  type ="string">
+			<column name = "MARITAL_STATUS"  sql-type ="char(1)" not-null = "false" />
+		</property>
+      
+       <property	name="supplIdNumber"  type ="string">
+			<column name = "ID_NUMBER"  sql-type ="varchar2(14)" not-null = "false" />
+		</property>
+      
+       <property	name="supplIdDate"  type ="date">
+			<column name = "ID_DATE"  sql-type ="Date" not-null = "false" />
+		</property>
+
+        <property	name="supplIdExpire"  type ="date">
+			<column name = "ID_EXPIRE"  sql-type ="Date" not-null = "false" />
+		</property>
+      
+	    <property	name="supplIdPlace"  type ="string">
+			<column name = "ID_PLACE"  sql-type ="varchar2(60)" not-null = "false" />
+		</property>
+     
+	    <property	name="supplNationality"  type ="string">
+	 		<column name = "NATIONALITY"  sql-type ="varchar2(20)" not-null = "false" />
+		</property>
+     
+        <property	name="supplEmail"  type ="string">
+			<column name = "EMAIL"  sql-type ="varchar2(60)" not-null = "false" />
+		 </property>
+	
+	    <property	name="supplIncome"  type ="float">
+			<column name = "INCOME"  sql-type ="number(10,2)" not-null = "false" />
+		</property>
+          	
+    	<property name="address1" type ="string" >
+    	  <column name ="ADDRESS1" sql-type ="varchar2(100)" not-null ="false"/>
+    	</property>	
+    	
+    	
+    	<property name="address2" type ="string" >
+    	  <column name ="ADDRESS2" sql-type ="varchar2(100)" not-null ="false"/>
+    	</property>
+    		
+    	<property name="city" type ="string" >
+    	  <column name ="CITY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+    	<property name="state" type ="string" >
+    	  <column name ="STATE" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+    	<property name="country" type ="string" >
+    	  <column name ="COUNTRY" sql-type ="varchar2(20)" not-null ="false"/>
+    	</property>
+
+         <property name="postalCode" type ="long" >
+    	  <column name ="POSTAL_CODE" sql-type ="Number(8)" not-null ="false"/>
+    	</property>
+    	
+    	<property name="addressType" type ="string" >
+    	  <column name ="ADDR_TYPE" sql-type ="varchar2(2)" not-null ="false"/>
+    	</property>
+       
+        <property name="phone" type ="string" >
+    	  <column name ="TEL" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	
+
+    	<property name="fax" type ="string" >
+    	  <column name ="FAX" sql-type ="varchar2(50)" not-null ="false"/>
+    	</property>	
+    	
+    	 <property	name="remarks"  type ="string">
+			<column name = "REMARKS"  sql-type ="varchar2(200)" not-null = "false" />
+	   </property>
+	
+	   <property   name="lastUpdatedBy" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+	   </property>
+	
+	    <property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>	
+    
+        <!-- this for supplemetary cardholder to customer many -to-one -->
+         <many-to-one name="appProcessDto" column="customer_id" not-null="true"/>
+	
+	</class> 
+	
+	 <!--  ###########This for CustomerAccountDto Mapping ############ -->
+		
+	<class name="CustomerAccountDto" table ="CUSTOMER_ACCOUNT">
+    
+    	<id name="accountId" >
+    	 <column name ="ACCOUNT_ID" sql-type ="varchar2(19)" not-null = "true"/>
+    		<generator class="assigned"/>
+    	</id>
+    	
+		 <property	name="accountName"  type ="string">
+			<column name = "ACCOUNT_NAME"  sql-type ="varchar2(20)"  not-null = "true"/>
+		</property>
+
+		<property	name="creditLimit"  type ="float">
+			<column name = "CREDIT_LIMIT"  sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="cashLimit"  type ="float">
+			<column name = "CASH_LIMIT"  sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="previousBalance"  type ="float">
+			<column name = "TOTAL_PREVIOUS_BAL"   sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="amountCredited"  type ="float">
+			<column name = "AMOUNT_CR"   sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="amountDebited"  type ="float">
+			<column name = "AMOUNT_DR"   sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="currencyCode"  type ="int">
+			<column name = "CURRENCY_CODE"   sql-type ="number(3)"  not-null = "true"/>
+		</property>
+		
+		<property	name="cycleNo"  type ="int">
+			<column name = "CYCLE_NO"   sql-type ="number(2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="lastStatementDate"  type ="date">
+			<column name = "LAST_STATEMENT_DATE"   sql-type ="Date"  not-null = "false"/>
+		</property>
+		
+		<property	name="lastStatementDueDate"  type ="date">
+			<column name = "LAST_STATEMENT_DUE_DATE"   sql-type ="Date"  not-null = "false"/>
+		</property>
+		
+		<property	name="minDueLastStatementDate"  type ="float">
+			<column name = "MINPAY_DUE_LASTSTATEMENT_DATE"   sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property	name="paymentfromLastStatement"  type ="float">
+			<column name = "PAYMENT_FROM_LAST_STATEMENT"   sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property	name="currentMinPaymentDue"  type ="float">
+			<column name = "CURRENT_MINPAYMENT_DUE"   sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property	name="limitUsed"  type ="float">
+			<column name = "LIMIT_USED"   sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+		
+		<property	name="authorizationAmt"  type ="float">
+			<column name = "AUTHORIZATION_AMT"   sql-type ="number(12,2)"  not-null = "true"/>
+		</property>
+			
+		<property	name="savingAccount"  type ="string">
+			<column name = "SAVING_ACCOUNT"   sql-type ="varchar2(10)"  not-null = "false"/>
+		</property>
+		
+		<property	name="checkingAccount"  type ="string">
+			<column name = "CHECKING_ACCOUNT"   sql-type ="varchar2(10)"  not-null = "false"/>
+		</property>
+		
+		<property name="previousPurhcaseBalance"  type ="float">
+			<column name = "PREVIOUS_PURCHASE_BALANCE"   sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property name="previousCashBalance"  type ="float">
+			<column name = "PREVIOUS_CASH_BALANCE"   sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property name="orgLimit"  type ="string">
+			<column name = "ORGINALLIMITAMT" sql-type ="varchar2(10)"  not-null = "false"/>
+		</property>
+		
+		<property name="orgBackDate"  type ="string">
+			<column name = "ORGINALLIMITBACK" sql-type ="varchar2(10)"  not-null = "false"/>
+		</property>
+		
+		<property name="cashUsed"  type ="double">
+			<column name = "CASH_USED" sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property name="saleUsed"  type ="double">
+			<column name = "PURCHASE_USED" sql-type ="number(12,2)"  not-null = "false"/>
+		</property>
+		
+		<property name="acctStatus"  type ="integer">
+			<column name = "STATUS" sql-type ="number(2,0)"  not-null = "false"/>
+		</property>
+		
+		<!--  this for customerAccount to Cards one-to-many -->
+		<set name ="customerCards" inverse ="true" cascade ="all" lazy ="false" fetch ="join">
+		  <key column ="ACCOUNT_ID"/>
+		  <one-to-many class="CardsDto"/>
+		  </set>
+		  
+		<!--  this for cusomerAccount to customer many-to-one -->
+    	<many-to-one name="appProcessDto" column="customer_id" not-null="true"/> 
+	
+	</class>
+	
+	<sql-query name="getNewCardInfo" callable="true">
+	 <return-scalar column ="CARDNUMBER" type="long"/>
+	 <return-scalar column ="EXPDATE"  type="string"/>
+	 <return-scalar column ="PVKI"  type="int"/>
+	 <return-scalar column ="CVKI"  type="int"/>
+	 { ? = call newcardnumber(:cardnumber,:cardproductid,:branchid,:issuerid) }
+	</sql-query>	
+	
+   </hibernate-mapping>

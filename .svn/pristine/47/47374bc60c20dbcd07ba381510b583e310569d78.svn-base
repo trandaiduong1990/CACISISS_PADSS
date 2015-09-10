@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.collectionmanagement">
+
+	<class name="DelinquencyFeeSetupDto" table="DELINQUENCY_FEE">
+		<id name="feeId" type="string">
+			<column name="FEE_ID" sql-type="varchar2(20)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(12)" not-null="true" />
+		</property>
+
+		<property name="policyId" type="string">
+			<column name="POLICY_ID" sql-type="varchar2(12)" not-null="true" />
+		</property>
+
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="true" />
+		</property>
+
+		<property name="agingBeginDays" type="integer">
+			<column name="AGING_BEGIN_DAYS" sql-type="number" not-null="true" />
+		</property>
+
+		<property name="agingEndDays" type="integer">
+			<column name="AGING_END_DAYS" sql-type="number" not-null="true" />
+		</property>
+		<property name="gracePeriodDays" type="integer">
+			<column name="GRACE_PERIOD_DAYS" sql-type="number" not-null="true" />
+		</property>
+		<property name="minAmt" type="integer">
+			<column name="MIN_AMT" sql-type="number" not-null="true" />
+		</property>
+		<property name="startEffectDate" type="date">
+			<column name="START_EFFECT_DATE" sql-type="DATE" not-null="true" />
+		</property>
+		<property name="endEffectDate" type="date">
+			<column name="END_EFFECT_DATE" sql-type="DATE" not-null="true" />
+		</property>
+		<property name="annualPerFee" type="integer">
+			<column name="ANNUAL_PER_FEE" sql-type="number" not-null="true" />
+		</property>
+		<property name="flatFee" type="integer">
+			<column name="FLAT_FEE" sql-type="number" not-null="true" />
+		</property>
+		<property name="nofityCollectionMgmr" type="string">
+			<column name="NOTIFY_COLLECTION_MGMR" sql-type="varchar2(1)"
+				not-null="true" />
+		</property>
+		<property name="collectionMgmrReq" type="string">
+			<column name="COLLECTION_MGMR_REQ" sql-type="varchar2(1)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="DATE" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

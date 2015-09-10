@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.disputemanagement">
+
+	<class name="DisputeConfigMasterDto"
+		table="DISPUTE_CONFIG_MASTER">
+		<id name="issuerId" type="string">
+		     <column name="ISSUER_ID" sql-type ="VARCHAR2 (12)"  not-null = "true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="minDisputeAmt" type ="double">
+			<column name="MIN_DISPUTE_AMT" sql-type ="NUMBER (12,2)"  not-null = "true" />
+		</property>
+
+		<property name="financeCharge" type ="double">
+			<column name="FINANCE_CHARGE" sql-type ="NUMBER (8,2)"  not-null = "true" />
+		</property>
+
+		<property name="issueTempDispatchChargeAmt" type ="character">
+			<column name="ISSUE_TEMP_DISPATCH_CHARGEAMT" sql-type ="CHAR (1)"  not-null = "true" />
+		</property>
+
+		<property name="transactionValidationPeriod" type ="int">
+			<column name="TRANSACTION_VALIDATION_PERIOD" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+
+		<property name="copyReqProcessingDays" type ="int">
+			<column name="COPY_REQ_PROCESSING_DAYS" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+		
+		<property name="chargebackProcessingDays" type ="int">
+			<column name="CHARGEBACK_PROCESSING_DAYS" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+		
+		<property name="lastUpdatedDate" type ="date">
+			<column name="LAST_UPDATED_DATE" sql-type ="DATE"  not-null = "true" />
+		</property>
+
+		<property name="lastUpdatedBy" type ="string">
+			<column name="LAST_UPDATED_BY" sql-type ="VARCHAR2 (25)"  not-null = "true" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

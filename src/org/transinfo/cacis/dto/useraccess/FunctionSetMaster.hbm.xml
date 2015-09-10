@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.useraccess">
+
+	<class name="FunctionSetMasterDto" table="FUNCTION_SET_MASTER">
+	
+	  <composite-id name="id" 
+	      	 class="FunctionSetMasterDto$Id">
+	          <key-property name="screenId" type="string" column="SCREEN_ID"/>
+	          <key-property name="functionId" type="string" column="FUNCTION_ID"/>    	
+          </composite-id>
+	  
+          <property name="functionDesc"  type ="string">
+		<column name = "FUNCTION_DESCRIPTION"  sql-type ="varchar2(300)" not-null = "true" />
+	  </property>	
+	  
+	</class>
+	
+</hibernate-mapping>

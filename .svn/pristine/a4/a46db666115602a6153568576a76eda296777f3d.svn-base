@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package ="org.transinfo.cacis.dto.switching">
+
+  <class name="SwitchDto" table="SWITCHES">	   
+      
+       <id name="swType" type ="string">
+		     <column name ="SW_TYPE" sql-type ="char(1)" not-null = "true"/>
+			 <generator class="assigned"/>
+       </id>
+      	  	   	  	
+	<property	name="swName"  type ="string">
+			<column name = "SW_NAME"  sql-type ="varchar2(30)"  not-null = "true"/>
+		</property>
+
+        <property	name="swIpAddress"  type ="string">
+			<column name = "SW_IPADDRESS"  sql-type ="varchar2(15)" not-null = "true" />
+		</property>
+	
+	<property	name="swPort"  type ="string">
+				<column name = "SW_PORT"  sql-type ="varchar2(5)" not-null = "true" />
+			</property>
+                        
+       <property	name="swTimeOut1"  type ="int">
+				<column name = "SW_TIMEOUT1"  sql-type ="number(2)" not-null = "false" />
+			</property>
+                        
+       <property	name="swTimeOut2"  type ="int">
+				<column name = "SW_TIMEOUT2"  sql-type ="number(2)" not-null = "false" />
+			</property>                           
+	        		
+        <property   	name="updatedDate" type ="date"  >
+		  	<column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+			</property>		
+			
+	<property   	name="userId" type ="string"  >
+		  	<column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+			</property>			        
+		         
+   </class>
+
+</hibernate-mapping>

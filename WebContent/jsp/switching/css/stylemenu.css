@@ -1,0 +1,9 @@
+.menu_niveau0 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; LEFT: 4px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; POSITION: absolute; TOP: 10px
+}
+.menu_item_niveau0 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; Z-INDEX: 100; BACKGROUND: #f0f0f0; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 1px; FONT: 11px arial; WIDTH: 165px; CURSOR: pointer; COLOR: #000000; PADDING-TOP: 0px; HEIGHT: 20px
+}
+.menu_item_niveau1 {
+	Z-INDEX: 100; FONT: 11px arial; WIDTH: 165px; CURSOR: pointer; BORDER-BOTTOM: #9ac1db 1px solid; HEIGHT: 20px
+}

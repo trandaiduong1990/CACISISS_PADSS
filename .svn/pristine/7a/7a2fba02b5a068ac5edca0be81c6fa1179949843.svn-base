@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package ="org.transinfo.cacis.dto.authorization">
+
+  <class name="TagFieldFormatDto" table="TAG_FIELD_FORMAT">	   
+      
+       <id name="tagName" type ="string">
+		     <column name ="TAG_NAME" sql-type ="varchar2(10)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+      	  	   	  	
+	<property	name="tagDesc"  type ="string">
+			<column name = "TAG_DESC"  sql-type ="varchar2(100)"  not-null = "false"/>
+		</property>
+
+        <property	name="tagFormat"  type ="string">
+			<column name = "TAG_FORMAT"  sql-type ="varchar2(10)" not-null = "true" />
+		</property>
+	
+	<property	name="tagAttribute"  type ="string">
+				<column name = "TAG_ATTRIBUTE"  sql-type ="varchar2(5)" not-null = "true" />
+			</property>
+	
+        <property	name="tagLength"  type ="int">
+				<column name = "TAG_LENGTH"  sql-type ="number(2)" not-null = "true" />
+			</property>
+			
+	<property	name="tagLeftField"  type ="string">
+				<column name = "TAG_LEFT_FILLED"  sql-type ="char(1)" not-null = "true" />
+			</property>
+	 	             				
+        <property	name="tagBinary"  type ="string">
+					<column name = "TAG_BINARY"  sql-type ="char(1)" not-null = "true" />
+			</property>
+			
+	<property	name="tagResponse"  type ="string">
+				<column name = "TAG_RESPONSE"  sql-type ="char(1)" not-null = "true" />
+			</property>
+			
+        <property   	name="updatedDate" type ="date"  >
+		  	<column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+			</property>		
+			
+	<property   	name="userId" type ="string"  >
+		  	<column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+			</property>
+	
+		         
+   </class>
+
+</hibernate-mapping>

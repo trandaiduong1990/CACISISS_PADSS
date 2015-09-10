@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.settings">
+	
+	<class name="EMVProfileDto" table="EMVPROFILE">
+		<id name="emvProfileName" type ="string"  unsaved-value="0">
+    		<column name ="EMVPROFILE_NAME" sql-type ="varchar2(20)" not-null = "true"/>
+       		<generator class="assigned"/>
+   		</id>
+   		
+   		<property name="applType" type ="string">
+	        <column name = "APPL_TYPE" sql-type ="varchar2(15)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="applCryptogram" type ="string">
+	        <column name = "APPL_CRYPTOGRAM" sql-type ="varchar2(15)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="issuerAuthentication" type ="string">
+	        <column name = "ISSUER_AUTHENTICATION" sql-type ="varchar2(1)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="scriptadviceSupported" type ="string">
+	        <column name = "SCRIPTADVICE_SUPPORTED" sql-type ="varchar2(1)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="fallbackAllowed" type ="string">
+	        <column name = "FALLBACK_ALLOWED" sql-type ="varchar2(1)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="offlineAllowed" type ="string">
+	        <column name = "OFFLINE_ALLOWED" sql-type ="varchar2(1)" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="offlineMaxPin" type ="long">
+	        <column name = "OFFLINE_MAX_PIN" sql-type ="number" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="offlineFloorLimit" type ="long">
+	        <column name = "OFFLINE_FLOOR_LIMIT" sql-type ="number" not-null="false"/>
+	   	</property>
+	   	
+	   	<property name="status" type ="string">
+	        <column name = "STATUS" sql-type ="varchar2(1)" not-null="true"/>
+	   	</property>
+   	</class>  
+
+</hibernate-mapping>

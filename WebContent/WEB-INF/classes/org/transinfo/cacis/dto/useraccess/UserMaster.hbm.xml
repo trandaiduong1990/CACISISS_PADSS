@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.useraccess">
+
+	<class name="UserMasterDto" table="USER_MASTER">
+		<composite-id name="id" class="UserMasterDto$Id">
+			<key-property name="issuerId" type="string"
+				column="ISSUER_ID" />
+			<key-property name="userId" type="string" column="USER_ID" />
+		</composite-id>
+		<property name="firstName" type="string">
+			<column name="FIRST_NAME" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="LAST_NAME" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="roleId" type="string">
+			<column name="ROLE_ID" sql-type="VARCHAR2 (32)"
+				not-null="false" />
+		</property>
+		<property name="emailId" type="string">
+			<column name="EMAIL_ID" sql-type="VARCHAR2 (50)"
+				not-null="false" />
+		</property>
+		<property name="department" type="string">
+			<column name="DEPARTMENT" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="phone" type="string">
+			<column name="PHONE" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="password" type="string">
+			<column name="PASSWORD" sql-type="VARCHAR2 (50)"
+				not-null="false" />
+		</property>
+		<property name="prevPassword1" type="string">
+			<column name="PREV_PASSWORD_1" sql-type="VARCHAR2 (50)"
+				not-null="false" />
+		</property>
+		<property name="prevPassword2" type="string">
+			<column name="PREV_PASSWORD_2" sql-type="VARCHAR2 (50)"
+				not-null="false" />
+		</property>
+		<property name="pwdModifiedOn" type="date">
+			<column name="PWD_MODIFIED_ON" sql-type="DATE"
+				not-null="false" />
+		</property>
+		<property name="loginFailCount" type="integer">
+			<column name="LOGIN_FAIL_COUNT" sql-type="NUMBER (2)"
+				not-null="false" />
+		</property>
+		<property name="hintQuestion" type="string">
+			<column name="HINT_QUESTION" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="hintAnswer" type="string">
+			<column name="HINT_ANSWER" sql-type="VARCHAR2 (100)"
+				not-null="false" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="VARCHAR2 (20)"
+				not-null="false" />
+		</property>
+		<property name="otherAddress" type="string">
+			<column name="OTHER_ADDRESS" sql-type="VARCHAR2 (500)"
+				not-null="false" />
+		</property>
+		<property name="permanentAddress" type="string">
+			<column name="PERMANENT_ADDRESS" sql-type="VARCHAR2 (500)"
+				not-null="false" />
+		</property>
+		<property name="firstTimeLogin" type="char">
+			<column name="FIRST_TIME_LOGIN" sql-type="CHAR (1)"
+				not-null="false" />
+		</property>
+		<property name="ftlExpiryDate" type="date">
+			<column name="FTL_EXPIRY_DATE" sql-type="DATE"
+				not-null="false" />
+		</property>
+		<property name="userStationIp" type="string">
+			<column name="USER_STATION_IP" sql-type="VARCHAR2 (15)"
+				not-null="false" />
+		</property>
+		<property name="userType" type="string">
+			<column name="USER_TYPE" sql-type="VARCHAR2 (10)"
+				not-null="false" />
+		</property>
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="DATE"
+				not-null="false" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="VARCHAR2 (32)"
+				not-null="false" />
+		</property>
+		<property name="branchId" type="string">
+			<column name="BRANCH_ID" sql-type="VARCHAR2 (4)"
+				not-null="false" />
+		</property>
+	</class>
+</hibernate-mapping>

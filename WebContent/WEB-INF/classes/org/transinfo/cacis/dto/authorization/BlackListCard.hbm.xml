@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package ="org.transinfo.cacis.dto.authorization">
+  <class name="BlackListCardDto" table="BLACKLIST_CARDS">	   
+      
+       <id name="cardNumber" type ="long" >
+		     <column name ="CARDNUMBER" sql-type ="Number(19)" not-null = "true"/>
+			 <generator class="assigned"/>
+		</id>
+      	  	   	  	
+	    <property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(32)"  not-null = "true"/>
+		</property>
+
+        <property	name="cardStatusId"  type ="long">
+			<column name = "CARDSTATUSID"  sql-type ="Number(10)" not-null = "true" />
+		</property>
+	 	     
+	 <property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+		</property>
+	
+		<property   name="updatedDate" type ="date"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "true" />
+		</property>
+         
+   </class>
+
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.settings">
+
+ <class 	name="MCCDto" table="MCCS"> 
+		
+		<id name="merchantId" type ="string" unsaved-value="0">
+		    <column name ="MCC" sql-type ="varchar2(4)" not-null = "true"/>
+		       <generator class="assigned"/>
+		   </id>
+		  
+		  <property	name="issuerId"  type ="string">
+		        <column name = "ISSUER_ID"  sql-type ="varchar2(32)" not-null = "true"/>
+		</property>
+		
+	  <property	name="status"  type ="string">
+	        <column name = "STATUS"  sql-type ="varchar2(2)" not-null = "true"/>
+	   </property>
+		
+		 <property	name="merchantType" type ="string">
+		        <column name = "DESCRIPTION"  sql-type ="varchar2(30)" not-null = "true"/>
+		</property>
+		
+		 <property   name="floorLimit" type ="long">
+		    <column name = "FLOORLIMIT" sql-type ="number(12,2)" not-null = "true"/>
+		</property>
+
+		<property   name="currencyCode" type ="string">
+		    <column name = "CURRCODE"  sql-type ="varchar2(3)" not-null = "true"/>
+		</property>
+
+      <property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+	  </property>
+		
+	   <property   name="updatedDate" type ="date" >
+		   <column name= "LAST_UPDATED_DATE" sql-type ="date" not-null = "true"/>
+	  </property>
+	   <!-- this is for showing currency Descrip[tion -->
+     
+       <property name="currency" formula="(select cs.CURR_NAME from CURRENCIES cs where cs.CURR_CODE = CURRCODE)" />
+
+</class>
+</hibernate-mapping>

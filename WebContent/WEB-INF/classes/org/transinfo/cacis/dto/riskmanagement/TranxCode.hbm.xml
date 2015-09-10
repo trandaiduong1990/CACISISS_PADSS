@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.riskmanagement">
+
+	<class name="TranxCodeDto"
+		table="TRANXCODES">
+		<id name="tranxCode" type="string">
+		     <column name="TRANX_CODE" sql-type ="VARCHAR2 (10)"  not-null = "true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="mti" type ="string">
+			<column name="MTI" sql-type ="VARCHAR2 (4)"  not-null = "true" />
+		</property>
+
+		<property name="processingCode" type ="string">
+			<column name="PROCESSINGCODE" sql-type ="VARCHAR2 (6)"  not-null = "true" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

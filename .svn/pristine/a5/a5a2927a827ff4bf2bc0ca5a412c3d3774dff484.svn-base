@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping  package ="org.transinfo.cacis.dto.csr">
+	
+	<class name="CallTypeDto" table="CALLTYPES" >
+		<id name="callTypeId" type ="int" >
+		     <column name ="ID" sql-type ="number" not-null = "true"/>
+			 <generator class="native"/>
+		</id>
+      	 <property	name="callType"  type ="string">
+			<column name = "DESCRIPTION"  sql-type ="varchar2(20)"  not-null = "false"/>
+		</property>
+	</class>
+   </hibernate-mapping>

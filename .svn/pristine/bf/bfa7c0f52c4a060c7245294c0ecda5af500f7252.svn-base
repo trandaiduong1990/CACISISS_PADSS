@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.riskmanagement">
+
+	<class name="CardLimitsDto"
+		table="CARDLIMITS">
+		<id name="cardNumber" type="long">
+		     <column name="CARDNUMBER" sql-type ="NUMBER (19)"  not-null = "true" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="creditLimit" type ="double">
+			<column name="CREDIT_LIMIT" sql-type ="NUMBER (12,2)"  not-null = "true" />
+		</property>
+
+		<property name="cashLimit" type ="double">
+			<column name="CASH_LIMIT" sql-type ="NUMBER (12,2)"  not-null = "true" />
+		</property>
+
+		<property name="amountPerTranx" type ="integer">
+			<column name="AMOUNTPERTRANX" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitCount" type ="integer">
+			<column name="DAILYLIMITCOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="dailyLimitAmount" type ="integer">
+			<column name="DAILYLIMITAMOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitCount" type ="integer">
+			<column name="MONTHLYLIMITCOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="monthlyLimitAmount" type ="integer">
+			<column name="MONTHLYLIMITAMOUNT" sql-type ="NUMBER"  not-null = "true" />
+		</property>
+
+		<property name="currCode" type ="string">
+			<column name="CURR_CODE" sql-type ="NUMBER (3)"  not-null = "true" />
+		</property>
+
+		<property name="issuerId" type ="string">
+			<column name="ISSUER_ID" sql-type ="VARCHAR2 (32)"  not-null = "true" />
+		</property>
+	</class>
+
+</hibernate-mapping>

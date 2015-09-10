@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.disputemanagement">
+
+	<class name="DisputeMasterDto" table="DISPUTE_MASTER">
+		<id name="disputeCaseNo" type="string">
+		    <column name="DISPUTE_CASENO" sql-type ="varchar2(20)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		
+		<many-to-one name="disputeType" class="DisputeTypesDto" column="DISPUTE_TYPE" cascade="none" not-null="true" lazy="false" />
+		
+		<many-to-one name="disputeReason" class="DisputeGroupDetailsDto" column="DISPUTE_REASON" cascade="none" not-null="false" lazy="false" />
+
+		<property name="disputeAmt" type="double">
+			<column name="DISPUTE_AMOUNT" sql-type="number" not-null="false" />
+		</property>
+
+		<!-- 
+		<property name="disputeCurrency" type="string">
+			<column name="DISPUTE_CURRENCY" sql-type="varchar2(3)" not-null="false" />
+		</property>
+		 -->
+		
+		<many-to-one name="disputeCurrency" class="org.transinfo.cacis.dto.settings.CurrencyDto" column="DISPUTE_CURRENCY" cascade="none" not-null="false" lazy="false" />
+
+		<property name="memberMessage" type="string">
+			<column name="MEMBER_MESSAGE" sql-type="varchar2(50)" not-null="false" />
+		</property>
+		
+		<!-- 
+			<many-to-one name="tranxId" class="org.transinfo.cacis.dto.csr.TransactionLogDto" column="TRANX_ID" cascade="none" not-null="false" lazy="false" />
+		 -->
+		<property name="arn" type="string">
+			<column name="ARN" sql-type="varchar2(23)" not-null="false" />
+		</property>
+
+		<property name="settlementId" type="long">
+			<column name="SETTLEMENT_ID" sql-type="number" not-null="false" />
+		</property>
+		
+		<many-to-one name="status" class="DisputeStatusDto" column="STATUS" cascade="none" not-null="false" lazy="false" />
+
+		<property name="updatedDate" type="timestamp">
+			<column name="UPDATED_DATE" sql-type="date" not-null="false" />
+		</property>
+
+		<property name="updatedBy" type="string">
+			<column name="UPDATED_BY" sql-type="varchar2(30)" not-null="false" />
+		</property>
+
+		<property name="disputeCreatedDate" type="timestamp">
+			<column name="DISPUTE_CREATED_DATE" sql-type="date" not-null="false" />
+		</property>
+
+		<property name="disputeCreatedBy" type="string">
+			<column name="DISPUTE_CREATED_BY" sql-type="varchar2(30)" not-null="false" />
+		</property>
+		
+		<property  name="createdDays" 
+			formula ="(TO_DATE(TO_CHAR(SYSDATE, 'DD/MM/YYYY'), 'DD/MM/YYYY') - TO_DATE(TO_CHAR(DISPUTE_CREATED_DATE, 'DD/MM/YYYY'), 'DD/MM/YYYY'))" type="string"/>
+		
+		<property name="cardHolder" type="string">
+			<column name="CARD_HOLDER" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+		<property name="disputeSource" type="string">
+			<column name="DISPUTE_SOURCE" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+		<property name="resend" type="string">
+			<column name="RESEND" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+		<property name="disMoto" type="string">
+			<column name="MOTO_ECI" sql-type="varchar2(1)" not-null="false" />
+		</property>
+
+		<property name="cbType" type="string">
+			<column name="FULL_PARTIAL" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		
+	</class>
+
+</hibernate-mapping>

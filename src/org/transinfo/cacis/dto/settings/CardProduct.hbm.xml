@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.transinfo.cacis.dto.settings">
+	
+	<class name="CardProductDto" table="CARD_PRODUCTS">
+		<id name="cardProductId" column="card_product_id"/>
+			
+		<property	name="issuerId"  type ="string">
+			<column name = "ISSUER_ID"  sql-type ="varchar2(12)"  not-null = "false"/>
+		</property>
+
+		<property	name="cardProductName"  type ="string">
+			<column name = "CARDPRODUCTNAME"  sql-type ="varchar2(30)"  not-null = "false"/>
+		</property>
+		
+		<many-to-one name="cardType" class="CardTypeDto" column="CARD_TYPE_ID" not-null="true" />
+		
+		<property	name="bin"  type ="string">
+			<column name = "BIN"  sql-type ="varchar2(6)"  not-null = "false"/>
+		</property>
+		
+		<property	name="serviceCode"  type ="string">
+			<column name = "SERVICECODE"  sql-type ="varchar2(3)"  not-null = "false"/>
+		</property>
+		
+		<many-to-one name="cardProductType" class="CardProductTypeDto" column="CARD_PRODUCT_TYPE_ID" lazy="false" not-null="true" />
+		
+		<property	name="expireTime"  type ="integer">
+			<column name = "EXP_TIME"  sql-type ="number(6)" not-null = "false"/>
+		</property>
+		<!-- 
+		<property	name="floorLimit"  type ="float">
+			<column name = "FLOORLIMIT"  sql-type ="number(18,2)" />
+		</property>
+ 		-->
+		<property	name="floorLimit"  type ="integer">
+			<column name = "FLOORLIMIT" />
+		</property>
+
+		<property	name="dueDays"  type ="integer">
+			<column name = "DUEDAYS"  sql-type ="number(2)" not-null = "false"/>
+		</property>
+
+		<property	name="status"  type ="string">
+			<column name = "STATUS"  sql-type ="varchar2(2)" not-null = "false" />
+		</property>
+		
+		<property   name="updatedDate" type ="timestamp"  >
+		  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "false" />
+		</property>
+
+		<property   name="userId" type ="string"  >
+		  <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "false" />
+		</property>
+		
+		<property	name="binLength"  type ="integer">
+			<column name = "BIN_LENGTH"  sql-type ="number(6)" />
+		</property>
+		
+		<property	name="pinLength"  type ="integer">
+			<column name = "PIN_LENGTH"  sql-type ="number(2)" />
+		</property>
+		
+		<property	name="cardNoLength"  type ="integer">
+			<column name = "CARDNUMBER_LENGTH"  sql-type ="number(2)" />
+		</property>
+		
+		<property	name="embossNameLength"  type ="integer">
+			<column name = "EMBOSSEDNAME_LENGTH"  sql-type ="number(2)" />
+		</property>
+		
+		<property   name="pinRequired" type ="string"  >
+		  <column name = "PIN_REQUIRED" sql-type ="char(1)" not-null = "false" />
+		</property>
+		
+		<property   name="renewalCardActive" type ="string"  >
+		  <column name = "RENEWAL_CARD_ACTIVE" sql-type ="char(1)" not-null = "false" />
+		</property>
+		
+		<property	name="firstIssueValidity"  type ="integer">
+			<column name = "FIRSTISSUE_VALIDITY"  sql-type ="number(2)" />
+		</property>
+		
+		<property	name="renewalIssueValidity"  type ="integer">
+			<column name = "RENEWALISSUE_VALIDITY"  sql-type ="number(2)" />
+		</property>
+		
+		<property	name="maxPinRetry"  type ="integer">
+			<column name = "MAX_PIN_RETRY"  sql-type ="number(2)" />
+		</property>
+		
+		<property   name="accountCreation" type ="string"  >
+		  <column name = "ACCOUNT_CREATION" sql-type ="char(1)" not-null = "false" />
+		</property>
+		
+		<property	name="cardNoNextValue"  type ="integer">
+			<column name = "CARDNO_NEXT_VALUE"  sql-type ="number(8)" />
+		</property>
+		
+		<property   name="pinMailerRequired" type ="string"  >
+		  <column name = "PIN_MAILER_REQUIRED" sql-type ="varchar2(1)" not-null = "false" />
+		</property>
+		
+		<property   name="cardActivationOn" type ="string"  >
+		  <column name = "CARD_ACTIVATION_ON" sql-type ="varchar2(1)" not-null = "false" />
+		</property>	
+		
+		<property   name="newOrSameCardnumberForReplacement" type ="string"  >
+		  <column name = "REPLACEMENT_NEWCARD" sql-type ="varchar2(1)" not-null = "false" />
+		</property>	
+		
+		<property   name="branchIdInclude" type ="string"  >
+		  <column name = "BRANCHID_ON_CARDNO" sql-type ="varchar2(1)" not-null = "false" />
+		</property>		
+		
+		<property   name="eComEnable" type ="string"  >
+		  <column name = "ECOMM_ENABLE" sql-type ="varchar2(1)" not-null = "false" />
+		</property>	
+				
+		<property   name="low3rdRange" type ="string"  >
+		  <column name = "LOW_3RD_RANGE" sql-type ="varchar2(12)" not-null = "false" />
+		</property>
+		
+		<property   name="creditLowerLimit" type ="long"  >
+		  <column name = "CREDIT_LOWER_LIMIT" sql-type ="number" not-null = "false" />
+		</property>
+		
+		<property   name="creditUpperLimit" type ="long"  >
+		  <column name = "CREDIT_UPPER_LIMIT" sql-type ="number" not-null = "false" />
+		</property>
+		
+		<set name ="creditLimit" cascade ="all" lazy ="false" fetch ="join" >
+		  <key column ="CARD_PRODUCT_ID"/>
+		  <one-to-many class="org.transinfo.cacis.dto.settings.CreditLimitProfileDto"/>
+		</set>
+	</class>
+	
+	<!--   This is for Card Product Rate mapping  -->
+	<class name="CardProductRateDto" table="CARD_PRODUCT_RATE">
+		<id name="id" type="int">
+			<column name="ID" sql-type="number" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_CARDPRODUCTRATE</param>
+            </generator>
+		</id>
+		   
+		<property	name="creditFinanceCharge"  type ="float" >
+		       <column name = "CREDIT_FINANCE_CHARGE" sql-type ="number(5,2)"  not-null = "true"/>
+		</property>
+	
+		<property	name="latePaymentFee" type ="float" >
+		       <column name = "LATE_PAYMENT_FEE" sql-type ="number(5,2)" not-null = "true"/>
+		</property>
+	
+		<property	name="minRepaymentPercent"    type ="integer" >
+		     <column name = "MIN_REPAYMENT_PERCENT"     sql-type ="number(2)" not-null = "true" />
+		</property>
+	
+		<property	name="minRepaymentAmt"  type ="float" >
+		     <column name = "MIN_REPAYMENT_AMT" sql-type ="number(5,2)" not-null = "true"/>
+		</property>
+		
+		<property	name="cashAdvanceCharge"  type ="integer">
+		    <column name= "CASH_ADVANCE_CHARGE" sql-type ="number(2)" not-null = "true"/>
+		</property>
+	
+		<property   name="cashFinaceCharge"   type ="float">
+		   <column name= "CASH_FINANCE_CHARGE" sql-type ="number(5,2)" not-null = "true" />
+		</property>
+		
+		<property   name="cashChargeAmt"  type ="float">
+		   <column name= "CASH_CHARGE_AMT" sql-type ="number(5,2)" not-null = "true" />
+		</property>
+		
+		<property   name="maxCashTranx"  type ="float">
+		   <column name= "MAX_CASH_TRANX" sql-type ="number(5,2)" not-null = "true" />
+		</property>
+		
+		<property   name="maxCashDueTranx"  type ="float">
+			<column name= "MAX_CASH_DUE_TRANX" sql-type ="number(5,2)" not-null = "true" />
+		</property>
+	
+		<property   name="startDt" type ="date">
+			<column name = "START_DATE" sql-type ="Date"/>
+		</property>
+		
+		<property   name="endDt" type ="date" >
+			<column name= "END_DATE" sql-type ="Date"/>
+		</property>
+	
+		<property   name="userId" type ="string"  >
+			<column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+		</property>
+		
+		<property   name="updatedDate" type ="date"  >
+			<column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "false" />
+		</property>
+	
+		<property name="overLimitCharge" type ="float" >
+			<column name = "OVER_LIMIT_CHARGE" sql-type ="number(5,2)" not-null = "true"/>
+		</property>	
+	
+		<property name="gracePeriod" type ="integer" >
+			<column name = "GRACE_PERIOD" sql-type ="number(2)" not-null = "true"/>
+		</property>
+	
+		<property   name="minAmtCalMethod" type ="string"  >
+			<column name = "MIN_AMT_CAL_METHOD" sql-type ="varchar2(3)" not-null = "true" />
+		</property>
+	
+		<property name="tranxFee" type ="float" >
+			<column name = "TRANX_FEE" sql-type ="number(5,2)" not-null = "true"/>
+		</property>			
+	   
+	    <property  name="displayStatus" formula ="case when to_char(sysdate,'yyyymmdd') &gt;= to_char(start_date,'yyyymmdd') and to_char(sysdate,'yyyymmdd') &lt;=to_char(end_date,'yyyymmdd') then 'Active' else 'Not Active' end" type="string"/>
+		 
+		<many-to-one name="cardProduct" column="card_product_id" /> 
+			
+		<property	name="latePaymentFeePer" type ="float" >
+		       <column name = "LATE_PAYMENT_FEE_PER" sql-type ="number(5,2)" not-null = "true"/>
+		</property>
+		
+	</class>	
+            
+            
+            
+     <!--   This is for Card Product Fee  mapping  -->
+ 
+   <class 	name="CardProductFeeDto" table="CARD_PRODUCT_FEE">
+    <id name="id" type="int">
+			<column name="ID" sql-type="number" not-null="true" />
+    		 <generator class="sequence">
+                <param name="sequence">SEQ_CARDPRODUCTFEE</param>
+            </generator>
+		</id>
+  
+  <property	name="annualFeePrimary"  type ="integer" >
+       <column name = "ANNUAL_FEE_PRIMARY" sql-type ="number(3)"  not-null = "true"/>
+  </property>
+
+  <property	name="annualFeeSecondary" type ="integer" >
+       <column name = "ANNUAL_FEE_SECONDARY" sql-type ="number(3)" not-null = "true"/>
+  </property>
+ 
+  <property	name="issuerFee"    type ="integer" >
+     <column name = "ISSUER_FEE"     sql-type ="number(3)" not-null = "true" />
+  </property>
+
+  <property	name="replacementFee"  type ="integer" >
+     <column name = "REPLACEMENT_FEE" sql-type ="number(3)" not-null = "true"/>
+  </property>
+  
+   <property	name="cancelationFee"  type ="integer">
+    <column name= "CANCELATION_FEE" sql-type ="number(3)" not-null = "true"/>
+   </property>
+
+  <property   name="currConversionFee"   type ="integer">
+   <column name= "CURR_CONVERSION_FEE" sql-type ="number(3)" not-null = "true" />
+  </property>
+
+  <property   name="adminstrationFee"  type ="integer">
+   <column name= "ADMINISTRATIVE_FEE" sql-type ="number(3)" not-null = "true" />
+  </property>
+
+   <property   name="startDt" type ="date">
+      <column name = "START_DATE" sql-type ="Date"/>
+  </property>
+
+    <property   name="endDt" type ="date" >
+      <column name= "END_DATE" sql-type ="Date"/>
+  </property>
+
+   <property   name="userId" type ="string"  >
+     <column name = "LAST_UPDATED_BY" sql-type ="varchar2(32)" not-null = "true" />
+  </property>
+ 
+   <property   name="updatedDate">
+	  <column name = "LAST_UPDATED_DATE" sql-type ="Date" not-null = "false" />
+	</property>	
+	
+   <property  name="displayStatus" formula ="case when to_char(sysdate,'yyyymmdd') &gt;= to_char(start_date,'yyyymmdd') and to_char(sysdate,'yyyymmdd') &lt;=to_char(end_date,'yyyymmdd') then 'Active' else 'Not Active' end" type="string"/>
+   
+  <property name="joinFeePrimary" type ="integer">
+  	<column name= "JOINING_FEE_PRIMARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="joinFeeSecondary" type ="integer">
+  	<column name= "JOINING_FEE_SECONDARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="creditAdjFeePrimary" type ="integer">
+  	<column name= "CREDIT_ADJ_FEE_PRIMARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="creditAdjFeeSecondary" type ="integer">
+  	<column name= "CREDIT_ADJ_FEE_SECONDARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="urgentFeePrimary" type ="integer">
+  	<column name= "URGENT__FEE_PRIMARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="urgentFeeSecondary" type ="integer">
+  	<column name= "URGENTFEE_SECONDARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="repinFeePrimary" type ="integer">
+  	<column name= "REPIN_FEE_PRIMARY" sql-type ="number(38)" not-null="true" />
+  </property>   
+  <property name="repinFeeSecondary" type ="integer">
+  	<column name= "REPIN_FEE_SECONDARY" sql-type ="number(38)" not-null="true" />
+  </property>
+  
+   <many-to-one name="cardProduct" column="card_product_id"
+	update="false" not-null="true" /> 
+
+   </class>
+   
+   
+<class name="CardProductRulesDto" table="CARD_PRODUCT_RULES">
+	<id name="cardProductId" column="CARD_PRODUCT_ID"/>
+	
+	<property name="ca3rdInterface" type ="string">
+  		<column name= "CA_3RDINTERFACE" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="caDelivery" type ="string">
+  		<column name= "CA_DELIVERY" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="caTerminal" type ="string">
+  		<column name= "CA_TERMINAL" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="caEmbPINGen" type ="string">
+  		<column name= "CA_EMB_PINGEN" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="caDaDays" type ="integer">
+  		<column name= "CA_DA_DAYS" sql-type ="number" not-null="false" />
+  	</property>	
+	<property name="cdBranch" type ="string">
+  		<column name= "CD_BRACH" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="cdMail" type ="string">
+  		<column name= "CD_MAIL" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="cbLost" type ="string">
+  		<column name= "CB_LOST" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="cbStolen" type ="string">
+  		<column name= "CB_STOLEN" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="crOcUsage" type ="string">
+  		<column name= "CR_OC_USAGE" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="crOcRep" type ="string">
+  		<column name= "CR_OC_REP" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="crOcNc" type ="string">
+  		<column name= "CR_OC_NC" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="crNodays" type ="integer">
+  		<column name= "CR_NODAYS" sql-type ="number(2,0)" not-null="false" />
+  	</property>	
+	<property name="pdDelivery" type ="string">
+  		<column name= "PD_DELIVERY" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="pdTerminal" type ="string">
+  		<column name= "PD_TERMINAL" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="pdBranch" type ="string">
+  		<column name= "PD_BRANCH" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="pdDaDays" type ="integer">
+  		<column name= "PD_DA_DAYS" sql-type ="number" not-null="false" />
+  	</property>	
+	<property name="fbDom" type ="string">
+  		<column name= "FB_DOM" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="fbIntl" type ="string">
+  		<column name= "FB_INTL" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="fbNoTranx" type ="integer">
+  		<column name= "FB_NOTRANX" sql-type ="number(2,0)" not-null="false" />
+  	</property>	
+	<property name="fbTranxMaxAmt" type ="integer">
+  		<column name= "FB_TRANXMAXAMT" sql-type ="number(2,0)" not-null="false" />
+  	</property>	
+	<property name="fbSms" type ="string">
+  		<column name= "FB_SMS" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property name="olMinAmt" type ="integer">
+  		<column name= "OL_MINAMT" sql-type ="number" not-null="false" />
+  	</property>	
+	<property name="olMccList" type ="string">
+  		<column name= "OL_MCC_LIST" sql-type ="varchar2(1)" not-null="false" />
+  	</property>	
+	<property   name="userId" type ="string"  >
+     <column name = "UPDATED_BY" sql-type ="varchar2(30)" not-null = "false" />
+  	</property>
+   	<property  name="updatedDate" type ="timestamp">
+	  <column name = "UPDATED_DATE" sql-type ="Date" not-null = "false" />
+	</property>
+</class>
+
+</hibernate-mapping>
