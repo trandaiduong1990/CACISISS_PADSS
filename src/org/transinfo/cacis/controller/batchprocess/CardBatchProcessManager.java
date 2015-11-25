@@ -9,6 +9,7 @@ import org.transinfo.cacis.dataacess.DAOFactory;
 import org.transinfo.cacis.dataacess.dao.batchprocess.CardBatchProcessADO;
 import org.transinfo.cacis.dto.applicationforms.CardsRenewalDto;
 import org.transinfo.cacis.dto.applicationforms.SupplementaryFormDto;
+import org.transinfo.cacis.dto.batchprocess.CardApplLinkDto;
 import org.transinfo.cacis.dto.batchprocess.CardBatchDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationFormDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationProcessDto;
@@ -17,6 +18,7 @@ import org.transinfo.cacis.dto.cardproduction.SupplementaryCardHolderDto;
 import org.transinfo.cacis.dto.csr.AddProductDto;
 import org.transinfo.cacis.dto.customerservice.CardChangeDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.settings.BranchDto;
 import org.transinfo.cacis.dto.settings.CardProductDto;
 import org.transinfo.cacis.dto.settings.CustomerGroupFeeDto;
 import org.transinfo.cacis.model.CardGeneration;
@@ -30,12 +32,12 @@ public class CardBatchProcessManager {
 		objBatchProcessADO = DAOFactory.getInstance().getCardBatchProcessADO();
 	}
 
-	public Collection list(String issuerID, int pageNo) throws TPlusException {
+	public Collection list(String issuerID, int pageNo, BranchDto objBranchDto, String getAll) throws TPlusException {
 
 		Collection searchLst = null;
 
 		try {
-			searchLst = objBatchProcessADO.list(issuerID, pageNo);
+			searchLst = objBatchProcessADO.list(issuerID, pageNo, objBranchDto, getAll);
 
 		} catch (Exception e) {
 			System.out.println("Error while search operation - list" + e);
@@ -697,6 +699,128 @@ public class CardBatchProcessManager {
 							+ e);
 		}
 		return custList;
+	}
+
+	public ApplicationFormDto getApplicationForm(String applicationId) throws TPlusException {
+		ApplicationFormDto objDto = new ApplicationFormDto();
+		try {
+
+			objDto = objBatchProcessADO.getApplicationForm(applicationId);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getApplicationForm method"
+							+ e);
+		}
+		return objDto;
+	}
+
+	public boolean addCardApplLink(CardApplLinkDto objCardApplLinkDto) throws TPlusException {
+		boolean boolAdd = false;
+		try {
+
+			boolAdd = objBatchProcessADO.addCardApplLink(objCardApplLinkDto);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager addCardApplLink method" + e);
+		}
+		return boolAdd;
+	}
+
+	public ArrayList<CardBatchDto> getCardBatch() throws TPlusException {
+		ArrayList<CardBatchDto> list;
+		try {
+			list = objBatchProcessADO.getCardBatch();
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getCardBatch method" + e);
+		}
+		return list;
+	}
+
+	public ArrayList<ApplicationFormDto> getApplicationFormByBatchId(String batchId) throws TPlusException {
+				ArrayList<ApplicationFormDto> list;
+				try {
+
+					list = objBatchProcessADO.getApplicationFormByBatchId(batchId);
+
+				} catch (Exception e) {
+					throw new TPlusException(
+							"Error in CardBatchProcessManager getApplicationFormByBatchId method" + e);
+				}
+				return list;
+	}
+
+	public CardBatchDto getCardBatchDto(String batchId) throws TPlusException {
+		CardBatchDto objDto = new CardBatchDto();
+		try {
+
+			objDto = objBatchProcessADO.getCardBatchDto(batchId);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getCardBatchDto method"
+							+ e);
+		}
+		return objDto;
+	}
+
+	public String getUserType(String userId) throws TPlusException {
+		String userType;
+		try {
+
+			userType = objBatchProcessADO.getUserType(userId);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getUserType method"
+							+ e);
+		}
+		return userType;
+	}
+
+	public String getApplicationType(int applicationType) throws TPlusException {
+		String applType;
+		try {
+
+			applType = objBatchProcessADO.getApplicationType(applicationType);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getApplicationType method"
+							+ e);
+		}
+		return applType;
+	}
+
+	public Map getBranch(BranchDto objBranchDto, String getAll) 
+			throws TPlusException {
+		Map branchList;
+		try {
+
+			branchList = objBatchProcessADO.getBranch(objBranchDto, getAll);
+
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardBatchProcessManager getBranch method"
+							+ e);
+		}
+		return branchList;
+	}
+
+	public Collection list(String issuerId, int pageNo) throws TPlusException {
+		Collection searchLst = null;
+
+		try {
+			searchLst = objBatchProcessADO.list(issuerId, pageNo);
+
+		} catch (Exception e) {
+			System.out.println("Error while search operation - list" + e);
+			throw new TPlusException(
+					"Error in CardBatchProcessManager list method" + e);
+		}
+		return searchLst;
 	}
 
 }

@@ -17,6 +17,7 @@ public class UserSetupSearchForm extends ValidatorForm {
 
 	private Map roleList;
 	private Map statusList;
+	private Map userTypeList;
 
 	public UserSetupSearchForm() {
 		System.out.println("In Costructor");
@@ -89,10 +90,22 @@ public class UserSetupSearchForm extends ValidatorForm {
 			roleList = objUserSetupDAO.getRoleId(issuerId, userType);
 
 			statusList = objUserSetupDAO.statusListData("USERSTATUS");
+			
+			if(userTypeList == null) {
+				userTypeList = objUserSetupDAO.getUserType();
+			}
 
 		} catch (Exception e) {
 			System.out.println("Error while getting  PreListData:" + e);
 		}
+	}
+
+	public Map getUserTypeList() {
+		return userTypeList;
+	}
+
+	public void setUserTypeList(Map userTypeList) {
+		this.userTypeList = userTypeList;
 	}
 
 }

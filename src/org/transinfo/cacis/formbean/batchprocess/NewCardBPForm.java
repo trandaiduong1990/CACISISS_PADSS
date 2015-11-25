@@ -1,11 +1,15 @@
 package org.transinfo.cacis.formbean.batchprocess;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
+import org.transinfo.cacis.dataacess.DAOFactory;
+import org.transinfo.cacis.dataacess.dao.batchprocess.CardBatchProcessADO;
+import org.transinfo.cacis.dataacess.dao.useraccess.RoleFunctionSetupDAO;
 
 @SuppressWarnings( { "serial", "unchecked" })
 public class NewCardBPForm extends ValidatorForm {
@@ -18,10 +22,12 @@ public class NewCardBPForm extends ValidatorForm {
 	private Collection appList;
 	private Collection successAppsPrimaryList;
 	private Collection successAppsSuppList;
-
+	private String branchId;
+	private Map branchList;
 	private String cardNos;
-	private String totalNoOfApps;
-
+	
+	private String applIdArray="";
+	
 	public String getIssuerId() {
 		return issuerId;
 	}
@@ -100,12 +106,28 @@ public class NewCardBPForm extends ValidatorForm {
 		this.cardNos = cardNos;
 	}
 
-	public String getTotalNoOfApps() {
-		return totalNoOfApps;
+	public String getApplIdArray() {
+		return applIdArray;
 	}
 
-	public void setTotalNoOfApps(String totalNoOfApps) {
-		this.totalNoOfApps = totalNoOfApps;
+	public void setApplIdArray(String applIdArray) {
+		this.applIdArray = applIdArray;
+	}
+	
+	public String getBranchId() {
+		return branchId;
 	}
 
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+
+	public Map getBranchList() {
+		return branchList;
+	}
+
+	public void setBranchList(Map branchList) {
+		this.branchList = branchList;
+	}
+	
 }

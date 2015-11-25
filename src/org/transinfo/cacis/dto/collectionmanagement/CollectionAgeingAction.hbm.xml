@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.collectionmanagement">
+
+	<class name="CollectionAgeingActionDto" table="COLLECTION_AGEING_ACTION">
+		<id name="sno" type="string">
+			<column name="SNO" sql-type="varchar2(6)" not-null="true" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_COLLECTION_AGEING_ACTION</param>
+			</generator>
+		</id>
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(12)" not-null="true" />
+		</property>
+		<many-to-one name="collectionAgeingDto" class="CollectionAgeingDto" cascade="none" lazy="false" not-null="true"
+			column="AGEING_POLICY" />
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="days" type="integer">
+			<column name="DAYS" sql-type="number" not-null="true" />
+		</property>
+		<property name="phone" type="string">
+			<column name="PHONE" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="remainder" type="string">
+			<column name="REMAINDER" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="remainderType" type="string">
+			<column name="REMAINDER_TYPE" sql-type="varchar2(3)" not-null="false" />
+		</property>
+		<property name="tempCardOff" type="string">
+			<column name="TEMP_CARD_OFF" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="writeOff" type="string">
+			<column name="WRITE_OFF" sql-type="varchar2(1)" not-null="false" />
+		</property>
+	</class>
+</hibernate-mapping>

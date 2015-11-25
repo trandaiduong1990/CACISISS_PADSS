@@ -14,6 +14,10 @@ public class CardBatchDto implements Serializable {
 	private Date authorizedDate;
 	private String updateddBy;
 	private Date updatedDate;
+	private String createdBy;
+	private Date createdDate;
+	private Integer noApplications;
+	private Integer rerun;
 	
 	public String getBatchId() {
 		return batchId;
@@ -63,6 +67,29 @@ public class CardBatchDto implements Serializable {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Integer getNoApplications() {
+		return noApplications;
+	}
+	public void setNoApplications(Integer noApplications) {
+		this.noApplications = noApplications;
+	}
+	public Integer getRerun() {
+		return rerun;
+	}
+	public void setRerun(Integer rerun) {
+		this.rerun = rerun;
+	}
 
 }

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="inc/css/style.css" type="text/css"><script language="JavaScript" src="js/Checking.js"></script>
 <script language="JavaScript" src="js/Transfer.js"></script>
 <script language="JavaScript" src="js/IssuerUserSetup.js"></script>
+<script src="inc/js/jquery-1.11.3.min.js"></script>
 <script language="JavaScript">
 function go(method) 
 {
@@ -26,6 +27,28 @@ function showList()
  document.forms[0].submit();
 }
 
+function userTypeChange(event) {
+	var userType = "";
+	if(typeof event != 'undefined' && event != null && event != "") {
+		userType = event.value;
+	}
+	$.ajax({
+        type: "POST",
+        url: "usersetupprocess.do?method=setRole",
+        data: "userType=" + userType,
+        success: function(response){
+            // we have the response
+           $('#roleIdDiv').html(response);
+        },
+        error: function(e){
+            alert('Error: ' + e);
+        }
+    });
+}
+
+/* $(document).ready(function() {
+	userTypeChange();
+}); */
 </script>
 </head>
 
@@ -33,7 +56,7 @@ function showList()
  <html:form action="usersetupprocess.do">
  <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>"/>
  <html:hidden property="userId" value="<%=(String)session.getAttribute("USERID")%>"/>                                                  
- <html:hidden property="userType"/>
+ <%-- <html:hidden property="userType"/> --%>
  <input type=hidden name="method"/>
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -207,12 +230,23 @@ function showList()
                                           </td>
                                         </tr>                                        
                       			<tr>
+		        		  <td class="desc_cell" nowrap><b><bean:message key ="usersetup.usertype"/>*</b></td>
+		          		  <td valign="top">
+		      	   		  <html:select property="userType" onchange="userTypeChange(this)">
+		      	     		     <html:option value=""></html:option>
+		      	     		     <html:optionsCollection property="userTypeList" value="key" label="value" />
+		      	   		  </html:select>
+		        		  </td>
+                      		        </tr>                                        
+                      			<tr>
 		        		  <td class="desc_cell" nowrap><b><bean:message key ="usersetup.role"/>*</b></td>
 		          		  <td valign="top">
+		          		  	<div id="roleIdDiv">
 		      	   		  <html:select property="roleId" >
 		      	     		     <html:option value=""></html:option>
 		      	     		     <html:optionsCollection property="roleList" value="key" label="value" />
 		      	   		  </html:select>
+		      	   		  </div>
 		        		  </td>
                       		        </tr>                                        
                       			<tr>

@@ -35,6 +35,9 @@
         <%if(objUserAccess.hasScreen("ISS_USER_USER")){%>
               <li class=onclick><html:link  action ="usersetuplistpage.do?method=List&userType=ISSADMIN" target='mainFrame'>&nbsp;&nbsp;Issuer User Setup </html:link>  </li>
         <%}%>
+        <%if(objUserAccess.hasScreen("ASSIGN_USER")){%>
+              <li class=onclick><html:link  action ="assignuserlist.do?method=List&userType=ISSADMIN" target='mainFrame'>&nbsp;&nbsp;Assign User Setup </html:link>  </li>
+        <%}%>
         </ul>
     </li>
 <%}%>
@@ -243,6 +246,9 @@
 					</ul>
 				</li>
 			<% } %>
+			<%-- <%if(objUserAccess.hasScreen("NEWCARDPRODUCT_BATCHPROCESS")){%>
+			<% } %> --%>
+				<li class=onclick><html:link action ="cardbatchprocess.do?method=List"  paramScope="request" target='mainFrame'>Batch Process</html:link></li>
 		</ul>
 	</li>
 <% } %>
@@ -578,6 +584,7 @@
         <%if(objUserAccess.hasScreen("RENEWAL")){%>
 	     <li class=onclick><html:link  action ="GenerateReportServlet?hdOpCode=3&mode=List&REPORT_CODE=RENEWAL" target='mainFrame'>Card Renewal</html:link></li>
         <% } %>
+	     <li class=onclick><html:link  action ="GenerateReportServlet?hdOpCode=3&mode=List&REPORT_CODE=BATCHPROCESS" target='mainFrame'>Batch Process</html:link></li>
         <%--
         <%if(objUserAccess.hasScreen("TRANX_REPORT")){%>
 	     <li class=onclick><html:link  action ="GenerateReportServlet?hdOpCode=3&mode=List&REPORT_CODE=TR" target='mainFrame'>Transaction Report</html:link></li>
@@ -655,10 +662,24 @@
 				<% if(objUserAccess.hasScreen("WRITEOFF_CARDS")){ %>
        	       <li class=onclick><html:link  action ="writeoffcardslistpage.do" target='mainFrame'>WriteOffCards</html:link></li>
                <% } %>
+               <% if(objUserAccess.hasScreen("COLLECTION_CONFIG")){ %>
+       	       <li class=onclick><html:link  action ="collectionconfigprocess.do?method=get" target='mainFrame'>Collection Config</html:link></li>
+               <% } %>
+                <% if(objUserAccess.hasScreen("AGENT_SETUP")){ %>
+               <li class=onclick><html:link  action ="collectionagentsetuplist.do?method=List" target='mainFrame'>Agent Setup</html:link></li>
+               <% } %>
+                <% if(objUserAccess.hasScreen("COLLECTION_AGEING")){ %>
+               <li class=onclick><html:link  action ="collectionageinglist.do" target='mainFrame'>Collection Ageing</html:link></li>
+               <% } %>
+                <% if(objUserAccess.hasScreen("COLLECTION_AGEING_ACTION")){ %>
+               <li class=onclick><html:link  action ="collectionageingactionlist.do?method=List" target='mainFrame'>Collection Ageing Action</html:link></li>
+               <% } %>
+                <% if(objUserAccess.hasScreen("COLLECTION_ACCOUNT_DETAILS")){ %>
+               <li class=onclick><html:link  action ="collectionaccountdetailslist.do?method=List" target='mainFrame'>Collection Account Details</html:link></li>
+               <% } %>
 			</ul>
 	</li>
 <% } %>
-
 <%--
 <% if(objUserAccess.hasScreen("APPLICATIONFORM_UPLOAD") || objUserAccess.hasScreen("BLACKLISTCARD_UPLOAD") ||objUserAccess.hasScreen("CARDEMBOSSING_UPLOAD") || objUserAccess.hasScreen("PINPRINTING_UPLOAD") || objUserAccess.hasScreen("CARDDELIVER_UPLOAD") || objUserAccess.hasScreen("CURRENCY_UPLOAD")){%>
   <li class=onclick><a href="#">&nbsp;&nbsp;<b>Upload</b></a>
@@ -689,8 +710,19 @@
   </li>
 <% } %>
 --%>
-
-
+	<li class=onclick><a href="#">&nbsp;&nbsp;<b>Inventory</b></a>
+    	<ul><!-- -->
+			<li class=onclick><html:link  action ="stocksetuplist.do?method=list" target='mainFrame'>Stock Setup</html:link></li>
+			<li class=onclick><html:link  action ="inventorysearch.do?method=order" target='mainFrame'>Order Stock</html:link></li>
+			<li class=onclick><html:link  action ="inventorysearch.do?method=authorized" target='mainFrame'>Athorized Order</html:link></li>
+			<li class=onclick><html:link  action ="inventorysearch.do?method=dispatch" target='mainFrame'>Dispatch Stock</html:link></li>
+			<li class=onclick><html:link  action ="inventorysearch.do?method=received" target='mainFrame'>Received Stock</html:link></li>
+			<li class=onclick><html:link  action ="inventorysearch.do?method=return" target='mainFrame'>Return Stock</html:link></li>
+			<li class=onclick><html:link  action ="orderlist.do?method=List" target='mainFrame'>Order List</html:link></li>
+			<li class=onclick><html:link  action ="lowlevelqty.do" target='mainFrame'>Low Level Qty</html:link></li>
+			<li class=onclick><html:link  action ="viewhistory.do?method=List" target='mainFrame'>View History</html:link></li>
+        </ul>
+    </li>
   <ul> <li class=onclick><html:link  action ="passwordchangesetup.do" target='mainFrame'>Password Change</html:link></li></ul>
 
 </UL>

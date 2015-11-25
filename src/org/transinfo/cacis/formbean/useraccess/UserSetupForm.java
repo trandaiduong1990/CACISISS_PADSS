@@ -51,6 +51,7 @@ public class UserSetupForm extends ValidatorForm{
         private Map ftlOptionList;
 
         private Map branchList;
+        private Map userTypeList;
 
 
         public UserSetupForm() {
@@ -245,9 +246,8 @@ public class UserSetupForm extends ValidatorForm{
         try{
             System.out.println("issuerId,userType"+issuerId+"  "+userType);
             UserSetupDAO objUserSetupDAO = DAOFactory.getInstance().getUserSetupDAO();
-            if(roleList==null)  {
-                roleList = objUserSetupDAO.getRoleId(issuerId,userType);
-            }
+            roleList = objUserSetupDAO.getRoleId(issuerId,userType);
+            
             if(userStatusList==null)  {
                 userStatusList = objUserSetupDAO.statusListData("USERSTATUS");
                 System.out.println("userStatusList==>"+userStatusList.size());
@@ -259,6 +259,9 @@ public class UserSetupForm extends ValidatorForm{
             if(branchList==null)  {
             	branchList = objUserSetupDAO.branchListData(issuerId);
                 System.out.println("branchList==>"+branchList.size());
+            }
+            if(userTypeList == null) {
+            	userTypeList = objUserSetupDAO.getUserType();
             }
 
         }catch(Exception e){
@@ -382,6 +385,16 @@ public class UserSetupForm extends ValidatorForm{
 
 	public void setBranchList(Map branchList) {
 		this.branchList = branchList;
+	}
+
+
+	public Map getUserTypeList() {
+		return userTypeList;
+	}
+
+
+	public void setUserTypeList(Map userTypeList) {
+		this.userTypeList = userTypeList;
 	}
     
 }

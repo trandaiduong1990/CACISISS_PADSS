@@ -53,6 +53,8 @@ import org.transinfo.cacis.dataacess.dao.disputemanagement.StatisticReportsDAO;
 import org.transinfo.cacis.dataacess.dao.disputemanagement.WorkItemDAO;
 import org.transinfo.cacis.dataacess.dao.excell.UploadDAO;
 import org.transinfo.cacis.dataacess.dao.help.HelpDAO;
+import org.transinfo.cacis.dataacess.dao.inventory.InventoryManagementDAO;
+import org.transinfo.cacis.dataacess.dao.inventory.InventoryMasterDAO;
 import org.transinfo.cacis.dataacess.dao.key.KeyIndexDAO;
 import org.transinfo.cacis.dataacess.dao.letters.ApplicationProcessSearchDAO;
 import org.transinfo.cacis.dataacess.dao.letters.ChLetterHistDAO;
@@ -98,6 +100,7 @@ import org.transinfo.cacis.dataacess.dao.settings.SalaryProfileDAO;
 import org.transinfo.cacis.dataacess.dao.switching.SwitchDAO;
 import org.transinfo.cacis.dataacess.dao.transaction.TransactionDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.AdminLoginDAO;
+import org.transinfo.cacis.dataacess.dao.useraccess.AssignUserDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.PasswordChangeDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.RoleFunctionSetupDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.UserSetupDAO;
@@ -152,6 +155,8 @@ import org.transinfo.cacis.dataacess.daoimpl.oracle.disputemanagement.StatisticR
 import org.transinfo.cacis.dataacess.daoimpl.oracle.disputemanagement.WorkItemDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.excell.UploadDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.help.HelpDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.inventory.InventoryManagementDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.inventory.InventoryMasterDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.key.KeyIndexDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.letters.ApplicationProcessSearchDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.letters.ChLetterHistDAOImpl;
@@ -197,15 +202,25 @@ import org.transinfo.cacis.dataacess.daoimpl.oracle.settings.SalaryProfileDAOImp
 import org.transinfo.cacis.dataacess.daoimpl.oracle.switching.SwitchDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.transaction.TransactionDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.useraccess.AdminLoginDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.useraccess.AssignUserDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.useraccess.PasswordChangeDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.useraccess.RoleFunctionDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.useraccess.UserSetupDAOImpl;
 import org.transinfo.cacis.dataacess.dao.cardproduction.CardBatchDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAccountDetailsDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgeingActionDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgeingDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgentDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionConfigDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyFeeSetupDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyNotificationSetupDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyPolicyDAO;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.batchprocess.CardBatchDAOImpl;
-
+import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.CollectionAccountDetailsDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.CollectionAgeingActionDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.CollectionAgeingDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.CollectionAgentDAOImpl;
+import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.CollectionConfigDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.DelinquencyFeeSetupDAOImpt;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.DelinquencyNotificationSetupDAOImpl;
 import org.transinfo.cacis.dataacess.daoimpl.oracle.collectionmanagement.DelinquencyPolicyDAOImpl;
@@ -817,4 +832,52 @@ public class DAOFactoryImpl extends DAOFactory {
 	}
 
 	private DelinquencyNotificationSetupDAO objDelinquencyNotificationSetupDAO = new DelinquencyNotificationSetupDAOImpl();
+
+	@Override
+	public AssignUserDAO getAssignUserDAO() {
+		return objAssignUserDAO;
+	}
+	private AssignUserDAO objAssignUserDAO = new AssignUserDAOImpl();
+
+	@Override
+	public CollectionConfigDAO getCollectionConfigDAO() {
+		return objCollectionConfigDAO;
+	}
+	private CollectionConfigDAO objCollectionConfigDAO = new CollectionConfigDAOImpl();
+	
+	@Override
+	public CollectionAgentDAO getCollectionAgentDAO() {
+		return objAgentDAO;
+	}
+	private CollectionAgentDAO objAgentDAO = new CollectionAgentDAOImpl();
+	
+	@Override
+	public CollectionAgeingDAO getCollectionAgeingDAO() {
+		return objAgeingDAO;
+	}
+	private CollectionAgeingDAO objAgeingDAO = new CollectionAgeingDAOImpl();
+	
+	@Override
+	public CollectionAgeingActionDAO getCollectionAgeingActionDAO() {
+		return objAgeingActionDAO;
+	}
+	private CollectionAgeingActionDAO objAgeingActionDAO = new CollectionAgeingActionDAOImpl();
+	
+	@Override
+	public CollectionAccountDetailsDAO getCollectionAccountDetailsDAO() {
+		return objAccountDetailsDAO;
+	}
+	private CollectionAccountDetailsDAO objAccountDetailsDAO = new CollectionAccountDetailsDAOImpl();
+
+	@Override
+	public InventoryMasterDAO getInventoryMasterDAO() {
+		return objInventoryMasterDAO;
+	}
+	private InventoryMasterDAO objInventoryMasterDAO = new InventoryMasterDAOImpl();
+
+	@Override
+	public InventoryManagementDAO getInventoryManagementDAO() {
+		return objInventoryManagementDAO;
+	}
+	private InventoryManagementDAO objInventoryManagementDAO = new InventoryManagementDAOImpl();
 }

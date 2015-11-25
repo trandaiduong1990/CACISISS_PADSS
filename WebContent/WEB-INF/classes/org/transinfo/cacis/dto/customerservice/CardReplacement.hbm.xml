@@ -57,6 +57,10 @@
    	<property   name="customerId" type ="string"  >
 		  <column name = "CUSTOMER_ID" sql-type ="varchar2(20)" not-null = "false" />
 	</property>
+	
+   	<property name="instantReplacement" type ="string" >
+    	  <column name ="INSTANT_REPLACEMENT" sql-type ="varchar2(1)" not-null ="false"/>
+    </property> 
    
             <!--  this is to insert the address data -->
     <component name="customerAddDto" class="org.transinfo.cacis.dto.cardproduction.CustomerAddressDto">

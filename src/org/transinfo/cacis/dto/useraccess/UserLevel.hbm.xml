@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.transinfo.cacis.dto.useraccess">
+
+	<class name="UserLevelDto" table="USER_LEVEL">
+	
+	  <id name="userType" type="string">
+			<column name="USER_TYPE" sql-type="varchar2(10)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+	  
+      <property name="userTypeDesc"  type ="string">
+		<column name = "USER_TYPE_DESC"  sql-type ="varchar2(120)" not-null = "false" />
+	  </property>	
+	  
+      <property name="levelId"  type ="string">
+		<column name = "LEVEL_ID"  sql-type ="varchar2(20)" not-null = "false" />
+	  </property>	
+	  
+	</class>
+	
+</hibernate-mapping>

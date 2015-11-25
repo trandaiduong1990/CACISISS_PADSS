@@ -32,7 +32,7 @@ public class UserSetupDAOImpl extends BaseDAOImpl implements UserSetupDAO {
 		try {
 
 			sbf.append("select um.id.userId, um.firstName, um.roleId, um.status,  ");
-			sbf.append(" to_char(um.lastUpdatedDate,'dd-MM-yyyy') FROM  UserMasterDto um ");
+			sbf.append(" to_char(um.lastUpdatedDate,'dd-MM-yyyy'), um.userType FROM  UserMasterDto um ");
 
 
 			if (objSearchDto.getIssuerId()!= null && !objSearchDto.getIssuerId().equals(""))
@@ -286,8 +286,13 @@ public class UserSetupDAOImpl extends BaseDAOImpl implements UserSetupDAO {
 	        try{
 		    Session session = HibernetFactory.currentSession();
 		    tx =session.beginTransaction();
+		    StringBuffer sbf = new StringBuffer();
                    // System.out.println("userType in impl===>"+userType);
-                    Query qry = session.createQuery("From RoleMasterDto rm where rm.userType = '"+userType+"' and rm.id.issuerId='"+issuerId+"' and rm.status='A'");
+            sbf.append("From RoleMasterDto rm where rm.id.issuerId='"+issuerId+"' and rm.status='A' ");
+            if(userType!=null && !userType.equals("")) {
+            	sbf.append("and rm.userType = '"+userType+"' ");
+            }
+            Query qry = session.createQuery(sbf.toString());
 		    List listDocs = qry.list();
 
 		    for(Iterator it = listDocs.iterator();it.hasNext();){
@@ -313,7 +318,7 @@ public class UserSetupDAOImpl extends BaseDAOImpl implements UserSetupDAO {
 		  }
 	     return roleList;
 	}
-             
+        
 }
 
 

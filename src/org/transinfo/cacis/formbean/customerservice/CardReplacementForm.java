@@ -70,6 +70,17 @@ public class CardReplacementForm extends ValidatorActionForm {
 
 	private String maskedCardNo;
 	private String encryptedCardNo;
+	private String instantReplacement = "N";
+	private String replacementCardNo;
+
+	
+	public String getReplacementCardNo() {
+		return replacementCardNo;
+	}
+
+	public void setReplacementCardNo(String replacementCardNo) {
+		this.replacementCardNo = replacementCardNo;
+	}
 
 	public String getTotFeeAmt() {
 		return totFeeAmt;
@@ -416,6 +427,14 @@ public class CardReplacementForm extends ValidatorActionForm {
 
 	public void setMaskedCardNo(String maskedCardNo) {
 		this.maskedCardNo = maskedCardNo;
+	}
+
+	public String getInstantReplacement() {
+		return instantReplacement;
+	}
+
+	public void setInstantReplacement(String instantReplacement) {
+		this.instantReplacement = instantReplacement;
 	}
 
 }

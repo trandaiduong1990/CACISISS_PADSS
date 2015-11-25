@@ -2698,4 +2698,119 @@ CardReplacementDAO {
 
 	}
 
+	@Override
+	public boolean updateReplacementCard(CardsDto objCardsDto)
+			throws TPlusException {
+		boolean update = false;
+		Transaction tx = null;
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			session.update(objCardsDto);
+			session.flush();
+			tx.commit();
+			update = true;
+		}
+
+		catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while supdateReplacementCard()  in CardReplacementDAOImpl"
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error:  while updateReplacementCard() in CardReplacementDAOImpl"
+					+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return update;
+	}
+
+	@Override
+	public boolean insertReplacementLog(
+			CardReplacementLogDto objCardReplacementLogDto)
+			throws TPlusException {
+		boolean boolCreate = false;
+		Transaction tx = null;
+
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			session.save(objCardReplacementLogDto);
+
+			tx.commit();
+			boolCreate = true;
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+					.println("Error in CardReplacementDAOImpl insertReplacementLog method : "
+							+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: in CardReplacementDAOImpl insertReplacementLog  method :" + e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+
+		return boolCreate;
+	}
+
+	@Override
+	public boolean updateCardReplacementForm(CardReplacementDto objRepDto)
+			throws TPlusException {
+		boolean accept = false;
+		Transaction tx = null;
+		int count;
+		CardActivityDto objCardActivity = null;
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			// updating cardrepalcmentdto
+			String sql = "UPDATE CardReplacementDto SET applicationStatus =:appacceptstatus, feeApplicable=:feesapp, immeidateProcess=:immprocess WHERE applicationId=:applicationid";
+			count = session.createQuery(sql)
+			.setString("applicationid", objRepDto.getApplicationId())
+			.setString("feesapp", objRepDto.getFeeApplicable())
+			.setString("immprocess", objRepDto.getImmeidateProcess())
+			.setInteger("appacceptstatus", CommonCodes.APPLICATIONSTATUS_ACCEPTED)
+			.executeUpdate();
+			if (count > 0) {
+				// Inserting Data into CardActivity Table
+				objCardActivity = new CardActivityDto();
+				objCardActivity.setDateTime(new Date());
+				objCardActivity.setCardNumber(objRepDto.getCardNumber());
+				objCardActivity
+				.setActivity("CardReplacement Application Acccepted");
+				objCardActivity.setStationIp(InetAddress.getLocalHost()
+						.getHostAddress());
+				objCardActivity.setUserId(objRepDto.getUserId());
+				objCardActivity.setReason(objRepDto.getRemarks());
+				objCardActivity.setLastUpdatedBy(objRepDto.getUserId());
+				objCardActivity.setUpdatedDate(objRepDto.getUpdatedDate());
+				session.save(objCardActivity);
+			}
+			session.flush();
+			tx.commit();
+			if (count > 0)
+				accept = true;
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while accepting replacementform in CardReplacementDAOImpl updateCardReplacementForm"
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while accepting the updateCardReplacementForm in CardReplacementDAOImpl"
+					+ e);
+		} finally {
+
+			HibernetFactory.closeSession();
+		}
+		return accept;
+	}
+
 }

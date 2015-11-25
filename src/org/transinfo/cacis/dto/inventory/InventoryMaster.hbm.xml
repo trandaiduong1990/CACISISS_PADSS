@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.inventory">
+
+	<class name="InventoryMasterDto" table="INVENTORY_MASTER">
+		<id name="cardProductId" type="string">
+			<column name="CARDPRODUCT_ID" sql-type="varchar2(6)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="supplierId" type="string">
+			<column name="SUPPLIER_ID" sql-type="varchar2(10)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="CREATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="stockAvailable" type="integer">
+			<column name="STOCK_AVAILABLE" sql-type="number" not-null="true" />
+		</property>
+		<property name="lastQty" type="integer">
+			<column name="LAST_QTY" sql-type="number" not-null="true" />
+		</property>
+		<property name="replenishPoint" type="integer">
+			<column name="REPLENISH_POINT" sql-type="number" not-null="true" />
+		</property>
+		<property name="lastMode" type="string">
+			<column name="LAST_MODE" sql-type="varchar2(1)" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

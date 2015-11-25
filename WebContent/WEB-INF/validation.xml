@@ -2582,6 +2582,9 @@
 			<field property="roleDesc" depends="required">
 				<arg0 key="rolefunctionsetup.description" />
 			</field>
+			<field property="userType" depends="required">
+				<arg0 key="rolefunctionsetup.usertype" />
+			</field>
 			<field property="status" depends="required">
 				<arg0 key="rolefunctionsetup.status" />
 			</field>
@@ -2591,7 +2594,22 @@
 								
 		</form>	
 		
-
+		<form name="assignUserForm">
+		    <field property="roleId" depends="required">
+				<arg0 key="assignuser.role" />
+			</field>
+			<field property="userId" depends="required">
+				<arg0 key="assignuser.user" />
+			</field>
+			<field property="lower" depends="integer">
+				<arg0 key="assignuser.lower" />
+			</field>
+		    <field property="upper" depends="integer">
+				<arg0 key="assignuser.upper" />
+			</field>
+		</form>
+		
+		
 		<form name="systemParamForm">
 			<field property="mailServerAddress" depends="required,validIpAddress">
 				<arg0 key="systemparameter.mailserveraddress" />
@@ -2648,6 +2666,9 @@
 			</field>
 			<field property="lastName" depends="required">
 				<msg name="required" key="errors.userlastname" />
+			</field>
+			<field property="userType" depends="required">
+				<arg0 key="usersetup.usertype" />
 			</field>
 			<field property="roleId" depends="required">
 				<arg0 key="usersetup.role" />
@@ -3306,11 +3327,8 @@
 		<!-- #######################  END  ########################### -->
 			
 	 	<form name="newCardBatchprocessFrom">
-			<field property="authUserId" depends="required">
-				<arg0 key="cardbatcprocess.auth.username" />
-			</field>
-			<field property="authPassword" depends="required">
-				<arg0 key="cardbatcprocess.auth.password" />
+			<field property="applIdArray" depends="required">
+				<arg0 key="error.authorizedfailed" />
 			</field>
 		</form>
 					
@@ -3577,7 +3595,63 @@
 				<arg0 key="co.policyDesc" />
 			</field>
 		</form>
+		
+		<form name="collectionConfigForm">
+			<field property="minAmount" depends="required,float,validDecimal">
+				<arg0 key="co.policyId" />
+			</field>
+			<field property="minDays" depends="required,integer">
+				<arg0 key="co.policyDesc" />
+			</field>
+		</form>
+		
+		<form name="collectionAgentSetupForm">
+			<field property="agentId" depends="required">
+				<arg0 key="collectionagent.agentId" />
+			</field>
+			<field property="agentName" depends="required">
+				<arg0 key="collectionagent.agentName" />
+			</field>
+			<field property="agentType" depends="required">
+				<arg0 key="collectionagent.agentType" />
+			</field>
+			<field property="address1" depends="required">
+				<arg0 key="collectionagent.address1" />
+			</field>
+			<field property="address2" depends="required">
+				<arg0 key="collectionagent.address2" />
+			</field>
+			<field property="phoneNo" depends="required, long">
+				<arg0 key="collectionagent.phoneNo" />
+			</field>
+			<field property="emailId" depends="required, email">
+				<arg0 key="collectionagent.emailId" />
+			</field>
+			<field property="contactName" depends="required">
+				<arg0 key="collectionagent.contactName" />
+			</field>
+			<field property="contactPhoneNo" depends="required, long">
+				<arg0 key="collectionagent.contactPhNo" />
+			</field>
+		</form>
 
+
+		<form name="collectionAgeingSetupForm">
+    		<field property="ageingPolicy" depends="required">
+				<arg0 key="collectionageing.ageingPolicy" />
+			</field>
+			<field property="startDays" depends="required, integer">
+				<arg0 key="collectionageing.startDay" />
+			</field>
+			<field property="endDays" depends="required, integer">
+				<arg0 key="collectionageing.endDay" />
+			</field>
+			<field property="bucket" depends="required, integer">
+				<arg0 key="collectionageing.bucket" />
+			</field>
+   		</form>
+   		
+		
 		<form name="delinquencyFeeSetupForm">
 			<field property="agingBeginDays" depends="required">
 				<arg0 key="co.ageBegin" />
@@ -3632,6 +3706,92 @@
 			</field>
 		</form>
 	  
+		<form name="collectionAgeingActionSetupForm">
+			<field property="ageingPolicy" depends="required">
+				<arg0 key="collectionageingaction.ageingPolicy" />
+			</field>
+			<field property="days" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days2" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days3" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days4" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days5" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days6" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days7" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days8" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days9" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+			<field property="days10" depends="integer">
+				<arg0 key="collectionageingaction.day" />
+			</field>
+		</form>
+		
+		<form name="collectionAccountDetailsSearchForm">
+			<field property="cardNo" depends="long">
+				<arg0 key="codetail.cardnumber" />
+			</field>
+		</form>
+		
+		<form name="collectionAccountDetailsSetupForm">
+			<field property="noOfInstallment" depends="long">
+				<arg0 key="codetail.noOfInstallment" />
+			</field>
+			<field property="minPaymentAmt" depends="long">
+				<arg0 key="codetail.minPaymentAmt" />
+			</field>
+			<field property="interestRate" depends="double">
+				<arg0 key="codetail.interestRate" />
+			</field>
+			<field property="currentInstallmentNo" depends="long">
+				<arg0 key="codetail.currentInstallmentNo" />
+			</field>
+		</form>
+		
+		<form name="inventorySetupForm">
+			<field property="orderNo" depends="required">
+				<arg0 key="inventory.orderno" />
+			</field>
+			<field property="orderExpectedDate" depends="required">
+				<arg0 key="inventory.orderexpected" />
+			</field>
+			<field property="branchId" depends="required">
+				<arg0 key="inventory.branch" />
+			</field>
+			<field property="cardproductId" depends="required">
+				<arg0 key="inventory.cardproduct" />
+			</field>
+			<field property="orderQty" depends="required,integer">
+				<arg0 key="inventory.orderqty" />
+			</field>
+		</form>
+		
+		<form name="orderListForm">
+			<field property="status" depends="required">
+				<arg0 key="vh.status" />
+			</field>
+		</form>
+		
+		<form name="viewHistoryForm">
+			<field property="status" depends="required">
+				<arg0 key="vh.status" />
+			</field>
+		</form>
     </formset>
 
     <!-- An example formset for another locale

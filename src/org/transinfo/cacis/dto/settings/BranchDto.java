@@ -23,7 +23,7 @@ public class BranchDto implements Serializable{
 	 private String  status;
 	 private String  userId;
 	 private Date  updatedDate = new Date();
-	
+	 private String accessAllBranch;
 	 
 	 public BranchDto(){}
 	 
@@ -132,6 +132,14 @@ public class BranchDto implements Serializable{
 
 	public void setPostalCode(Long postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	public String getAccessAllBranch() {
+		return accessAllBranch;
+	}
+
+	public void setAccessAllBranch(String accessAllBranch) {
+		this.accessAllBranch = accessAllBranch;
 	}
 	
 

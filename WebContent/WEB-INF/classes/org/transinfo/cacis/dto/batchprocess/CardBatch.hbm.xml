@@ -31,6 +31,18 @@
 		<property	name="updatedDate"  type ="date">
 			<column name = "UPDATED_DATE"  sql-type ="Date" not-null = "true" />
 		</property>
+		<property	name="createdDate"  type ="date">
+			<column name = "CREATED_DATE"  sql-type ="Date" not-null = "false" />
+		</property>
+		<property	name="createdBy"  type ="string">
+			<column name = "CREATED_BY"  sql-type ="varchar2(32)"  not-null = "false"/>
+		</property>
+		<property	name="noApplications"  type ="integer">
+			<column name = "NO_APPLICATIONS"  sql-type ="NUMBER"  not-null = "false"/>
+		</property>
+		<property	name="rerun"  type ="integer">
+			<column name = "RERUN"  sql-type ="NUMBER"  not-null = "false"/>
+		</property>
 	</class>
 
 </hibernate-mapping>

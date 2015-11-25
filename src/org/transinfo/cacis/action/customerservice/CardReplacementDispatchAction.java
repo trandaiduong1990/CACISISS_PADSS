@@ -42,6 +42,7 @@ import org.transinfo.cacis.dto.cardproduction.CustomerAddressDto;
 import org.transinfo.cacis.dto.customerservice.CardCloseDto;
 import org.transinfo.cacis.dto.customerservice.CardLimitAdjustmentDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.customerservice.CardReplacementLogDto;
 import org.transinfo.cacis.dto.customerservice.CardStatusRemarksDto;
 import org.transinfo.cacis.dto.customerservice.CreditSplitDto;
 import org.transinfo.cacis.dto.customerservice.PinResendDto;
@@ -690,6 +691,7 @@ public class CardReplacementDispatchAction extends BaseDispatchAction {
 				if(displayStatus.equalsIgnoreCase("Active")){
 					// this for calling search method in DAOImpl to get the
 					// CustomerServiceDataBean
+					objCardRepDto.setEncryptedCardNo(objCardsDto.getEncryptedCardNo());
 					Collection cardReplaceList = objManager.search(objCardRepDto);
 					request.getSession(false).setAttribute("$CARDREPLACELIST$",
 							cardReplaceList);
@@ -708,6 +710,7 @@ public class CardReplacementDispatchAction extends BaseDispatchAction {
 					.setReasonCode(String
 							.valueOf(objCardRepDto.getReasonCode()));
 					objForm.setRemarks(objCardRepDto.getRemarks());
+					objForm.setInstantReplacement(objCardRepDto.getInstantReplacement());
 					// this value to pass reject method to update carreplacementForms
 					// table when clicks rejection
 					// request.setAttribute("ApplicationId",objCardRepDto.getApplicationId());
@@ -814,6 +817,159 @@ public class CardReplacementDispatchAction extends BaseDispatchAction {
 		return mapping.findForward("success");
 	}
 
+	/*
+	 * this method is used for instant replacement the cardreplacement form
+	 */
+	public ActionForward instantReplacement(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws TPlusException, Exception {
+
+		ActionErrors errors = null;
+		boolean isError = false;
+		String errormsg = null;
+		// Token Validation
+		if (!isTokenValid(request)) {
+			errors = new ActionErrors();
+			errors.add("Error", new ActionError("error.duplicate"));
+			saveErrors(request, errors);
+			return mapping.findForward("token");
+		}
+		
+		CardReplacementForm objForm = (CardReplacementForm) form;
+		// DTO Creation
+		CardReplacementDto objCardRepDto = new CardReplacementDto();
+		CardReplacementManager objManager = new CardReplacementManager();
+		CardManager objCardManager = new CardManager();
+		SystemParamManager objSystemParamManager = new SystemParamManager();
+		CardsDto objCardsDto = new CardsDto();
+		CardsDto objOldCardsDto = new CardsDto();
+		
+		try {
+			BeanUtils.copyProperties(objCardRepDto, objForm);
+			// to set the Customer Account to newly created cards object
+			Set objAccount = ((CustomerServiceDataBean) ((ArrayList) request
+				.getSession(false).getAttribute("$CARDREPLACELIST$"))
+				.get(0)).getCustomerAccount();
+			for (Iterator it = objAccount.iterator(); it.hasNext();) {
+				CustomerAccountDto objCustAcc = (CustomerAccountDto) it.next();
+				objCardRepDto.setCustomerAccountDto(objCustAcc);
+			}
+			// Check Replacement Card No
+			// to check cardnumber Entered or not
+			if (objForm.getReplacementCardNo() != null && objForm.getReplacementCardNo().equals("")) {
+				isError = true;
+				errormsg = "error.replacementcardnorequired";
+			} else {
+				String strCardNo = objForm.getReplacementCardNo();
+				try {
+					@SuppressWarnings("unused")
+					long longCardNo = Long.valueOf(strCardNo);
+					// to check cardnumber existed or not
+					objCardsDto = objCardManager.getCardByEncryptedData(CardEncryption.encrypt(strCardNo));
+					
+					if (objCardsDto == null) {
+						isError = true;
+						errormsg = "error.cardnumbernotexit";
+					} else {
+						// Check Card exp
+						Date now = new Date();
+						String strExpDate = objCardsDto.getCardExpDate();
+
+						SimpleDateFormat sdf = new SimpleDateFormat("MMyy");
+						Date eDate = sdf.parse(strExpDate);
+
+						Calendar calendar = Calendar.getInstance();
+						calendar.setTime(eDate);
+						calendar.set(calendar.get(1), calendar.get(2),calendar.get(5));
+
+						int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+						calendar.set(calendar.get(1), calendar.get(2), maxDay);
+						Date dateExpDate = calendar.getTime();
+
+						if (now.getTime() > dateExpDate.getTime()) {
+							isError = true; // for some wrong expire date formats. will enable it later
+							errormsg = "error.cardcannotreplaceonlyrenew";
+						} else {
+							SystemParamDto objSystemParamDto = objSystemParamManager.get("ASP");
+							int renewalTimeInterval = objSystemParamDto.getRenewalTimeInterval();
+
+							Date renewTimePeriod = DateUtil.addMonths(dateExpDate, -renewalTimeInterval);
+							if (now.getTime() > renewTimePeriod.getTime()) {
+								// isError = true;
+								isError = true; // for some wrong expire date formats. will enable it later
+								errormsg = "error.cardgoingtoexpirerenew";
+							}
+						}
+					}
+				} catch (Exception e) {
+					isError = true;
+					errormsg = "error.cardnoinvalid";
+				}
+			}
+			
+			if(isError) {
+				errors = new ActionErrors();
+				errors.add("Error", new ActionError(errormsg));
+				saveErrors(request, errors);
+				request.setAttribute("ACTION", "replace");
+			} else {
+				// Update Replacement Card
+				objOldCardsDto = objCardManager.getCard(objForm.getCardNumber());
+				objCardsDto.setCustomerId(objOldCardsDto.getCustomerId());
+				
+				AccountAdjustmentManager objAccountAdjustmentManager = new AccountAdjustmentManager();
+				CustomerAccountDto objCustomerAccountDto = objAccountAdjustmentManager.getCustomerAccountDto(objOldCardsDto.getAccountId());
+				objCardsDto.setCustAccountDto(objCustomerAccountDto);
+//				objCardsDto.setAccountId(objOldCardsDto.getAccountId());
+				objCardsDto.setPurchaseUsed(objOldCardsDto.getPurchaseUsed());
+				objCardsDto.setCashUsed(objOldCardsDto.getCashUsed());
+				objCardsDto.setLastStatementId(objOldCardsDto.getLastStatementId());
+				objCardsDto.setLastStatementDate(objOldCardsDto.getLastStatementDate());
+				objCardsDto.setCorporateId(objOldCardsDto.getCorporateId());
+				objCardsDto.setCycleNo(objOldCardsDto.getCycleNo());
+				
+				boolean boolUpdate = objManager.updateReplacementCard(objCardsDto);
+				//Insert Replacement log
+				CardReplacementLogDto objCardReplacementLogDto = new CardReplacementLogDto();
+				objCardReplacementLogDto.setOldCardNo(objForm.getCardNumber());
+				objCardReplacementLogDto.setNewCardNo(String.valueOf(objCardsDto.getCardNumber()));
+				objCardReplacementLogDto.setIssueDate(new Date());
+				objCardReplacementLogDto.setExpireDate(DateUtil.convertExpiryDateStringToDate(objCardsDto.getCardExpDate()));
+				objCardReplacementLogDto.setFlag(CommonCodes.LOG_OLD_NO_INSERTED);
+				objCardReplacementLogDto.setUpdatedDate(new Date());
+				objCardReplacementLogDto.setLastUpdatedBy((String)request.getSession().getAttribute("USERID"));
+				
+				boolean boolInsert = objManager.insertReplacementLog(objCardReplacementLogDto);
+				
+				//Update CardReplacement_Form table
+				boolean boolUpdateReplacementForm = objManager.updateCardReplacementForm(objCardRepDto);
+				
+				if (!boolUpdate || !boolInsert || !boolUpdateReplacementForm) {
+					errors = new ActionErrors();
+					errors.add("Error", new ActionError("error.acceptfailed"));
+					request.setAttribute("ACTION", "replace");
+					saveErrors(request, errors);
+				} else {
+					errors = new ActionErrors();
+					errors.add("Error", new ActionError("error.acceptSuccess"));
+					saveErrors(request, errors);
+					request.setAttribute("ACTION", "cancel");
+				}
+			}
+		} catch (Exception e) {
+			System.out
+			.println("Error converting to form bean in CardReplacementFormDispatchAction instantReplacement: "
+					+ e);
+			throw new TPlusException(
+					"Could not populate the form bean in CardReplacementFormDispatchAction instantReplacement: "
+							+ e);
+		}
+		// Success
+//		resetToken(request);
+		return mapping.findForward("success");
+	}
+	
 	/*
 	 * this method is used for rejecting the cardreplacement form
 	 */

@@ -26,14 +26,19 @@ import org.transinfo.cacis.common.constants.CommonCodes;
 import org.transinfo.cacis.constants.ICacisiss;
 import org.transinfo.cacis.controller.batchprocess.CardBatchProcessManager;
 import org.transinfo.cacis.controller.key.KeyIndexManager;
+import org.transinfo.cacis.controller.settings.BranchManager;
 import org.transinfo.cacis.controller.useraccess.AdminLoginManager;
+import org.transinfo.cacis.controller.useraccess.UserSetupManager;
+import org.transinfo.cacis.dto.batchprocess.CardApplLinkDto;
 import org.transinfo.cacis.dto.batchprocess.CardBatchDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationFormDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationProcessDto;
 import org.transinfo.cacis.dto.cardproduction.CardsDto;
 import org.transinfo.cacis.dto.cardproduction.CustomerAccountDto;
+import org.transinfo.cacis.dto.settings.BranchDto;
 import org.transinfo.cacis.dto.settings.CustomerGroupFeeDto;
 import org.transinfo.cacis.dto.useraccess.AdminLoginDto;
+import org.transinfo.cacis.dto.useraccess.UserMasterDto;
 import org.transinfo.cacis.formbean.batchprocess.BatchProcessSuccess;
 import org.transinfo.cacis.formbean.batchprocess.NewCardBPForm;
 
@@ -42,6 +47,62 @@ public class NewCardsDispatchAction extends BaseDispatchAction {
 	
 	private Logger logger = Logger.getLogger(NewCardsDispatchAction.class);
 
+	public ActionForward changeBranch(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws TPlusException, Exception {
+		int pageNo = 0;
+
+		if (request.getParameter("mode") != null
+				&& ((String) request.getParameter("mode")).equals("NEXT")) {
+			if (request.getParameter("pageNo") != null) {
+				pageNo = Integer.parseInt((String) request
+						.getParameter("pageNo")) + 1;
+
+			}
+		}
+		if (request.getParameter("mode") != null
+				&& ((String) request.getParameter("mode")).equals("PREV")) {
+
+			if (request.getParameter("pageNo") != null) {
+				pageNo = Integer.parseInt((String) request
+						.getParameter("pageNo")) - 1;
+			}
+		}
+		NewCardBPForm objForm = (NewCardBPForm) form;
+		CardBatchProcessManager objCardBatchProcessManager = new CardBatchProcessManager();
+		try {
+			String issuerId = (String) request.getSession(false).getAttribute(
+					"ISSUER");
+			String userId = (String) request.getSession(false).getAttribute("USERID");
+			//check branch 
+			UserSetupManager objUserSetupManager = new UserSetupManager();
+			BranchManager objBranchManager = new BranchManager();
+				
+				objForm.setBranchList(objCardBatchProcessManager.getBranch(null,"ALL"));
+				Collection applicationsList;
+				if(objForm.getBranchId().equals("")) {
+					applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, null, "ALL");
+				} else {
+					BranchDto objBranchDto = objBranchManager.getBranchDto(objForm.getBranchId());
+					applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, objBranchDto, "");
+				}
+				objForm.setAppList(applicationsList);
+				request.setAttribute("SEARCHLIST", applicationsList);
+				request.setAttribute("PAGENO", new Integer(pageNo).toString());
+			
+			
+
+		} catch (Exception e) {
+			logger.error(new Object(), e);
+			System.out
+					.println("Error converting to form bean in NewCardsDispatchAction : "
+							+ e.getMessage());
+			throw new TPlusException(
+					"Error converting to form bean in NewCardsDispatchAction : "
+							+ e);
+		}
+		return mapping.findForward("success");
+	}
 	public ActionForward List(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws TPlusException, Exception {
@@ -106,14 +167,38 @@ public class NewCardsDispatchAction extends BaseDispatchAction {
 		try {
 			String issuerId = (String) request.getSession(false).getAttribute(
 					"ISSUER");
-			Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo);
-			objForm.setAppList(applicationsList);
+			String userId = (String) request.getSession(false).getAttribute("USERID");
+			//check branch 
+			UserSetupManager objUserSetupManager = new UserSetupManager();
+			BranchManager objBranchManager = new BranchManager();
+			UserMasterDto objUserMasterDto = objUserSetupManager.getUserMasterForm(issuerId, userId);
+			if(null != objUserMasterDto) {
+				String branchId = objUserMasterDto.getBranchId();
+				objForm.setBranchId(branchId);
+				if(branchId.equals("ALL")) {
+					objForm.setBranchList(objCardBatchProcessManager.getBranch(null,"ALL"));
+					Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, null, "ALL");
+					objForm.setAppList(applicationsList);
+					request.setAttribute("SEARCHLIST", applicationsList);
+					request.setAttribute("PAGENO", new Integer(pageNo).toString());
+				} else {
+					BranchDto objBranchDto = objBranchManager.getBranchDto(branchId);
+					objForm.setBranchList(objCardBatchProcessManager.getBranch(objBranchDto,""));
+					Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, objBranchDto, "");
+					objForm.setAppList(applicationsList);
+					request.setAttribute("SEARCHLIST", applicationsList);
+					request.setAttribute("PAGENO", new Integer(pageNo).toString());
+				}
+			// The case when usserId = ASPSUPERADMIN and issuerId = Issuer1
+			} else {
+				objForm.setBranchList(objCardBatchProcessManager.getBranch(null,"ALL"));
+				Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, null, "ALL");
+				objForm.setAppList(applicationsList);
+				request.setAttribute("SEARCHLIST", applicationsList);
+				request.setAttribute("PAGENO", new Integer(pageNo).toString());
+			}
 			
-			int totApps = objCardBatchProcessManager.getTotalCardsApps(issuerId);
-			objForm.setTotalNoOfApps(String.valueOf(totApps));
 			
-			request.setAttribute("SEARCHLIST", applicationsList);
-			request.setAttribute("PAGENO", new Integer(pageNo).toString());
 
 		} catch (Exception e) {
 			logger.error(new Object(), e);
@@ -128,7 +213,7 @@ public class NewCardsDispatchAction extends BaseDispatchAction {
 
 	}
 
-	public ActionForward process(ActionMapping mapping, ActionForm form,
+	/*public ActionForward process(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws TPlusException, Exception {
 
@@ -425,5 +510,123 @@ public class NewCardsDispatchAction extends BaseDispatchAction {
 
 		return mapping.findForward("success");
 	}
+	*/
+	public ActionForward authorized(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws TPlusException, Exception {
 
+		ActionErrors errors = null;
+		boolean isError = false;
+
+		int pageNo = 0;
+
+		if (request.getParameter("pageNo") != null) {
+			pageNo = Integer.parseInt((String) request.getParameter("pageNo"));
+		}
+
+		String issuerId = (String) request.getSession(false).getAttribute(
+				"ISSUER");
+		String userID = (String) request.getSession(false).getAttribute(
+				"USERID");
+
+		NewCardBPForm objForm = (NewCardBPForm) form;
+		CardBatchProcessManager objCardBatchProcessManager = new CardBatchProcessManager();
+		
+		errors = objForm.validate(mapping,request);
+
+		if(errors!=null && !errors.isEmpty())
+		{
+			saveErrors(request,errors);
+			//check branch 
+			UserSetupManager objUserSetupManager = new UserSetupManager();
+			BranchManager objBranchManager = new BranchManager();
+			UserMasterDto objUserMasterDto = objUserSetupManager.getUserMasterForm(issuerId, userID);
+			if(null != objUserMasterDto) {
+				String branchId = objUserMasterDto.getBranchId();
+				objForm.setBranchId(branchId);
+				if(branchId.equals("ALL")) {
+					objForm.setBranchList(objCardBatchProcessManager.getBranch(null,"ALL"));
+					Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, null, "ALL");
+					objForm.setAppList(applicationsList);
+					request.setAttribute("SEARCHLIST", applicationsList);
+					request.setAttribute("PAGENO", new Integer(pageNo).toString());
+				} else {
+					BranchDto objBranchDto = objBranchManager.getBranchDto(branchId);
+					objForm.setBranchList(objCardBatchProcessManager.getBranch(objBranchDto,""));
+					Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, objBranchDto, "");
+					objForm.setAppList(applicationsList);
+					request.setAttribute("SEARCHLIST", applicationsList);
+					request.setAttribute("PAGENO", new Integer(pageNo).toString());
+				}
+			} else {
+				objForm.setBranchList(objCardBatchProcessManager.getBranch(null,"ALL"));
+				Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo, null, "ALL");
+				objForm.setAppList(applicationsList);
+				request.setAttribute("SEARCHLIST", applicationsList);
+				request.setAttribute("PAGENO", new Integer(pageNo).toString());
+			}
+			return mapping.findForward("success");
+		}
+		
+		try {
+			//update ApplicationForms
+			String applIdArray[] = objForm.getApplIdArray().split(",");
+			/*if(applIdArray.length == 1 && applIdArray[0].equals("")) {
+				errors = new ActionErrors();
+				errors.add("Error", new ActionError(
+						"error.authorizedfailed"));
+				saveErrors(request, errors);
+				Collection applicationsList = objCardBatchProcessManager.list(issuerId, pageNo);
+				objForm.setAppList(applicationsList);
+				
+				request.setAttribute("SEARCHLIST", applicationsList);
+				request.setAttribute("PAGENO", new Integer(pageNo).toString());
+				return mapping.findForward("success");
+			}*/
+			
+			for(int i=0;i<applIdArray.length;i++) {
+				ApplicationFormDto objApplicationFormDto = objCardBatchProcessManager.getApplicationForm(applIdArray[i]);
+				objApplicationFormDto.setApplicationStatus(CommonCodes.APPLICATIONSTATUS_AUTHORIZED);
+				objApplicationFormDto.setUserId(objForm.getUserId());
+				objApplicationFormDto.setUpdatedDate(new Date());
+				
+				objCardBatchProcessManager.updateApplication(objApplicationFormDto);
+			}
+			//insert CardBatch
+			CardBatchDto objBatchDto = new CardBatchDto();
+
+			objBatchDto.setStatus(CommonCodes.BATCH_NEW);
+			objBatchDto.setBatchId(objForm.getBatchId());
+			objBatchDto.setAuthorizedBy(objForm.getAuthUserId());
+			objBatchDto.setAuthorizedDate(new Date());
+			objBatchDto.setUpdateddBy(objForm.getUserId());
+			objBatchDto.setUpdatedDate(new Date());
+			objBatchDto.setNoApplications(applIdArray.length);
+
+			boolean overallSuccess = objCardBatchProcessManager
+					.addBatch(objBatchDto);
+			
+			//insert CardApplLink
+			for(int i=0;i<applIdArray.length;i++) {
+				CardApplLinkDto objCardApplLinkDto = new CardApplLinkDto();
+				objCardApplLinkDto.setBatchId(objForm.getBatchId());
+				objCardApplLinkDto.setApplicationId(applIdArray[i]);
+				objCardApplLinkDto.setApplicationType(CommonCodes.APPLICATIONTYPE_NEWCARD);
+				objCardApplLinkDto.setUpdatedDate(new Date());
+				objCardApplLinkDto.setUpdateddBy(objForm.getUserId());
+				objCardBatchProcessManager.addCardApplLink(objCardApplLinkDto);
+			}
+			
+			return mapping.findForward("batchprocess");
+		} catch (Exception e) {
+			logger.error(new Object(), e);
+			System.out
+					.println("Error converting to form bean in NewCardsDispatchAction : "
+							+ e.getMessage());
+			throw new TPlusException(
+					"Error converting to form bean in NewCardsDispatchAction : "
+							+ e);
+		}
+
+	}
 }

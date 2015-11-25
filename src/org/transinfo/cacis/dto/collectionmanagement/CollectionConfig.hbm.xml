@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.collectionmanagement">
+
+	<class name="CollectionConfigDto" table="COLLECTION_CONFIG">
+		<id name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(12)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="minAmount" type="integer">
+			<column name="COLT_MIN_AMT" sql-type="NUMBER" not-null="true" />
+		</property>
+
+		<property name="minDays" type="integer">
+			<column name="COLT_MIN_DAYS" sql-type="NUMBER" not-null="true" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="smsNotification" type="string">
+			<column name="SMS_NOTIFICATION" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="emailNotification" type="string">
+			<column name="EMAIL_NOTIFICATION" sql-type="varchar2(1)" not-null="false" />
+		</property>
+	</class>
+</hibernate-mapping>

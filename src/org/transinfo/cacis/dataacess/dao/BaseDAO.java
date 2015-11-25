@@ -75,6 +75,8 @@ public interface BaseDAO {
 
 	public Map statusListData(String groupId) throws TPlusException;
 
+	public Map getUserType() throws TPlusException;
+
 	public Map branchListData(String issuerId) throws TPlusException;
 
 	public Map customerTypeListData(String issuerId) throws TPlusException;

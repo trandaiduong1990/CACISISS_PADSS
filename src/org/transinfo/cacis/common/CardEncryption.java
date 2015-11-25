@@ -105,16 +105,16 @@ public class CardEncryption {
 		
 		try {
 			
-			//CardEncryption objNishanEncryption = new CardEncryption();
+			CardEncryption objNishanEncryption = new CardEncryption();
 			
-			String plainText = "giftpac";
-			System.out.println(plainText);
+//			String plainText = "giftpac";
+//			System.out.println(plainText);
+//			
+//			String encStr = CardEncryption.encrypt(plainText);
+//			System.out.println(encStr);
 			
-			String encStr = CardEncryption.encrypt(plainText);
-			System.out.println(encStr);
-			
-			/*String decStr = objNishanEncryption.decrypt("9B2BC72BE879EC38");
-			System.out.println(decStr);*/
+			String decStr = objNishanEncryption.decrypt("9F410682E8CFAF0CC62EB31BDDB6F17C7195957AD1C59348");
+			System.out.println(decStr);
 			
 		}  catch (Exception e) {
 			e.printStackTrace();

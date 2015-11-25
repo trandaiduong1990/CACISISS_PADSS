@@ -182,6 +182,10 @@ function HC_doOpenRemote(aURL, newName){
                                         <html:optionsCollection property="statusList" value="key" label="value" />
 	                                </html:select> </td>
                               </tr>
+                              <tr>
+                              	<td class="desc_cell" nowrap><bean:message key ="branchsetup.accessallbranch"/></td>
+                              	<td><html:checkbox property ="accessAllBranch" value="Y"/></td>
+                              </tr>
                             </table></td>
                           </tr>
                         </tbody>

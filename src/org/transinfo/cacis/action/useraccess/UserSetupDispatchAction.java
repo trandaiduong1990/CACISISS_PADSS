@@ -1,9 +1,14 @@
 package org.transinfo.cacis.action.useraccess;
 
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +24,7 @@ import org.transinfo.cacis.action.BaseDispatchAction;
 import org.transinfo.cacis.controller.useraccess.UserSetupManager;
 import org.transinfo.cacis.dto.useraccess.UserMasterDto;
 import org.transinfo.cacis.formbean.useraccess.UserSetupForm;
+import org.transinfo.cacis.formbean.useraccess.UserSetupSearchForm;
 import org.transinfo.cacis.util.EncryptUtility;
 
 @SuppressWarnings("deprecation")
@@ -35,7 +41,7 @@ public class UserSetupDispatchAction extends BaseDispatchAction {
 		UserSetupManager objManager = new UserSetupManager();
 		//ActionErrors errors = null;
 		
-		String userType = (String)request.getParameter("userType");
+//		String userType = (String)request.getParameter("userType");
 
 		System.out.println("BaseDispatchAction");
 		UserSetupForm objNewForm = new UserSetupForm();
@@ -44,7 +50,7 @@ public class UserSetupDispatchAction extends BaseDispatchAction {
 		BeanUtils.copyProperties(objForm, objNewForm);
 		
 		objForm.setIssuerId(issuerid);
-		objForm.setUserType(userType);
+//		objForm.setUserType(userType);
 		//objNewForm.setUserId(objForm.getUserId());
 		System.out.println("1");
 		// objNewForm.setAdminUserName((String)objManager.getUserName(objForm.getIssuerId(),
@@ -450,6 +456,30 @@ public class UserSetupDispatchAction extends BaseDispatchAction {
 		resetToken(request);
 		request.setAttribute("ACTION", "cancel");
 		return mapping.findForward("activated");
+	}
+
+	public ActionForward setRole(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		UserSetupForm ajaxForm = (UserSetupForm)form;
+	    response.setContentType("text/text;charset=utf-8");
+	    response.setHeader("cache-control", "no-cache");
+	    PrintWriter out = response.getWriter();
+	    ajaxForm.getPreListData();
+	    StringBuffer sb = new StringBuffer();
+	    sb.append("<select name=\"roleId\">");
+	    sb.append("<option value=\"\">");
+	    HashMap roleList = (HashMap) ajaxForm.getRoleList();
+	    Set set = roleList.entrySet();
+	    Iterator iterator = set.iterator();
+	    while(iterator.hasNext()) {
+	         Map.Entry mentry = (Map.Entry)iterator.next();
+	         sb.append("<option value=\""+mentry.getKey() + "\">" + mentry.getValue() + "</option>");
+	    }
+	    sb.append("</select>");
+	    out.println(sb.toString());
+	    out.flush();
+	    return null;
 	}
 
 }

@@ -6,8 +6,11 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 import org.hibernate.LockMode;
@@ -16,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.transinfo.cacis.TPlusCodes;
 import org.transinfo.cacis.TPlusException;
+import org.transinfo.cacis.common.CommonDataBean;
 import org.transinfo.cacis.common.constants.CommonCodes;
 import org.transinfo.cacis.constants.ICacisiss;
 import org.transinfo.cacis.dataacess.HibernetDAO.HibernetFactory;
@@ -25,20 +29,25 @@ import org.transinfo.cacis.dto.applicationforms.CardsRenewalDto;
 import org.transinfo.cacis.dto.applicationforms.SupplementaryFormDto;
 import org.transinfo.cacis.dto.authorization.SystemParamDto;
 import org.transinfo.cacis.dto.batchprocess.CardATMLinkDto;
+import org.transinfo.cacis.dto.batchprocess.CardApplLinkDto;
 import org.transinfo.cacis.dto.batchprocess.CardBatchDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationFormDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationProcessDto;
+import org.transinfo.cacis.dto.cardproduction.ApplicationTypeDto;
 import org.transinfo.cacis.dto.cardproduction.CardDataDto;
 import org.transinfo.cacis.dto.cardproduction.CardEmbossingDto;
 import org.transinfo.cacis.dto.cardproduction.CardsDto;
 import org.transinfo.cacis.dto.cardproduction.CustomerAccountDto;
 import org.transinfo.cacis.dto.cardproduction.CustomerLimitsDto;
 import org.transinfo.cacis.dto.cardproduction.SupplementaryCardHolderDto;
+import org.transinfo.cacis.dto.collectionmanagement.CollectionAgeingActionDto;
+import org.transinfo.cacis.dto.collectionmanagement.CollectionAgentDto;
 import org.transinfo.cacis.dto.csr.AddProductDto;
 import org.transinfo.cacis.dto.customerservice.CardActivityDto;
 import org.transinfo.cacis.dto.customerservice.CardChangeCloseDto;
 import org.transinfo.cacis.dto.customerservice.CardChangeDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.settings.BranchDto;
 import org.transinfo.cacis.dto.settings.CardProductDto;
 import org.transinfo.cacis.dto.settings.CardProductFeeDto;
 import org.transinfo.cacis.dto.settings.CustomerGroupFeeDto;
@@ -46,6 +55,7 @@ import org.transinfo.cacis.dto.transaction.CustomerFeeDto;
 import org.transinfo.cacis.dto.transaction.DebitCardFeeDto;
 import org.transinfo.cacis.dto.transaction.FeeCreditGLDto;
 import org.transinfo.cacis.dto.transaction.FeeDebitGLDto;
+import org.transinfo.cacis.dto.useraccess.CodeMasterDto;
 
 @SuppressWarnings({"unchecked","unused"})
 public class CardbatchProcessDAOImpl extends BaseDAOImpl implements
@@ -53,6 +63,36 @@ CardBatchProcessADO {
 
 	private Logger logger = Logger.getLogger(CardbatchProcessDAOImpl.class);
 
+	public Collection list(String issuerID, int pageNo, BranchDto objBranchDto, String getAll) throws TPlusException {
+
+		Collection objSearchCollection = null;
+		StringBuffer sbf = new StringBuffer();
+		try {
+
+			sbf
+			.append(" select afd.applicationId, afd.customerName, afd.idNumber, to_char(afd.updatedDate,'dd-MM-yyyy') ");
+			sbf
+			.append("from ApplicationFormDto afd where afd.applicationStatus = 1 and afd.issuerId = '"
+					+ issuerID + "'");
+				if(!getAll.equals("ALL")) {
+					sbf.append("and afd.branchId = '" + objBranchDto.getBranchId() + "' ");
+				}
+
+			objSearchCollection = getSearchList(sbf.toString(), pageNo);
+
+		} catch (Exception e) {
+			System.out
+			.println("Error while retrieving the CardbatchProcessDAOImpl list Info"
+					+ e);
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving the CardbatchProcessDAOImpl list Info"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return objSearchCollection;
+	}
+	
 	public Collection list(String issuerID, int pageNo) throws TPlusException {
 
 		Collection objSearchCollection = null;
@@ -195,7 +235,6 @@ CardBatchProcessADO {
 
 			Query qry = session.createQuery(sbf.toString());
 			objSearchCollection = (ArrayList) qry.list();
-
 			tx.commit();
 
 		} catch (Exception e) {
@@ -3303,6 +3342,377 @@ CardBatchProcessADO {
 		}
 		return objSearchCollection;
 
+	}
+
+	@Override
+	public ApplicationFormDto getApplicationForm(String applicationId)
+			throws TPlusException {
+		ApplicationFormDto objDto = null;
+		Transaction tx = null;
+
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+
+			objDto = (ApplicationFormDto) session.get(ApplicationFormDto.class, applicationId);
+
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error in CardbatchProcessDAOImpl getApplicationForm method : "
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: in CardbatchProcessDAOImpl getApplicationForm  method :"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return objDto;
+	}
+
+	@Override
+	public boolean addCardApplLink(CardApplLinkDto objCardApplLinkDto)
+			throws TPlusException {
+		boolean boolAdd = false;
+		Transaction tx = null;
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			session.save(objCardApplLinkDto);
+
+			tx.commit();
+			boolAdd = true;
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error in CardbatchProcessDAOImpl addCardApplLink method : "
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: in CardbatchProcessDAOImpl addCardApplLink  method :" + e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return boolAdd;
+	}
+
+	@Override
+	public ArrayList<CardBatchDto> getCardBatch() throws TPlusException {
+		ArrayList<CardBatchDto> objSearchCollection = null;
+		Transaction tx = null;
+		StringBuffer sbf = new StringBuffer();
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+
+			sbf.append("from CardBatchDto dto ");
+			sbf.append("where dto.status = 'N' ");
+
+			Query qry = session.createQuery(sbf.toString());
+			objSearchCollection = (ArrayList<CardBatchDto>) qry.list();
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while retrieving the CardbatchProcessDAOImpl getCardBatch Info"
+					+ e);
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving the CardbatchProcessDAOImpl getCardBatch Info"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return objSearchCollection;
+	}
+
+	@Override
+	public ArrayList<ApplicationFormDto> getApplicationFormByBatchId(
+			String batchId) throws TPlusException {
+		ArrayList<ApplicationFormDto> objSearchCollection = null;
+		Transaction tx = null;
+		StringBuffer sbf = new StringBuffer();
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+
+			sbf.append("from ApplicationFormDto dto ");
+			sbf.append("where dto.applicationId in (select ca.applicationId from CardApplLinkDto ca where ca.batchId = '" + batchId + "') ");
+
+			Query qry = session.createQuery(sbf.toString());
+			objSearchCollection = (ArrayList<ApplicationFormDto>) qry.list();
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while retrieving the CardbatchProcessDAOImpl getCardBatch Info"
+					+ e);
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving the CardbatchProcessDAOImpl getCardBatch Info"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return objSearchCollection;
+	}
+	
+	@Override
+	public CardBatchDto getCardBatchDto(String batchId)
+			throws TPlusException {
+		CardBatchDto objCardBatchDto = null;
+		Transaction tx = null;
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+
+			objCardBatchDto = (CardBatchDto) session.get(CardBatchDto.class, batchId);
+
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error in CardbatchProcessDAOImpl getCardBatchDto method : "
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: in CardbatchProcessDAOImpl getCardBatchDto  method :"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return objCardBatchDto;
+	}
+
+	@Override
+	public String getUserType(String userId) throws TPlusException {
+		String userType = null;
+		StringBuffer sbf = new StringBuffer();
+		Transaction tx = null;
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+
+			sbf.append("select u.userType ");
+			sbf.append("from UserMasterDto u ");
+			sbf.append("where u.id.userId = '" + userId + "' ");
+
+			Query qry = session.createQuery(sbf.toString());
+			List recList = qry.list();
+
+			if (recList.size() > 0) {
+				userType = (String) recList.get(0);
+			}
+
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while retrieving the CardbatchProcessDAOImpl getUserType Info"
+					+ e);
+			throw new TPlusException(
+					TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving the CardbatchProcessDAOImpl getUserType Info"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return userType;
+	}
+
+	@Override
+	public Map getApplTypleList() throws TPlusException {
+		Map applTypeList = new LinkedHashMap();
+		Transaction tx = null;
+
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			Query qry = session
+					.createQuery("from ApplicationTypeDto dto ");
+
+			List applicationType = qry.list();
+
+			for (Iterator it = applicationType.iterator(); it.hasNext();) {
+				ApplicationTypeDto objDto = new ApplicationTypeDto();
+				objDto = (ApplicationTypeDto) it.next();
+				applTypeList.put(objDto.getApplicationTypeId(),
+						objDto.getDescription());
+			}
+
+			tx.commit();
+
+		} catch (Exception e) {
+
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.error(e);
+			System.out
+					.println("while retrieving getApplTypleList "
+							+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving getApplTypleList "
+							+ e);
+
+		} finally {
+
+			HibernetFactory.closeSession();
+		}
+
+		return applTypeList;
+	}
+
+	@Override
+	public Map getCardBatchStatusList() throws TPlusException {
+		Map cardBatchStatusList = new LinkedHashMap();
+		Transaction tx = null;
+
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			Query qry = session
+					.createQuery("from CodeMasterDto dto where dto.id.groupId = 'BATCH_STATUS' ");
+
+			List agentList = qry.list();
+
+			for (Iterator it = agentList.iterator(); it.hasNext();) {
+				CodeMasterDto objDto = new CodeMasterDto();
+				objDto = (CodeMasterDto) it.next();
+				cardBatchStatusList.put(objDto.getId().getCodeId(),
+						objDto.getCodeDesc());
+			}
+
+			tx.commit();
+
+		} catch (Exception e) {
+
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.error(e);
+			System.out
+					.println("while retrieving getCardBatchStatusList "
+							+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving getCardBatchStatusList "
+							+ e);
+
+		} finally {
+
+			HibernetFactory.closeSession();
+		}
+
+		return cardBatchStatusList;
+	}
+
+	@Override
+	public String getApplicationType(int applicationType) throws TPlusException {
+		String description = null;
+		StringBuffer sbf = new StringBuffer();
+		Transaction tx = null;
+		ApplicationTypeDto objDto = null;
+		
+		try {
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			
+			
+			objDto = (ApplicationTypeDto) session.get(
+					ApplicationTypeDto.class, applicationType);
+
+			description = objDto.getDescription();
+
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.out
+			.println("Error while retrieving the CardbatchProcessDAOImpl getApplicationType Info"
+					+ e);
+			throw new TPlusException(
+					TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving the CardbatchProcessDAOImpl getApplicationType Info"
+							+ e);
+		} finally {
+			HibernetFactory.closeSession();
+		}
+		return description;
+	}
+
+	@Override
+	public Map getBranch(BranchDto objBranchDto, String getAll)
+			throws TPlusException {
+		Map branchList = new LinkedHashMap();
+		Transaction tx = null;
+		StringBuffer sb = new StringBuffer();
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			if(getAll.equals("ALL")) {
+				sb.append("from BranchDto order by branchName ");
+			} else {
+				if(objBranchDto.getAccessAllBranch().equals("Y")) {
+					sb.append("from BranchDto order by branchName ");
+				} else {
+					sb.append("from BranchDto where branchId='" + objBranchDto.getBranchId() + "' order by branchName ");
+				}
+			}
+			
+			Query qry = session.createQuery(sb.toString());
+
+			List agentList = qry.list();
+
+			for (Iterator it = agentList.iterator(); it.hasNext();) {
+				BranchDto objDto = new BranchDto();
+				objDto = (BranchDto) it.next();
+				branchList.put(objDto.getBranchId(), objDto.getBranchName());
+			}
+
+			tx.commit();
+
+		} catch (Exception e) {
+
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.error(e);
+			System.out
+					.println("while retrieving getBranch in BaseDAOIMpl "
+							+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving getBranch in BaseDAOIMpl "
+							+ e);
+
+		} finally {
+
+			HibernetFactory.closeSession();
+		}
+
+		return branchList;
 	}
 
 }

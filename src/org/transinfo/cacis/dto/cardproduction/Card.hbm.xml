@@ -161,7 +161,7 @@
 		</property>
 
 		<property name="icvv" type="string">
-			<column name="ICVV" sql-type="varchar2(4)" not-null="true" />
+			<column name="ICVV" sql-type="varchar2(4)" not-null="false" />
 		</property>
 
 		<property name="lastStatementId" type="string">
@@ -190,6 +190,14 @@
 
 		<property name="encryptedCardNo" type="string">
 			<column name="ENCRYPTED_CARD_NO" sql-type="varchar2(100)" not-null="true" />
+		</property>
+		
+		<property name="batchId" type="string">
+			<column name="BATCH_ID" sql-type="varchar2(30)" not-null="false" />
+		</property>
+		
+		<property name="corporateId" type="string">
+			<column name="CORPORATE_ID" sql-type="varchar2(20)" not-null="false" />
 		</property>
 
 	</class>

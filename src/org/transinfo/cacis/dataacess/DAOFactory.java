@@ -31,6 +31,11 @@ import org.transinfo.cacis.dataacess.dao.cardproduction.CardDeliverDAO;
 import org.transinfo.cacis.dataacess.dao.cardproduction.CardEmbossingDAO;
 import org.transinfo.cacis.dataacess.dao.cardproduction.CreditScoringDAO;
 import org.transinfo.cacis.dataacess.dao.cardproduction.PinPrintingDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAccountDetailsDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgeingActionDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgeingDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionAgentDAO;
+import org.transinfo.cacis.dataacess.dao.collectionmanagement.CollectionConfigDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyFeeSetupDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyNotificationSetupDAO;
 import org.transinfo.cacis.dataacess.dao.collectionmanagement.DelinquencyPolicyDAO;
@@ -58,6 +63,8 @@ import org.transinfo.cacis.dataacess.dao.disputemanagement.StatisticReportsDAO;
 import org.transinfo.cacis.dataacess.dao.disputemanagement.WorkItemDAO;
 import org.transinfo.cacis.dataacess.dao.excell.UploadDAO;
 import org.transinfo.cacis.dataacess.dao.help.HelpDAO;
+import org.transinfo.cacis.dataacess.dao.inventory.InventoryManagementDAO;
+import org.transinfo.cacis.dataacess.dao.inventory.InventoryMasterDAO;
 import org.transinfo.cacis.dataacess.dao.key.KeyIndexDAO;
 import org.transinfo.cacis.dataacess.dao.letters.ApplicationProcessSearchDAO;
 import org.transinfo.cacis.dataacess.dao.letters.ChLetterHistDAO;
@@ -103,6 +110,7 @@ import org.transinfo.cacis.dataacess.dao.settings.SalaryProfileDAO;
 import org.transinfo.cacis.dataacess.dao.switching.SwitchDAO;
 import org.transinfo.cacis.dataacess.dao.transaction.TransactionDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.AdminLoginDAO;
+import org.transinfo.cacis.dataacess.dao.useraccess.AssignUserDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.PasswordChangeDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.RoleFunctionSetupDAO;
 import org.transinfo.cacis.dataacess.dao.useraccess.UserSetupDAO;
@@ -204,6 +212,7 @@ public abstract class DAOFactory {
     public abstract LicenseMasterDAO getLicenseMasterDAO(); 
     public abstract PasswordChangeDAO getPasswordChangeDAO();
     public abstract UserSetupDAO getUserSetupDAO();
+    public abstract AssignUserDAO getAssignUserDAO();
     public abstract UserActivitiesDAO getUserActivitiesDAO();
     public abstract ErrorlogDAO getErrorlogDAO();
     public abstract RoleFunctionSetupDAO getRoleFunctionSetupDAO();
@@ -280,7 +289,16 @@ public abstract class DAOFactory {
     public abstract DelinquencyPolicyDAO getDelinquencyPolicyDAO();
     public abstract DelinquencyFeeSetupDAO getDelinquencyFeeSetupDAO();
     public abstract DelinquencyNotificationSetupDAO getDelinquencyNotificationSetupDAO();
+    public abstract CollectionConfigDAO getCollectionConfigDAO();
+    public abstract CollectionAgentDAO getCollectionAgentDAO();
+    public abstract CollectionAgeingDAO getCollectionAgeingDAO();
+    public abstract CollectionAgeingActionDAO getCollectionAgeingActionDAO();
+    public abstract CollectionAccountDetailsDAO getCollectionAccountDetailsDAO();
 
+    //Inventory
+    public abstract InventoryMasterDAO getInventoryMasterDAO();
+    public abstract InventoryManagementDAO getInventoryManagementDAO();
+    
     public static void setCtxt(ServletContext ctxt){
 
             servletCtxt = ctxt;

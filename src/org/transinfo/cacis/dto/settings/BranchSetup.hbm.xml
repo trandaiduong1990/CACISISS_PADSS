@@ -57,6 +57,10 @@
 		<property   name="contactEmail"  type ="string" >
 		   <column name = "EMAIL" sql-type ="varchar2(30)" not-null = "true"/>
 		</property>
+		
+		<property   name="accessAllBranch"  type ="string" >
+		   <column name = "ACCESS_ALL_BRANCH" sql-type ="varchar2(1)" not-null = "false"/>
+		</property>
 
         <property   name="status"  type ="string" >
           <column name = "STATUS" sql-type ="varchar2(2)" not-null = "true"/>

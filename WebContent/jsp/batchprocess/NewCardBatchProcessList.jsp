@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="inc/css/style.css" type="text/css">
 </head>
 <script src="inc/js/cacis.js"></script>
+<script src="inc/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     function batchProcess(method) {
         //alert('test');
@@ -26,18 +27,28 @@
 	   		document.forms[0].submit();
 	   	  }
       }
-
+    
+    $(document).ready(function() {
+		$("#checkall").on("change", function() {
+			$(".appIDCheckbox").prop("checked", this.checked);
+		});
+	});
+	
+    function batchAuthorized() {
+	    var applIdArray = "";
+    	$('.appIDCheckbox:checked').each(function() {
+    		applIdArray += $(this).val() + ",";
+        });
+    	document.forms[0].applIdArray.value = applIdArray;
+    	document.forms[0].action="newcardbatchprocess.do?method=authorized";
+   		document.forms[0].submit();
+    }
+    
     function go(param) {
         document.forms[0].action="newcardbatchprocess.do?method=List";
         document.getElementById("mode").value = param; 
 		document.forms[0].submit();
      }
-
-    function onLoad(){
-        //alert('test');
-    	document.getElementById("authUserId").value = ""; 
-    	document.getElementById("authPassword").value = ""; 
-    }
 
     <% String servletPath = request.getContextPath(); %>
 
@@ -46,9 +57,14 @@
         //parent.window.location.replace("/Cacisiss/adminloginsetup.do");
         window.parent.parent.location.replace('<%=servletPath%>'+'/adminloginsetup.do');
     }
+    
+    function branchChange(event) {
+    	document.forms[0].action="newcardbatchprocess.do?method=changeBranch";
+   		document.forms[0].submit();
+    }
 </script>
 
-<body bgcolor="ffffff" onload="onLoad()">
+<body bgcolor="ffffff">
 <html:form action ="newcardbatchprocess.do">
 
 <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>"/>
@@ -56,6 +72,9 @@
 
 <bean:define id="batId" name="newCardBatchprocessFrom" property="batchId"/>
 <html:hidden property="batchId" value="<%=(String)batId%>"/>
+
+<bean:define id="applIdArray" name="newCardBatchprocessFrom" property="applIdArray"/>
+<html:hidden property="applIdArray" value="<%=(String)applIdArray%>"/>
 
 <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
   <tr>
@@ -75,7 +94,7 @@
                 <logic:present name="newCardBatchprocessFrom" property="appList"> 
 					<bean:size id="size" name="newCardBatchprocessFrom" property="appList"/>
 					<logic:greaterThan name="size" value="0" >
-	                	<html:button property="process" onclick ="batchProcess('process')"><bean:message key ="common.process"/></html:button>
+	                	<html:button property="authorized" onclick ="batchAuthorized()"><bean:message key ="common.authorized"/></html:button>
 	                </logic:greaterThan>
                 </logic:present>
                 </td>
@@ -89,9 +108,9 @@
       </table>
     </td>
   </tr>
-<logic:present name="newCardBatchprocessFrom" property="appList"> 
+<%-- <logic:present name="newCardBatchprocessFrom" property="appList"> 
 <bean:size id="size" name="newCardBatchprocessFrom" property="appList"/>
-<logic:greaterThan name="size" value="0" >
+<logic:greaterThan name="size" value="0" > --%>
   <tr>
     <td valign="top">
      <br>
@@ -99,43 +118,76 @@
         <tr>
           <td valign="top" class="ErrFONT"><font color="#FF0000"><html:errors /></font></td>
         </tr>
+        
         <tr>
-          <td valign="top">
-          	<table>
-          		<tr>
-          			<td>
-          				<bean:message key ="cardbatcprocess.batchId"/>
-          			</td>
-          			<td>
-          				&nbsp;&nbsp;:
-          			</td>
-          			<td>
-          				<bean:write name ="newCardBatchprocessFrom" property="batchId" />
-          			</td>
-          		</tr>
-          		<tr>
-          			<td>
-          				<bean:message key ="cardbatcprocess.noofapplicarion"/>
-          			</td>
-          			<td>
-          				&nbsp;&nbsp;:
-          			</td>
-          			<td>
-          				<bean:write name ="newCardBatchprocessFrom" property="totalNoOfApps" />
-          			</td>
-          		</tr>
-          	</table>
-          </td>
+        	<td><table>
+        		<tr>
+        			<td class="ColumnFONT" nowrap>Branch</td>
+        			<td width="15px"></td>
+        			<td>
+        			<logic:present name="newCardBatchprocessFrom" property="branchList"> 
+        			<bean:size id="size" name="newCardBatchprocessFrom" property="branchList"/>
+					<logic:greaterThan name="size" value="1" > 
+					<%-- <logic:greaterThan name="newCardBatchprocessFrom" property="branchList" value="2" > --%>
+        				<html:select property="branchId" onchange="branchChange(this)">
+                               <option value=""></option>
+                                <html:optionsCollection property="branchList" value="key" label="value" />
+	                                </html:select> 
+	                 </logic:greaterThan>
+	                 <logic:equal name="size" value="1" >
+        				<html:select property="branchId" disabled="true">
+                                <html:optionsCollection property="branchList" value="key" label="value" />
+	                                </html:select> 
+	                                </logic:equal>
+	                                </logic:present>
+        			</td>
+        		</tr>
+        	</table></td>
         </tr>
         <tr>
           <td valign="top">
 		  	<%@ include file="/jsp/common/Buttons.jsp" %>
 		  </td>
         </tr>
-        <tr> 
+        <tr>
+        	<td>
+        		<logic:present name="newCardBatchprocessFrom" property="appList"> 
+        			<bean:size id="size" name="newCardBatchprocessFrom" property="appList"/>
+					<logic:greaterThan name="size" value="0" > 
+					<%-- <logic:greaterThan name="newCardBatchprocessFrom" property="appList" value="0" > --%>
+						<table border="0" cellpadding="2" cellspacing="2" width="60%" class="simple">
+							<caption><font class="titreSection">New Cards Batch Process Records</font></caption>
+							<thead>
+								<tr>
+								<th align="center" width="28"><input type="checkbox" id="checkall" ></th>
+								<th align="left">Application Id</th>
+								<th align="left">Customer Name</th>
+								<th align="left">NRIC</th>
+								<th align="left">Updated Date</th></tr></thead>
+						<tbody>
+						<logic:iterate id ="appProcess" name="newCardBatchprocessFrom" property ="appList">
+	                        					<tr class="odd">
+	                        						<td class="label" align="center"><input type="checkbox" class="appIDCheckbox" name="appProcess"
+	                        							 value="<%= ((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn1()%>" ></td>
+		                        					<td class="label"><bean:write name ="appProcess"  property="column1" /></td>
+		                        					<td class="label"><bean:write name ="appProcess"  property="column2" /></td>
+		                        					<td class="label"><bean:write name ="appProcess"  property="column3" /></td>
+		                        					<td class="label"><bean:write name ="appProcess"  property="column4" /></td>
+		                        				</tr>
+		                        			</logic:iterate>
+		                        			</tbody>
+		                        			</table>
+	                </logic:greaterThan>
+                </logic:present>
+            </td>
+        </tr>
+        <%-- <tr> 
           <td valign="top">
 			
 			   <display:table  id="appProcess" name="newCardBatchprocessFrom" property="appList" class="simple" width="80%">
+				   <display:column class="label"  >
+				   		<input type="checkbox" class="appIDCheckbox" name="appId" value="<%= ((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn1()%>" >
+				   </display:column>
 				   <display:column property="column1" title="Application Id" class="label" />
 				   <display:column property="column2" title="Customer Name" class="label" />
 				   <display:column property="column3" title="NRIC" class="label" />
@@ -143,11 +195,11 @@
 				   <display:caption><font class="titreSection">New Cards Batch Process Records</font></display:caption>
 			   </display:table>
      	  </td>
-        </tr>
+        </tr> --%>
   		<tr> 
      		<td valign="top">&nbsp;</td>
   		</tr>
-  		<tr> 
+  		<%-- <tr> 
           <td colspan="1">
           		<table cellspacing=0 cellpadding=0 border=0>
                 <tbody>
@@ -196,11 +248,11 @@
                  </tbody>
                </table>
            </td>
-         </tr>
+         </tr> --%>
 	</table>
    </td>
   </tr>
-</logic:greaterThan>
+<%-- </logic:greaterThan>
 <logic:lessEqual name="size" value="0">
 	<tr>
 		<td valign="top">
@@ -214,7 +266,7 @@
 		</td>
 	</tr>
 </logic:lessEqual>
-</logic:present>
+</logic:present> --%>
 </table>
 
 </html:form> 

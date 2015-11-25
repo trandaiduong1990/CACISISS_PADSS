@@ -170,7 +170,7 @@ document.forms[0].submit();
                     </table></td>
                   </tr> 
                     <tr>
-		      <html:hidden property="userType"/>
+		      <%-- <html:hidden property="userType"/> --%>
                     </tr>
                     <tr>
                       <td class="desc_cell" nowrap width="132"><b><bean:message key ="rolefunctionsetup.roleid"/></b></td>
@@ -181,7 +181,17 @@ document.forms[0].submit();
                       <td class="desc_cell" nowrap><b><bean:message key ="rolefunctionsetup.description"/></b></td>
                       <td valign="top"><html:text property="roleDesc" size="20"/></td>
                       <td>&nbsp;</td>
-                    </tr>                    
+                    </tr> 
+                    <tr>
+                      <td class="desc_cell" nowrap><b><bean:message key ="rolefunctionsetup.usertype"/></b></td>
+                      <td valign="top">
+                         <html:select property="userType">
+                          <html:option value=""></html:option>
+                          <html:optionsCollection property="userTypeList" value="key" label="value" />
+                        </html:select>
+                      </td>
+                      <td>&nbsp;</td>
+                    </tr>                   
                     <tr>
                       <td class="desc_cell" nowrap><b><bean:message key ="rolefunctionsetup.status"/></b></td>
                       <td valign="top">

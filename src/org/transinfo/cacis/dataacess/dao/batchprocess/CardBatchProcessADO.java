@@ -2,11 +2,13 @@ package org.transinfo.cacis.dataacess.dao.batchprocess;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.transinfo.cacis.TPlusException;
 import org.transinfo.cacis.dataacess.dao.BaseDAO;
 import org.transinfo.cacis.dto.applicationforms.CardsRenewalDto;
 import org.transinfo.cacis.dto.applicationforms.SupplementaryFormDto;
+import org.transinfo.cacis.dto.batchprocess.CardApplLinkDto;
 import org.transinfo.cacis.dto.batchprocess.CardBatchDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationFormDto;
 import org.transinfo.cacis.dto.cardproduction.ApplicationProcessDto;
@@ -15,12 +17,13 @@ import org.transinfo.cacis.dto.cardproduction.SupplementaryCardHolderDto;
 import org.transinfo.cacis.dto.csr.AddProductDto;
 import org.transinfo.cacis.dto.customerservice.CardChangeDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.settings.BranchDto;
 import org.transinfo.cacis.dto.settings.CustomerGroupFeeDto;
 
 @SuppressWarnings("unchecked")
 public interface CardBatchProcessADO extends BaseDAO {
 
-	public Collection list(String issuerId, int pageNo) throws TPlusException;
+	public Collection list(String issuerId, int pageNo, BranchDto objBranchDto, String getAll) throws TPlusException;
 
 	public Collection listNewProduct(String issuerId, int pageNo) throws TPlusException;
 
@@ -130,4 +133,27 @@ public interface CardBatchProcessADO extends BaseDAO {
 
 	public CustomerGroupFeeDto getCustomerGF(String cardProductId, String custType)
 	throws TPlusException;
+
+	public ApplicationFormDto getApplicationForm(String applicationId) throws TPlusException;
+
+	public boolean addCardApplLink(CardApplLinkDto objCardApplLinkDto)throws TPlusException;
+
+	public ArrayList<CardBatchDto> getCardBatch()throws TPlusException;
+
+	public ArrayList<ApplicationFormDto> getApplicationFormByBatchId(String batchId)throws TPlusException;
+
+	public CardBatchDto getCardBatchDto(String batchId)throws TPlusException;
+
+	public String getUserType(String userId) throws TPlusException;
+
+	public Map getApplTypleList() throws TPlusException;
+
+	public Map getCardBatchStatusList() throws TPlusException;
+
+	public String getApplicationType(int applicationType) throws TPlusException;
+
+	public Map getBranch(BranchDto objBranchDto, String getAll)throws TPlusException;
+
+	public Collection list(String issuerId, int pageNo)throws TPlusException;;
+
 }

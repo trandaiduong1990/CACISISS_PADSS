@@ -20,7 +20,8 @@ public class CommonCodes {
 	public static final int APPLICATIONSTATUS_CLOSED = 3;
 	public static final int APPLICATIONSTATUS_ACCEPTED_PROCESSED = 4;
 	public static final int APPLICATIONSTATUS_PENDING = 5;
-
+	public static final int APPLICATIONSTATUS_AUTHORIZED = 6;
+	
 	// CardStatus Codes
 	public static final int CARD_ACTIVE = 0;
 	public static final int CARD_NEW = 1;
@@ -116,6 +117,7 @@ public class CommonCodes {
 	// Card Batch Status
 	public static final String BATCH_COMPLETED = "C";
 	public static final String BATCH_COMPLETED_PARTIAl = "P";
+	public static final String BATCH_NEW = "N";
 	
 	// Replacement log flag
 	public static final char LOG_OLD_NO_INSERTED = '0';

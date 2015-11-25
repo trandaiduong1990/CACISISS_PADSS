@@ -78,10 +78,12 @@
          <mapping resource="org/transinfo/cacis/dto/cardproduction/State.hbm.xml"/>
          <mapping resource="org/transinfo/cacis/dto/cardproduction/City.hbm.xml"/>
          <mapping resource="org/transinfo/cacis/dto/cardproduction/Township.hbm.xml"/>
+         <mapping resource="org/transinfo/cacis/dto/cardproduction/ApplicationType.hbm.xml"/>
          
 			<!-- Card Batch mapping files -->
          <mapping resource="org/transinfo/cacis/dto/batchprocess/CardBatch.hbm.xml"/>
          <mapping resource="org/transinfo/cacis/dto/batchprocess/CardATMLink.hbm.xml"/>
+         <mapping resource="org/transinfo/cacis/dto/batchprocess/CardApplLink.hbm.xml"/>
           
             <!-- Application Forms mapping files -->
          <mapping resource="org/transinfo/cacis/dto/applicationforms/SupplementaryForm.hbm.xml"/>
@@ -195,6 +197,8 @@
 	      <!-- UserSetup mapping file -->
 	     <mapping resource="org/transinfo/cacis/dto/useraccess/RoleMaster.hbm.xml"/> 
          <mapping resource="org/transinfo/cacis/dto/useraccess/CodeMaster.hbm.xml"/>                           
+         <mapping resource="org/transinfo/cacis/dto/useraccess/AssignUser.hbm.xml"/>                           
+         <mapping resource="org/transinfo/cacis/dto/useraccess/UserLevel.hbm.xml"/>                           
          
          <!-- Role Function Setup mapping files -->
          <mapping resource="org/transinfo/cacis/dto/useraccess/FunctionSetMaster.hbm.xml"/>                           
@@ -270,7 +274,16 @@
     	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/DelinquencyPolicy.hbm.xml"/>
     	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/DelinquencyFeeSetup.hbm.xml"/>
     	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/DelinquencyNotificationSetup.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/CollectionConfig.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/CollectionAgent.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/CollectionAgeing.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/CollectionAgeingAction.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/collectionmanagement/Collection.hbm.xml"/>
     
+    	<!-- Inventory -->
+    	<mapping resource="org/transinfo/cacis/dto/inventory/InventoryMaster.hbm.xml"/>
+    	<mapping resource="org/transinfo/cacis/dto/inventory/InventoryManagement.hbm.xml"/>
+    	
     </session-factory>
 
 </hibernate-configuration>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.inventory">
+
+	<class name="InventoryManagementDto" table="INVENTORY_MANAGEMENT">
+		<id name="orderNo" type="string">
+			<column name="ORDER_NO" sql-type="varchar2(10)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="authorizedBy" type="string">
+			<column name="AUTHORIZED_BY" sql-type="varchar2(20)"
+				not-null="false" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="false" />
+		</property>
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="authorizedDate" type="timestamp">
+			<column name="AUTHORIZED_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="batchId" type="string">
+			<column name="BATCH_ID" sql-type="varchar2(20)"
+				not-null="false" />
+		</property>
+		<property name="branchId" type="string">
+			<column name="BRANCH_ID" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="canceledBy" type="string">
+			<column name="CANCELED_BY" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="canceledDate" type="timestamp">
+			<column name="CANCELED_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="cardproductId" type="string">
+			<column name="CARDPRODUCT_ID" sql-type="varchar2(6)" not-null="true" />
+		</property>
+		<property name="cardrangeFrom" type="string">
+			<column name="CARDRANGE_FROM" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="cardrangeTo" type="string">
+			<column name="CARDRANGE_TO" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="dispatchBy" type="string">
+			<column name="DISPATCH_BY" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="deliveryDate" type="timestamp">
+			<column name="DELIVERY_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="dispatchDate" type="timestamp">
+			<column name="DISPATCH_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="dispatchNote" type="string">
+			<column name="DISPATCH_NOTE" sql-type="varchar2(100)" not-null="false" />
+		</property>
+		<property name="otherShip" type="string">
+			<column name="OTHER_SHIP" sql-type="varchar2(32)" not-null="false" />
+		</property>
+		<property name="orderBy" type="string">
+			<column name="ORDER_BY" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="orderDate" type="timestamp">
+			<column name="ORDER_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="orderExpected" type="timestamp">
+			<column name="ORDER_EXPECTED" sql-type="Date" not-null="false" />
+		</property>
+		<property name="orderNote" type="string">
+			<column name="ORDER_NOTE" sql-type="varchar2(100)" not-null="false" />
+		</property>
+		<property name="orderQty" type="integer">
+			<column name="ORDER_QTY" sql-type="number" not-null="true" />
+		</property>
+		<property name="receivedBy" type="string">
+			<column name="RECEIVED_BY" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		<property name="receivedDate" type="timestamp">
+			<column name="RECEIVED_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="receivedNote" type="string">
+			<column name="RECEIVED_NOTE" sql-type="varchar2(100)" not-null="false" />
+		</property>
+		<property name="receivedQty" type="integer">
+			<column name="RECEIVED_QTY" sql-type="number" not-null="false" />
+		</property>
+		<property name="returnQty" type="integer">
+			<column name="RETURN_QTY" sql-type="number" not-null="false" />
+		</property>
+		<property name="returnBy" type="string">
+			<column name="RETURN_BY" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+		<property name="returnDate" type="timestamp">
+			<column name="RETURN_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="returnNote" type="string">
+			<column name="RETURN_NOTE" sql-type="varchar2(100)" not-null="false" />
+		</property>
+		<property name="shipBy" type="string">
+			<column name="SHIP_BY" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="false" />
+		</property>
+		<property name="trackingNo" type="string">
+			<column name="TRACKING_NO" sql-type="varchar2(20)" not-null="false" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

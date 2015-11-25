@@ -5,9 +5,11 @@ import java.util.Collection;
 import org.transinfo.cacis.TPlusException;
 import org.transinfo.cacis.dataacess.DAOFactory;
 import org.transinfo.cacis.dataacess.dao.customerservice.CardReplacementDAO;
+import org.transinfo.cacis.dto.cardproduction.CardsDto;
 import org.transinfo.cacis.dto.customerservice.CardCloseDto;
 import org.transinfo.cacis.dto.customerservice.CardLimitAdjustmentDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.customerservice.CardReplacementLogDto;
 import org.transinfo.cacis.dto.customerservice.CardStatusRemarksDto;
 import org.transinfo.cacis.dto.customerservice.CreditSplitDto;
 import org.transinfo.cacis.dto.customerservice.PinResendDto;
@@ -653,5 +655,42 @@ public class CardReplacementManager {
 		}
 		return searchRes;
 
+	}
+
+	public boolean updateReplacementCard(CardsDto objCardsDto) throws TPlusException {
+		boolean update = true;
+		try {
+			update = objDAO.updateReplacementCard(objCardsDto);
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardReplacementManager updateReplacementCard mehod:" + e);
+		}
+
+		return update;
+	}
+
+	public boolean insertReplacementLog(
+			CardReplacementLogDto objCardReplacementLogDto) throws TPlusException {
+		boolean insert = true;
+		try {
+			insert = objDAO.insertReplacementLog(objCardReplacementLogDto);
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardReplacementManager insertReplacementLog mehod:" + e);
+		}
+
+		return insert;
+	}
+
+	public boolean updateCardReplacementForm(CardReplacementDto objCardRepDto) throws TPlusException {
+		boolean update = true;
+		try {
+			update = objDAO.updateCardReplacementForm(objCardRepDto);
+		} catch (Exception e) {
+			throw new TPlusException(
+					"Error in CardReplacementManager updateCardReplacementForm mehod:" + e);
+		}
+
+		return update;
 	}
 }

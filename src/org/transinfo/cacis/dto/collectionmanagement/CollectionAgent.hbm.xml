@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.collectionmanagement">
+
+	<class name="CollectionAgentDto" table="COLLECTION_AGENT">
+		<id name="agentId" type="string">
+			<column name="AGENT_ID" sql-type="varchar2(8)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="issuerId" type="string">
+			<column name="ISSUER_ID" sql-type="varchar2(12)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(20)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="date">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="agentName" type="string">
+			<column name="AGENT_NAME" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="address1" type="string">
+			<column name="ADDRESS1" sql-type="varchar2(30)" not-null="true" />
+		</property>
+		<property name="address2" type="string">
+			<column name="ADDRESS2" sql-type="varchar2(30)" not-null="true" />
+		</property>
+		<property name="address3" type="string">
+			<column name="ADDRESS3" sql-type="varchar2(30)" not-null="false" />
+		</property>
+		<property name="phoneNo" type="string">
+			<column name="PHONE_NO" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="emailId" type="string">
+			<column name="EMAIL_ID" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="contactName" type="string">
+			<column name="CONTACT_NAME" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="contactPhoneNo" type="string">
+			<column name="CONTACT_PHONENO" sql-type="varchar2(20)" not-null="true" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="varchar2(1)" not-null="true" />
+		</property>
+		<property name="agentType" type="string">
+			<column name="AGENT_TYPE" sql-type="varchar2(20)" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

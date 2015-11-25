@@ -4,9 +4,11 @@ import java.util.Collection;
 
 import org.transinfo.cacis.TPlusException;
 import org.transinfo.cacis.dataacess.dao.BaseDAO;
+import org.transinfo.cacis.dto.cardproduction.CardsDto;
 import org.transinfo.cacis.dto.customerservice.CardCloseDto;
 import org.transinfo.cacis.dto.customerservice.CardLimitAdjustmentDto;
 import org.transinfo.cacis.dto.customerservice.CardReplacementDto;
+import org.transinfo.cacis.dto.customerservice.CardReplacementLogDto;
 import org.transinfo.cacis.dto.customerservice.CardStatusRemarksDto;
 import org.transinfo.cacis.dto.customerservice.CreditSplitDto;
 import org.transinfo.cacis.dto.customerservice.PinResendDto;
@@ -119,5 +121,12 @@ public interface CardReplacementDAO extends BaseDAO {
 
 	public CardReplacementDto getOpenReplacementFormSubmission(String cardNo)
 			throws TPlusException;
+
+	public boolean updateReplacementCard(CardsDto objCardsDto) throws TPlusException;
+
+	public boolean insertReplacementLog(
+			CardReplacementLogDto objCardReplacementLogDto) throws TPlusException;
+
+	public boolean updateCardReplacementForm(CardReplacementDto objCardRepDto) throws TPlusException;
 
 }

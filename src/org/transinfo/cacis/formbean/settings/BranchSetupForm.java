@@ -28,6 +28,7 @@ public class BranchSetupForm extends  ValidatorForm{
 	 private String  contactPerson;
 	 private String  contactEmail;
 	 private String  userId;
+	 private String  accessAllBranch="N";
 	
 	  private Map countryList;
 	  private Map statusList;
@@ -163,7 +164,15 @@ public class BranchSetupForm extends  ValidatorForm{
 		this.status = status;
 	}
 	
-	 // Reset form fields.
+	 public String getAccessAllBranch() {
+		return accessAllBranch;
+	}
+
+	public void setAccessAllBranch(String accessAllBranch) {
+		this.accessAllBranch = accessAllBranch;
+	}
+
+	// Reset form fields.
 	  public void reset(ActionMapping mapping, HttpServletRequest request)
 		  {
 		      branchId =null;

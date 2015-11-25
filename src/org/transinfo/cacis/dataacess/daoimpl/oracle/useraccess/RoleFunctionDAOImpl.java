@@ -34,7 +34,7 @@ public class RoleFunctionDAOImpl extends BaseDAOImpl implements RoleFunctionSetu
 
 			System.out.println("UserTYPE="+objSearchDto.getUserType()+" issuerId "+objSearchDto.id.getIssuerId());
 
-			sbf.append("select rm.id.roleId, rm.roleDesc,  rm.status, to_char(rm.updatedDate,'dd-MM-yyyy') ");
+			sbf.append("select rm.id.roleId, rm.roleDesc,  rm.status, to_char(rm.updatedDate,'dd-MM-yyyy'), rm.userType ");
 			sbf.append(" FROM  RoleMasterDto rm ");
 
 			if (objSearchDto.id.getIssuerId()!= null && !objSearchDto.id.getIssuerId().equals(""))
@@ -229,8 +229,11 @@ public class RoleFunctionDAOImpl extends BaseDAOImpl implements RoleFunctionSetu
 	        try{
 
                     sbf.append("select fm.id.functionId, fm.functionDesc From FunctionSetMasterDto fm, PermissionMatrixDto pm ");
-                    sbf.append(" where pm.id.userType = '"+userType+"' and pm.id.screenAccessible = fm.id.screenId ");
-
+                    sbf.append(" where pm.id.screenAccessible = fm.id.screenId ");
+                    
+                    if(userType != null && !userType.equals("")) {
+                    	 sbf.append(" and pm.id.userType = '"+userType+"' ");
+                    }
                     if(roleId !=null && !roleId.equals(""))
 		    		{
 						sbf.append(" and fm.id.functionId ");

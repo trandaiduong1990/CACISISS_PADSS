@@ -129,6 +129,8 @@
 			type="org.transinfo.cacis.formbean.batchprocess.CardBatchSearchForm" />
 		<form-bean name="cardBatchForm"
 			type="org.transinfo.cacis.formbean.batchprocess.CardBatchForm" />
+		<form-bean name="batchProcessFrom"
+			type="org.transinfo.cacis.formbean.batchprocess.BatchProcessForm" />
 
 		<!-- ################## CustomerService ####################### -->
 
@@ -358,6 +360,11 @@
 		<form-bean name="roleFunctionSetupForm"
 			type="org.transinfo.cacis.formbean.useraccess.RoleFunctionSetupForm" />
 
+		<form-bean name="assignUserForm1"
+			type="org.transinfo.cacis.formbean.useraccess.AssignUserForm" />
+		
+		<form-bean name="assignUserForm"
+			type="org.transinfo.cacis.formbean.useraccess.AssignUserForm" />
 
 		<form-bean name="userActivitiesSearchForm"
 			type="org.transinfo.cacis.formbean.log.UserActivitiesSearchForm" />
@@ -483,7 +490,35 @@
 			type="org.transinfo.cacis.formbean.collectionmanagement.DelinquencyNotificationSetupForm" />
 		<form-bean name="delinquencyNotificationSearchForm"
 			type="org.transinfo.cacis.formbean.collectionmanagement.DelinquencyNotificationSearchForm" />
-
+		<form-bean name="collectionConfigForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionConfigForm" />
+		<form-bean name="collectionAgentSearchForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAgentSearchForm" />
+		<form-bean name="collectionAgentSetupForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAgentSetupForm" />
+		<form-bean name="collectionAgeingSetupForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAgeingSetupForm" />
+		<form-bean name="collectionAgeingActionSearchForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAgeingActionSearchForm" />
+		<form-bean name="collectionAgeingActionSetupForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAgeingActionSetupForm" />
+		<form-bean name="collectionAccountDetailsSearchForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAccountDetailsSearchForm" />
+		<form-bean name="collectionAccountDetailsSetupForm"
+			type="org.transinfo.cacis.formbean.collectionmanagement.CollectionAccountDetailsSetupForm" />
+		
+		
+		<!-- ################## Inventory ####################### -->
+		<form-bean name="stockSetupForm"
+			type="org.transinfo.cacis.formbean.inventory.StockSetupForm" />
+		<form-bean name="inventorySearchForm"
+			type="org.transinfo.cacis.formbean.inventory.InventorySearchForm" />
+		<form-bean name="inventorySetupForm"
+			type="org.transinfo.cacis.formbean.inventory.InventorySetupForm" />
+		<form-bean name="orderListForm"
+			type="org.transinfo.cacis.formbean.inventory.OrderListSearchForm" />
+		<form-bean name="viewHistoryForm"
+			type="org.transinfo.cacis.formbean.inventory.ViewHistorySearchForm" />
 	</form-beans>
 
 
@@ -1015,6 +1050,18 @@
 			<forward name="reportpage"
 				path="/jsp/batchprocess/NewCardBatchProcessReportList.jsp" />
 			<forward name="token" path="/newcardbatchprocess.do" />
+			<forward name="batchprocess" path="/cardbatchprocess.do?method=List" />
+		</action>
+		
+			<!-- ===== Batch Process ========= -->
+		<action path="/cardbatchprocess"
+			type="org.transinfo.cacis.action.batchprocess.BatchProcessDispatchAction" 
+			parameter="method" name="batchProcessFrom"
+			input="/jsp/batchprocess/BatchProcessList.jsp" validate="false" scope="request">
+			
+			<forward name="success" path="/jsp/batchprocess/BatchProcessList.jsp" />
+			<forward name="token" path="/cardbatchprocess.do" />
+			
 		</action>
 
 		<!-- ===== Replacement Card Batch Process ========= -->
@@ -1076,6 +1123,7 @@
 			<forward name="token" path="/newcardproductbatchprocess.do" />
 			
 		</action>
+		
 
 		<!-- ========================ApplicationForms========================= -->
 		<!-- ==========SupplementaryForm============ -->
@@ -1823,7 +1871,7 @@
 			input="/error.jsp" validate="false" scope="request">
 		</action>
 
-
+		
 
 		<!-- ####### USER ACCESS ####### -->
 
@@ -1913,7 +1961,26 @@
 			<forward name="success" path="/jsp/useraccess/RoleFunctionList.jsp" />
 		</action>
 
+		<!-- ==========Assign User Setup============ -->
+		
+		<action path="/assignuserprocess"
+			type="org.transinfo.cacis.action.useraccess.AssignUserDispatchAction"
+			parameter="method" name="assignUserForm" input="/jsp/useraccess/AssignUserSetup.jsp"
+			validate="false" scope="session">
+			<forward name="change" path="/jsp/useraccess/AssignUserSetup.jsp" />
+			<forward name="delete" path="/assignuserlist.do" />
+			<forward name="token" path="/assignuserlist.do" />
+			<forward name="success" path="/assignuserlist.do" />
 
+		</action>
+		
+		<action path="/assignuserlist"
+			type="org.transinfo.cacis.action.useraccess.SearchAssignUserAction"
+			parameter="method" name="assignUserForm1" validate="false"
+			input="/jsp/useraccess/AssignUserList.jsp" scope="request">
+			<forward name="success" path="/jsp/useraccess/AssignUserList.jsp" />
+		</action>
+		
 		<!-- ==========Admin Login Setup============ -->
 
 		<action path="/adminloginsetup" type="org.apache.struts.actions.ForwardAction"
@@ -2890,9 +2957,150 @@
 			<forward name="token" path="/delinquencynotificationetupprocess.do" />
 		</action>
 
+		<!-- ####### Collection Config ####### -->
+		<action path="/collectionconfigprocess"
+			type="org.transinfo.cacis.action.collectionmanagement.CollectionConfigDispatchAction"
+			parameter="method" name="collectionConfigForm" input="/jsp/collectionmanagement/CollectionConfigSetup.jsp"
+			validate="false" scope="request">
+			<forward name="success" path="/jsp/collectionmanagement/CollectionConfigSetup.jsp" />
+		</action>
+		
+		
+		<!-- ####### Agent Setup ####### -->
+		
+		<action path="/collectionagentsetuplist"
+			type="org.transinfo.cacis.action.collectionmanagement.SearchCollectionAgentSetupAction"
+			name="collectionAgentSearchForm" validate="false"
+			input="/jsp/collectionmanagement/CollectionAgentList.jsp" scope="request">
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgentList.jsp" />
+		</action>
+
+		<action path="/collectionagentsetupprocess"
+			type="org.transinfo.cacis.action.collectionmanagement.CollectionAgentSetupDispatchAction"
+			parameter="method" name="collectionAgentSetupForm" input="/jsp/collectionmanagement/CollectionAgentSetup.jsp"
+			validate="false" scope="session">
+			<forward name="listsuccess" path="/jsp/collectionmanagement/CollectionAgentList.jsp" />
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgentSetup.jsp" />
+			<forward name="delete" path="/collectionagentsetuplist.do" />
+			<forward name="token" path="/collectionagentsetupprocess.do" />
+		</action>
+		
+		
+		<!-- ####### Collection Ageing ####### -->
+		
+		<action path="/collectionageinglist"
+			type="org.transinfo.cacis.action.collectionmanagement.SearchCollectionAgeingAction"
+			validate="false"
+			input="/jsp/collectionmanagement/CollectionAgeingList.jsp" scope="request">
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgeingList.jsp" />
+		</action>
+
+		<action path="/collectionageingprocess"
+			type="org.transinfo.cacis.action.collectionmanagement.CollectionAgeingDispatchAction"
+			parameter="method" name="collectionAgeingSetupForm" input="/jsp/collectionmanagement/CollectionAgeingSetup.jsp"
+			validate="false" scope="request">
+			<forward name="listsuccess" path="/jsp/collectionmanagement/CollectionAgeingList.jsp" />
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgeingSetup.jsp" />
+			<forward name="delete" path="/collectionageinglist.do" />
+			<forward name="token" path="/collectionageingprocess.do" />
+		</action>
+		
+		
+		
+		<!-- ####### Collection Ageing Action ####### -->
+		
+		<action path="/collectionageingactionlist"
+			type="org.transinfo.cacis.action.collectionmanagement.SearchCollectionAgeingActionSetupAction"
+			name="collectionAgeingActionSearchForm" validate="false" 
+			input="/jsp/collectionmanagement/CollectionAgeingActionList.jsp" scope="request">
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgeingActionList.jsp" />
+		</action>
+
+		<action path="/collectionageingactionprocess"
+			type="org.transinfo.cacis.action.collectionmanagement.CollectionAgeingActionDispatchAction"
+			parameter="method" name="collectionAgeingActionSetupForm" input="/jsp/collectionmanagement/CollectionAgeingActionSetup.jsp"
+			validate="false" scope="request">
+			<forward name="listsuccess" path="/jsp/collectionmanagement/CollectionAgeingActionList.jsp" />
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAgeingActionSetup.jsp" />
+			<forward name="delete" path="/collectionageingactionlist.do" />
+			<forward name="token" path="/collectionageingactionprocess.do" />
+		</action>
+		
+		
+		
+		<!-- ####### Collection Account Details ####### -->
+		
+		<action path="/collectionaccountdetailslist"
+			type="org.transinfo.cacis.action.collectionmanagement.SearchCollectionAccountDetailsAction"
+			name="collectionAccountDetailsSearchForm" validate="false" 
+			input="/jsp/collectionmanagement/CollectionAccountDetailsList.jsp" scope="request">
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAccountDetailsList.jsp" />
+		</action>
+
+		<action path="/collectionaccountdetailsprocess"
+			type="org.transinfo.cacis.action.collectionmanagement.CollectionAccountDetailsDispatchAction"
+			parameter="method" name="collectionAccountDetailsSetupForm" input="/jsp/collectionmanagement/CollectionAccountDetailsSetup.jsp"
+			validate="false" scope="request">
+			<forward name="listsuccess" path="/jsp/collectionmanagement/CollectionAccountDetailsList.jsp" />
+			<forward name="success" path="/jsp/collectionmanagement/CollectionAccountDetailsSetup.jsp" />
+			<forward name="delete" path="/collectionaccountdetailslist.do" />
+			<forward name="token" path="/collectionaccountdetailsprocess.do" />
+		</action>
+		
+		<!-- ============= Investory =========================== -->
+	
+		<action path="/stocksetuplist"
+			type="org.transinfo.cacis.action.inventory.StockSetupDispatchAction"
+			parameter="method" name="stockSetupForm" validate="false" input="/jsp/inventory/StockSetup.jsp"
+			scope="session">
+			<forward name="success" path="/jsp/inventory/StockSetup.jsp" />
+		</action>
+
+		<action path="/inventorysearch"
+			type="org.transinfo.cacis.action.inventory.InventorySearchAction"
+			name="inventorySearchForm" validate="false" input="/jsp/inventory/InventorySearch.jsp"
+			scope="request">
+			<forward name="success" path="/jsp/inventory/InventorySearch.jsp" />
+			<forward name="searchOrder" path="/inventorysetup.do?method=searchOrder" />
+			<forward name="searchAuthorized" path="/inventorysetup.do?method=searchAuthorized" />
+			<forward name="searchDispatch" path="/inventorysetup.do?method=searchDispatch" />
+			<forward name="searchReceived" path="/inventorysetup.do?method=searchReceived" />
+			<forward name="searchReturn" path="/inventorysetup.do?method=searchReturn" />
+		</action>
+		
+		<action path="/inventorysetup"
+			type="org.transinfo.cacis.action.inventory.InventoryDispatchAction"
+			parameter="method" name="inventorySetupForm" validate="false" input="/jsp/inventory/InventorySetup.jsp"
+			scope="request">
+			<forward name="success" path="/jsp/inventory/InventorySetup.jsp" />
+			<forward name="token" path="/inventorysearch.do" />
+		</action>
+		
+		<action path="/orderlist"
+			type="org.transinfo.cacis.action.inventory.SearchOrderListAction"
+			parameter="method" name="orderListForm" validate="false" input="/jsp/inventory/OrderList.jsp"
+			scope="request">
+			<forward name="success" path="/jsp/inventory/OrderList.jsp" />
+		</action>
+		
+		<action path="/lowlevelqty"
+			type="org.transinfo.cacis.action.inventory.SearchLowLevelQtyAction"
+			parameter="method" validate="false" input="/jsp/inventory/LowLeverQtyList.jsp"
+			scope="request">
+			<forward name="success" path="/jsp/inventory/LowLeverQtyList.jsp" />
+		</action>
+
+		<action path="/viewhistory"
+			type="org.transinfo.cacis.action.inventory.SearchViewHistoryAction"
+			parameter="method" name="viewHistoryForm" validate="false" input="/jsp/inventory/ViewHistoryList.jsp"
+			scope="request">
+			<forward name="success" path="/jsp/inventory/ViewHistoryList.jsp" />
+		</action>
 	</action-mappings>
 
-
+	
+		
+	
 	<!-- ============= Applications Resource =========================== -->
 
 	<message-resources parameter="resources.application" />

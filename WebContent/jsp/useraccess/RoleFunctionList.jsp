@@ -60,7 +60,7 @@ function addNew()
           <td valign="top">	    
 	   <%@ include file="/jsp/common/Buttons.jsp" %>	   	   	             
 	  <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>" />	  
-	  <html:hidden property="userType" value="<%=(String)request.getParameter("userType")%>"/>
+	  <%-- <html:hidden property="userType" value="<%=(String)request.getParameter("userType")%>"/> --%>
 	  </html:form>
 	  
 	  	  
@@ -78,7 +78,8 @@ function addNew()
 	       
               <html:hidden property="roleId" value="<%= ((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn1()%>" />
               <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>"/> 
-              <html:hidden property="userType" value="<%=(String)request.getParameter("userType")%>"/>
+              <html:hidden property="userType" value="<%=((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn5()%>"/>
+              <%-- <html:hidden property="userType" value="<%=(String)request.getParameter("userType")%>"/> --%>
               <html:hidden property="method" value ="change"/>
               <html:submit value="Update"/>
                

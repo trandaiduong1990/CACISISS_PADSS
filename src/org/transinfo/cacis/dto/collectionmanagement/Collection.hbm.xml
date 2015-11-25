@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.transinfo.cacis.dto.collectionmanagement">
+
+	<class name="CollectionDto" table="COLLECTION">
+		<id name="colectionId" type="string">
+			<column name="COLECT_ID" sql-type="varchar2(10)" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="cardNo" type="long">
+			<column name="CARDNUMBER" sql-type="NUMBER(19,0)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="LAST_UPDATED_BY" sql-type="varchar2(30)"
+				not-null="true" />
+		</property>
+		<property name="lastUpdatedDate" type="timestamp">
+			<column name="LAST_UPDATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" sql-type="VARCHAR2(1)" not-null="true" />
+		</property>
+		<property name="orgColectionAmt" type="long">
+			<column name="ORG_COLET_AMT" sql-type="NUMBER(10,2)" not-null="true" />
+		</property>
+		<property name="reclassification" type="string">
+			<column name="RECALSSIFICATION" sql-type="VARCHAR2(2)" not-null="true" />
+		</property>
+		<property name="dateAssigned" type="timestamp">
+			<column name="DATE_ASSIGNED" sql-type="Date" not-null="true" />
+		</property>
+		<property name="amountAssigned" type="string">
+			<column name="AMT_ASSIGNED" sql-type="VARCHAR2(20)" not-null="true" />
+		</property>
+		<property name="writeOffAmt" type="integer">
+			<column name="WRITEOFF_AMT" sql-type="number" not-null="true" />
+		</property>
+		<property name="writeOffDate" type="timestamp">
+			<column name="WRITEOFF_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="CREATED_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="recoveryAmt" type="integer">
+			<column name="RECOVERY_AMT" sql-type="number" not-null="false" />
+		</property>
+		<property name="lastRecoveryDate" type="timestamp">
+			<column name="LAST_RECOVERY_DATE" sql-type="Date" not-null="true" />
+		</property>
+		<property name="amountToRecover" type="integer">
+			<column name="AMT_TO_RECOVER" sql-type="number" not-null="false" />
+		</property>
+		<property name="recovedFullDate" type="timestamp">
+			<column name="RECOVED_FULL_DATE" sql-type="Date" not-null="false" />
+		</property>
+		<property name="installmentPayment" type="string">
+			<column name="ISALTPAY" sql-type="VARCHAR2(1)" not-null="false" />
+		</property>
+		<property name="noOfInstallment" type="integer">
+			<column name="NO_OF_INST" sql-type="NUMBER(2,0)" not-null="false" />
+		</property>
+		<property name="interestRate" type="double">
+			<column name="INST_INTEREST_RATE" sql-type="NUMBER(4,2)" not-null="false" />
+		</property>
+		<property name="minPaymentAmt" type="long">
+			<column name="INST_MIN_PAY" sql-type="NUMBER(8,0)" not-null="false" />
+		</property>
+		<property name="note" type="string">
+			<column name="REMARKS" sql-type="VARCHAR2(200)" not-null="false" />
+		</property>
+		<property name="accountId" type="string">
+			<column name="ACCOUNT_ID" sql-type="VARCHAR2(20)" not-null="true" />
+		</property>
+		<property name="currentCollector" type="string">
+			<column name="CURRENT_COLLECTOR" sql-type="VARCHAR2(12)" not-null="true" />
+		</property>
+		<property name="colectRef" type="string">
+			<column name="COLECT_REF" sql-type="VARCHAR2(2)" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -25,6 +25,12 @@ function accRej(method)
   var r=confirm("<bean:message key ='areyousure'/>");
   if (r==true)
   {
+	var instantReplacement = document.forms[0].instantReplacement.value;
+	if(instantReplacement == 'Y') {
+		document.forms[0].method.value = 'instantReplacement';
+	} else {
+		alert("call accept method");
+	}
 	document.forms[0].submit();
   }
 }
@@ -379,7 +385,7 @@ function viewAllInfo(urlToCall){
 			                    <td class="label"><html:textarea property="remarks" rows="3"></html:textarea></td>
 			                </tr>
 			   <!--if action = replace then dipalying billing address  on form  with accept, reject and cancel buttons-->	  	
-				  	  <% }else if(((String)request.getAttribute("ACTION")).equals("replace") || ((String)request.getAttribute("ACTION")).equals("cancel")){%>
+				  	  <% }else if(((String)request.getAttribute("ACTION")).equals("replace") || ((String)request.getAttribute("ACTION")).equals("cancel")) {%>
                            
                              <tr> 
                                  <td class="desc_cell" nowrap ><bean:message key ="customerservice.address1"/></td>
@@ -489,7 +495,81 @@ function viewAllInfo(urlToCall){
                       </tr>
                     </tbody>
                   </table></td>
-                  <td valign="top" class="form_bgcolor" style="padding: 20px 20px 10px 20px;">&nbsp;</td>
+                 <%	if(request.getAttribute("ACTION") == null || ((String)request.getAttribute("ACTION")).equals("search"))	{%>
+                  <td valign="top" class="form_bgcolor" style="padding: 20px 20px 10px 20px;"><table width="335" 
+                              border=0 cellpadding=0 cellspacing=0>
+                    <tbody>
+                      <tr>
+                        <td width="335"><table cellspacing=0 cellpadding=0 border=0>
+                            <tbody>
+                              <tr>
+                                <td><img height=19 alt="" src="images/tab_g.gif" width=8 border=0></td>
+                                <td class=group_title background=images/tab_fond.gif><bean:message key ="customerservice.instantreplacement"/></td>
+                                <td><img height=19 alt="" src="images/tab_d.gif" width=8 border=0></td>
+                              </tr>
+                            </tbody>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td bgcolor=#dce5ea><div 
+                                style="FONT-SIZE: 1px">&nbsp;</div></td>
+                      </tr>
+                      <tr>
+                        <td height="21"><table border="0" cellpadding="0" cellspacing="0" >
+					       <tr> 
+                               <td class="desc_cell" nowrap ><bean:message key ="customerservice.instantreplacement"/></td>
+                               <td class="label"><html:checkbox property="instantReplacement" value="Y"></html:checkbox></td>
+                            </tr>
+                            
+                            </table></td>
+                      </tr>
+                    </tbody>
+                  </table></td>
+                  <% } else if((request.getAttribute("ACTION") != null) && (((String)request.getAttribute("ACTION")).equals("replace") || ((String)request.getAttribute("ACTION")).equals("cancel"))) {%>
+	                    <logic:equal name="cardReplacementForm" property="instantReplacement" value="Y">
+	                         <td valign="top" class="form_bgcolor" style="padding: 20px 20px 10px 20px;"><table width="335" 
+                              border=0 cellpadding=0 cellspacing=0>
+			                    <tbody>
+			                      <tr>
+			                        <td width="335"><table cellspacing=0 cellpadding=0 border=0>
+			                            <tbody>
+			                              <tr>
+			                                <td><img height=19 alt="" src="images/tab_g.gif" width=8 border=0></td>
+			                                <td class=group_title background=images/tab_fond.gif><bean:message key ="customerservice.instantreplacement"/></td>
+			                                <td><img height=19 alt="" src="images/tab_d.gif" width=8 border=0></td>
+			                              </tr>
+			                            </tbody>
+			                        </table></td>
+			                      </tr>
+			                      <tr>
+			                        <td bgcolor=#dce5ea><div 
+			                                style="FONT-SIZE: 1px">&nbsp;</div></td>
+			                      </tr>
+			                      <tr>
+			                        <td><table border="0" cellpadding="0" cellspacing="0" >
+								       <tr> 
+			                               <td class="desc_cell" nowrap ><bean:message key ="customerservice.instantreplacement"/></td>
+			                               <td class="label"><html:checkbox property="instantReplacement" value="Y" disabled="true"></html:checkbox></td>
+			                            </tr>
+			                            <tr>
+			                            	<td class="desc_cell" nowrap ><bean:message key ="customerservice.replacementcardno"/></td>
+			                               <td class="label"><html:text property="replacementCardNo" maxlength ="16" size="20"/></td>
+			                            </tr>
+			                            </table></td>
+			                      </tr>
+			                    </tbody>
+			                  </table></td>
+	                    </logic:equal>
+	                    <logic:notEqual name="cardReplacementForm" property="instantReplacement" value="Y">
+	                    	<td valign="top" class="form_bgcolor" style="padding: 20px 20px 10px 20px;">&nbsp;
+	                    		<bean:define id="instantReplacement" name="cardReplacementForm" property="instantReplacement"/>
+								<html:hidden property="instantReplacement" value="<%=(String)instantReplacement%>"/>
+	                    	</td>
+	                    </logic:notEqual>
+	                    
+	              <% } else { %> 
+                  	<td valign="top" class="form_bgcolor" style="padding: 20px 20px 10px 20px;">&nbsp;</td>
+                  <% } %>
                   <td background="images/tbl_d.gif"></td>                                   
                 </tr>                
                 <tr> 

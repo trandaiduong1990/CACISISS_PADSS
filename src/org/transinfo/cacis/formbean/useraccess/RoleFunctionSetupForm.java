@@ -22,6 +22,7 @@ public class RoleFunctionSetupForm extends ValidatorForm{
         private Map functionList;
         private Map selectedListSet = new HashMap();
         private Map statusList;
+        private Map userTypeList;
         private String[] selFuncList;
 
 
@@ -119,7 +120,15 @@ public class RoleFunctionSetupForm extends ValidatorForm{
 
 
 
-        public void getPreListData()
+        public Map getUserTypeList() {
+			return userTypeList;
+		}
+
+		public void setUserTypeList(Map userTypeList) {
+			this.userTypeList = userTypeList;
+		}
+
+		public void getPreListData()
         {
 	        try{
 	            RoleFunctionSetupDAO objRoleFuncDAO = DAOFactory.getInstance().getRoleFunctionSetupDAO();
@@ -131,6 +140,10 @@ public class RoleFunctionSetupForm extends ValidatorForm{
                     if(statusList==null) {
                         statusList = objRoleFuncDAO.statusListData("CODE_AI");
                         System.out.println("statusList==>"+statusList.size());
+                    }
+                    
+                    if(userTypeList==null) {
+                    	userTypeList = objRoleFuncDAO.getUserType();
                     }
 
 	        }catch(Exception e){

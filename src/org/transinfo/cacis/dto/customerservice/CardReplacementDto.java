@@ -27,6 +27,7 @@ public class CardReplacementDto implements Serializable {
 	private String   feeApplicable;
 	private String immeidateProcess;
 	private String eComEnable;
+	private String instantReplacement;
 	
 	/*Setting AddressDto to CardReplacementDto*/
 	// AddressDto addressDto = new AddressDto();
@@ -201,6 +202,14 @@ public class CardReplacementDto implements Serializable {
 
 	public void setEncryptedCardNo(String encryptedCardNo) {
 		this.encryptedCardNo = encryptedCardNo;
+	}
+
+	public String getInstantReplacement() {
+		return instantReplacement;
+	}
+
+	public void setInstantReplacement(String instantReplacement) {
+		this.instantReplacement = instantReplacement;
 	}
 
 	

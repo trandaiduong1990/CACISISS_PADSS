@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="inc/css/style.css" type="text/css">
 </head>
 <script src="inc/js/cacis.js"></script>
+<script src="inc/js/jquery-1.11.3.min.js"></script>
 <script>
 function doSetup()
 {
@@ -39,6 +40,29 @@ function updateForm(){
 	//alert(document.forms[1].name);
 	document.listForm.submit();
 }
+
+function userTypeChange(event) {
+	var userType = "";
+	if(typeof event != 'undefined' && event != null && event != "") {
+		userType = event.value;
+	}
+	$.ajax({
+        type: "POST",
+        url: "usersetuplistpage.do?method=setRole",
+        data: "userType=" + userType,
+        success: function(response){
+            // we have the response
+           $('#roleIdDiv').html(response);
+        },
+        error: function(e){
+            alert('Error: ' + e);
+        }
+    });
+}
+
+$(document).ready(function() {
+	userTypeChange();
+});
 </script>
 
 <body bgcolor="ffffff">
@@ -46,7 +70,7 @@ function updateForm(){
 <html:form action ="usersetuplistpage.do">
 <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>"/>
 <html:hidden property="userId" value="<%=(String)session.getAttribute("USERID")%>"/> 	  
-<html:hidden property="userType" value="<%= ((UserSetupSearchForm)pageContext.getAttribute("formid")).getUserType()%>"/> 
+<%-- <html:hidden property="userType" value="<%= ((UserSetupSearchForm)pageContext.getAttribute("formid")).getUserType()%>"/>  --%>
 <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
   <tr>
     <td> 
@@ -89,12 +113,22 @@ function updateForm(){
                         <td><html:text property="searchUserId" size="30" maxlength="30" onkeypress="return disableEnterKey(event)"/></td>
                       </tr>              
                       <tr>                            
+                         <td nowrap class="ColumnFONT"><bean:message key ="usersetup.usertype"/></td>		             
+		      	  <td>
+		      	     <html:select property="userType" onchange="userTypeChange(this)" >
+		      	       <html:option value=""></html:option>
+		      	       <html:optionsCollection property="userTypeList" value="key" label="value" />
+		      	     </html:select>
+		      	  </td>
+		      </tr>
+                      <tr>                            
                          <td nowrap class="ColumnFONT"><bean:message key ="usersetup.searchname2"/></td>		             
 		      	  <td>
-		      	     <html:select property="searchRoleId" >
+		      	  	<div id="roleIdDiv"></div>
+		      	     <%-- <html:select property="searchRoleId" >
 		      	       <html:option value=""></html:option>
 		      	       <html:optionsCollection property="roleList" value="key" label="value" />
-		      	     </html:select>
+		      	     </html:select> --%>
 		      	  </td>
 		      </tr>
 		      <tr>		      	    
@@ -129,7 +163,8 @@ function updateForm(){
   	   <form name ="listForm" action="usersetupprocess.do">	 
 	
               <html:hidden property="frmUserId" value="<%= ((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn1()%>" />
-              <html:hidden property="userType" value="<%= ((UserSetupSearchForm)pageContext.getAttribute("formid")).getUserType()%>"/> 
+              <html:hidden property="userType" value="<%= ((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn6()%>"/> 
+              <%-- <html:hidden property="userType" value="<%= ((UserSetupSearchForm)pageContext.getAttribute("formid")).getUserType()%>"/> --%> 
               <html:hidden property="issuerId" value="<%=(String)session.getAttribute("ISSUER")%>"/>              
               <html:hidden property="searchUserId" value="<%=request.getParameter("searchUserId")%>"/>
               <html:hidden property="firstName" value="<%=((CommonDataBean)pageContext.getAttribute("appProcess")).getColumn2()%>"/> 	    	

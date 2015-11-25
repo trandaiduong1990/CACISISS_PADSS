@@ -101,6 +101,26 @@ public class CardsDto implements Serializable {
 
 	private String maskedCardNo;
 	private String encryptedCardNo;
+	
+	private String batchId;
+	private String corporateId;
+	
+
+	public String getBatchId() {
+		return batchId;
+	}
+
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
+	}
+
+	public String getCorporateId() {
+		return corporateId;
+	}
+
+	public void setCorporateId(String corporateId) {
+		this.corporateId = corporateId;
+	}
 
 	public String getOc() {
 		return oc;

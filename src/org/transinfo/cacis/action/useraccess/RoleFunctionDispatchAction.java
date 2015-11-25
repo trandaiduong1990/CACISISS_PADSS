@@ -47,7 +47,8 @@ public class RoleFunctionDispatchAction extends BaseDispatchAction {
 			}
 	 	}
 
-    	RoleFunctionSetupForm objForm = (RoleFunctionSetupForm) form;
+//    	RoleFunctionSetupForm objForm = (RoleFunctionSetupForm) form;
+	 	RoleFunctionSetupForm objForm = new RoleFunctionSetupForm();
         RoleMasterDto objDto = new RoleMasterDto();
         objForm.getPreListData();
 
@@ -98,6 +99,7 @@ public class RoleFunctionDispatchAction extends BaseDispatchAction {
 			objForm.setRoleId("");
                         objForm.setRoleDesc("");
                         objForm.setStatus("");
+            objForm.setUserType("");
                         
 		} catch (Exception e) {
 			System.out.println("Error converting to form bean: " + e);

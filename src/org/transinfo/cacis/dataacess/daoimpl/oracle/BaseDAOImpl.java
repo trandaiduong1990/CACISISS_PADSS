@@ -63,6 +63,7 @@ import org.transinfo.cacis.dto.settings.IssuerDto;
 import org.transinfo.cacis.dto.settings.TranxTypeDto;
 import org.transinfo.cacis.dto.switching.SwitchTypeDto;
 import org.transinfo.cacis.dto.useraccess.CodeMasterDto;
+import org.transinfo.cacis.dto.useraccess.UserLevelDto;
 import org.transinfo.cacis.dto.useraccess.UserMasterDto;
 import org.transinfo.cacis.formbean.batchprocess.CardBatchForm;
 import org.transinfo.cacis.formbean.collectionmanagement.DelinquencyFeeSetupForm;
@@ -2485,6 +2486,45 @@ public class BaseDAOImpl implements BaseDAO {
 			throws TPlusException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Map getUserType() throws TPlusException {
+		Map userTypeList = new TreeMap();
+		Transaction tx = null;
+
+		try {
+
+			Session session = HibernetFactory.currentSession();
+			tx = session.beginTransaction();
+			Query qry = session
+			.createQuery("From UserLevelDto ");
+			List listUserLevel = qry.list();
+			for (Iterator it = listUserLevel.iterator(); it.hasNext();) {
+				UserLevelDto objDto = new UserLevelDto();
+				objDto = (UserLevelDto) it.next();
+				userTypeList.put(objDto.getUserType(), objDto
+						.getUserTypeDesc());
+
+			}
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.error(e);
+			System.out
+			.println("while retrieving getUserType in BaseDAOIMpl"
+					+ e.getMessage());
+			throw new TPlusException(TPlusCodes.APPLICATION_ERROR,
+					"Error: while retrieving getUserType in BaseDAOIMpl"
+					+ e);
+		} finally {
+
+			HibernetFactory.closeSession();
+		}
+		return userTypeList;
 	}
 
 }
